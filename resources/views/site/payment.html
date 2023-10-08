@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portafoto</title>
+
+    <!--  favicon -->
+    <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/fontawesome-free-6.4.2-web/css/all.min.css" />
+    <!-- custom css link -->
+    <link rel="stylesheet" href="./assets/css/style-prefix.css" />
+    <!-- <link rel="stylesheet" href="./assets/css/style-prefix-ar.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="overlay" data-overlay></div>
+
+    <!-- - HEADER -->
+
+    <header>
+        <div class="header-main">
+            <div class="container">
+                <a href="./index.html" class="header-logo">
+                    <!-- <img src="./assets/images/logo/logo.jpg" alt="Anon's logo" width="120" height="36"> -->
+                    Portafoto
+                </a>
+                <div class="header-search-container">
+                    <input type="search" name="search" class="search-field" placeholder="Enter your product name..." />
+                    <button class="search-btn">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
+                </div>
+                <div class="header-user-actions">
+                    <div class="dropdown">
+                        <button class="action-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <ion-icon name="person-outline"></ion-icon>
+                        </button>
+                        <ul class="dropdown-menu profile" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item" href="./profile/index.html"><i class="fa-solid fa-user"></i>
+                                    Profile</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="./forms/index.html"><i
+                                        class="fa-solid fa-right-to-bracket"></i> Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown fav">
+                        <button class="action-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <ion-icon name="heart-outline"></ion-icon>
+                            <span class="count">0</span>
+                        </button>
+                        <ul class="dropdown-menu wide" aria-labelledby="dropdownMenuButton1">
+                            <li class="shop-content">
+                                <img src="./assets/images/logo/logo.jpg" alt="product" />
+                                <div class="shop-body">
+                                    <button class="remove"><i class="fas fa-times"></i></button>
+                                    <span>Wall Frame</span>
+                                    <p class="text-black-50">Frame 30 x 60</p>
+                                </div>
+                            </li>
+
+                            <li class="shop-content">
+                                <img src="./assets/images/logo/logo.jpg" alt="product" />
+                                <div class="shop-body">
+                                    <button class="remove"><i class="fas fa-times"></i></button>
+                                    <span>Wall Frame</span>
+                                    <p class="text-black-50">Frame 30 x 60</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown shop">
+                        <button class="action-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <ion-icon name="bag-handle-outline"></ion-icon>
+                            <i class="fas fa-sort-down"></i>
+                            <span class="count">0</span>
+                        </button>
+                        <ul class="dropdown-menu wide" aria-labelledby="dropdownMenuButton1">
+                            <li class="shop-content">
+                                <img src="./assets/images/logo/logo.jpg" alt="product" />
+                                <div class="shop-body">
+                                    <span>Wall Frame</span>
+                                    <p class="text-black-50">Frame 30 x 60</p>
+                                </div>
+                                <div class="price-field">
+                                    <p class="price">$48.00</p>
+                                    <del>$75.00</del>
+                                </div>
+                            </li>
+
+                            <li class="shop-content">
+                                <img src="./assets/images/logo/logo.jpg" alt="product" />
+                                <div class="shop-body">
+                                    <span>Wall Frame</span>
+                                    <p class="text-black-50">Frame 30 x 60</p>
+                                </div>
+                                <div class="price-field">
+                                    <p class="price">$48.00</p>
+                                    <del>$75.00</del>
+                                </div>
+                            </li>
+
+                            <li class="checkout">
+                                <a class="dropdown-item" href="./cart.html"><button type="button"
+                                        class="btn btn-dark btn-block">
+                                        Cart
+                                        <i class="fa-solid fa-cart-shopping cartt"></i></button></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown shop lang">
+                        <button class="action-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <ion-icon name="language-outline"></ion-icon> <i class="fas fa-sort-down"></i>
+                        </button>
+                        <ul class="dropdown-menu profile" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">English</a></li>
+                            <li><a class="dropdown-item" href="#">Arabic</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-bottom-navigation">
+            <button class="action-btn" data-mobile-menu-open-btn>
+                <ion-icon name="menu-outline"></ion-icon>
+            </button>
+            <button class="action-btn">
+                <ion-icon name="bag-handle-outline"></ion-icon>
+                <span class="count">0</span>
+            </button>
+            <button class="action-btn">
+                <ion-icon name="home-outline"></ion-icon>
+            </button>
+            <button class="action-btn">
+                <ion-icon name="heart-outline"></ion-icon>
+                <span class="count">0</span>
+            </button>
+            <button class="action-btn" data-mobile-menu-open-btn>
+                <ion-icon name="grid-outline"></ion-icon>
+            </button>
+        </div>
+    </header>
+
+    <!-- - MAIN -->
+    <section class="payment">
+        <div class="container shadow-lg">
+            <h3 class="text-center text-uppercase pt-5 pb-5">Payment</h3>
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputFirst">First Name</label>
+                        <input type="text" class="form-control" id="inputFirst" placeholder="First Name"
+                            name="firstName" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputLast">Last Name</label>
+                        <input type="text" class="form-control" id="inputLast" placeholder="Last Name"
+                            name="lastName" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email Address"
+                        name="email" />
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputAddress">Address</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
+                            name="address1" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputAddress2">Address 2</label>
+                        <input type="text" class="form-control" id="inputAddress2"
+                            placeholder="Apartment, studio, or floor" name="address2" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="validationCustom15" class="form-label">Country</label>
+                        <select class="form-select" id="validationCustom15" name="governorates_id">
+                            <option selected value="">Egypt</option>
+                            <option value="">Saudi Arabia</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="validationCustom16" class="form-label">State</label>
+                        <select class="form-select" id="validationCustom16" name="city_id">
+                            <option selected disabled value="">Choose...</option>
+                            <option value="">Cairo</option>
+                            <option value="">Giza</option>
+                            <option value="">Alexandria</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZip">Zip</label>
+                        <input type="text" class="form-control" id="inputZip" placeholder="Zip Code" name="zip" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputPhone">Phone Number</label>
+                        <input type="text" class="form-control" id="inputPhone" placeholder="Phone Number"
+                            name="mobile1" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPhone">Phone Number 2</label>
+                        <input type="text" class="form-control" id="inputPhone" placeholder="Phone Number"
+                            name="mobile2" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="validationCustom17" class="form-label">Payment Method</label>
+                        <select class="form-select" id="validationCustom17">
+                            <option selected value="">Vodafone Cash</option>
+                            <option value="">InstaPay</option>
+                            <option value="">Fawry</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-dark mt-2">
+                            Submit <i class="fa-solid fa-credit-card ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- - FOOTER -->
+
+    <footer class="mt-5">
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="copyright">
+                    Copyright &copy; <a href="#">Portafoto</a> all rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- - custom js link -->
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+
+    <!--  - ionicon link -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
