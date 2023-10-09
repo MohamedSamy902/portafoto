@@ -15,6 +15,7 @@ use App\Http\Controllers\Site\paymentController;
 use App\Http\Controllers\Site\ProductCartController;
 use App\Http\Controllers\Site\ProductFavoriteController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SliderController;
 use App\Models\Category;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -40,19 +41,27 @@ Route::group(
                 /** Start Route Users **/
                 Route::resource('users', UserController::class);
                 Route::get('/', function () {
-                    return 'index';
+                    return view('dashbord.home');
                 })->name('index');
                 /** End Route Users **/
+
+
                 /** Start Route Roles **/
                 Route::resource('roles', RoleController::class)->except(['show']);
                 /** End Route Roles **/
 
-                 /** Start Route Roles **/
-                 Route::resource('invoices', InvoiceController::class);
-                 Route::get('approved/invoice/{id}', [InvoiceController::class, 'approvedChengStatus'])->name('invoice.approved');
-                 Route::get('invoice/pending', [InvoiceController::class, 'pendingList'])->name('invoice.pendingList');
-                 Route::get('invoice/approved', [InvoiceController::class, 'approvedList'])->name('invoice.approvedList');
-                 /** End Route Roles **/
+                /** Start Route Roles **/
+                Route::resource('sliders', SliderController::class)->except(['show']);
+                /** End Route Roles **/
+
+                /** Start Route Roles **/
+                Route::resource('invoices', InvoiceController::class);
+
+                Route::get('approved/invoice/{id}', [InvoiceController::class, 'approvedChengStatus'])->name('invoice.approved');
+                Route::get('refusal/invoice/{id}',  [InvoiceController::class, 'refusal'])->name('invoice.refusal');
+                Route::get('invoice/pending',       [InvoiceController::class, 'pendingList'])->name('invoice.pendingList');
+                Route::get('invoice/approved',      [InvoiceController::class, 'approvedList'])->name('invoice.approvedList');
+                /** End Route Roles **/
 
 
                 /** Start Route Customers **/
@@ -119,8 +128,6 @@ Route::group(
                 Route::get('payment', 'showPayment')->name('customers.payment.show');
                 Route::get('getCities/{governorateId}', 'getCities')->name('customers.getCitiesInSite');
             });
-
-
         });
     }
 );

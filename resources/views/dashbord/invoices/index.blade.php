@@ -29,6 +29,7 @@
                                     <tr>
                                         <th>{{ __('master.name') }}</th>
                                         <th>{{ __('master.countProductInvoice') }}</th>
+                                        <th>{{ __('site.payment') }}</th>
                                         {{-- <th>{{ __('master.status') }}</th>
                                         <th>{{ __('master.image') }}</th>
 
@@ -40,6 +41,7 @@
                                         <tr>
                                             <td><a href="{{ route('invoices.show', $invoise->id) }}">{{ $invoise->name }}</a> </td>
                                             <td>{{ count($invoise->cart) }}</td>
+                                            <td>{{ $invoise->payment }}</td>
 
                                         </tr>
                                     @endforeach

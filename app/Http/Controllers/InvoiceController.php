@@ -7,85 +7,46 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    function __construct()
+    {
+        $this->middleware('permission:invoice-list',   ['only' => ['index']]);
+        $this->middleware('permission:invoice-approvedList', ['only' => ['approvedList']]);
+        $this->middleware('permission:invoice-pendingList',   ['only' => ['pendingList']]);
+        $this->middleware('permission:invoice-approvedChengStatus', ['only' => ['approvedChengStatus']]);
+        $this->middleware('permission:invoice-refusal', ['only' => ['refusal']]);
+    }
+
+
     public function index()
     {
         $invoises =  Invoice::all();
         return view('dashbord.invoices.index', compact('invoises'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
 
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        return $request->all();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
     public function show(Invoice $invoice)
     {
         return view('dashbord.invoices.invoice', compact('invoice'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Invoice $invoice)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Invoice $invoice)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
     public function approvedChengStatus($id)
     {
-        Invoice::findOrFail($id)->update(['status' => 'approved']);
+        $invoises = Invoice::findOrFail($id)->update(['status' => 'approved']);
         return redirect()->back()
             ->with('success', __('master.messages_success', compact('invoises')));
 
     }
+
+    public function refusal($id)
+    {
+        $invoises = Invoice::findOrFail($id)->update(['status' => 'refusal']);
+        return redirect()->back()
+            ->with('success', __('master.messages_success', compact('invoises')));
+
+    }
+
 
     public function pendingList()
     {
@@ -100,9 +61,5 @@ class InvoiceController extends Controller
         return view('dashbord.invoices.index', compact('invoises'));
 
     }
-
-
-
-
 
 }

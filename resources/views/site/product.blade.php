@@ -247,7 +247,7 @@
                                     <div class="showcase-content">
                                         <h4><span
                                                 id="price">{{ $product->price != null? $product->price: $product->size()->latest()->first()->price }}</span>
-                                            L.E</h4>
+                                            {{ __('site.EGP') }}</h4>
                                         <span class="text-success font-weight-bold pb-2" id="SOLDOUT" @if ($product->status == 'SOLD OUT')
                                             style="color: red !important"  @endif >{{ $product->status != 'SOLD OUT' ? 'In Stock' : 'SOLD OUT' }}</span>
 
@@ -290,9 +290,9 @@
                                             <div class="col-md-12 gap-0">
 
                                                 <div>
-                                                    <label for="color" class="form-label">Color</label>
+                                                    <label for="color" class="form-label">{{ __('site.color') }}</label>
                                                     <select required class="form-select" id="color" name="standard_color_id">
-                                                        <option selected disabled value="">Choose... </option>
+                                                        <option selected disabled value="">{{ __('site.choose') }}</option>
                                                         @foreach ($colors as $color)
                                                             <option value="{{ $color->id }}">
                                                                 {{ $color->name }}</option>
@@ -324,7 +324,7 @@
                                             <div class="col-12">
                                                 <div class="input-icons">
                                                     {{-- <i style="position: absolute;color:#FFF" class="fa-solid fa-cart-shopping"></i> --}}
-                                                    <input type="submit" class="btn btn-dark" value="Add To Cart ">
+                                                    <input type="submit" class="btn btn-dark" value="{{ __('site.addToCart') }}">
 
                                                 </div>
                                             </div>

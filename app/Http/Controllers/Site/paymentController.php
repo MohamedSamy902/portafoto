@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Payment\StorePaymentRquest;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Cookie;
 
@@ -20,16 +21,11 @@ class paymentController extends Controller
         $totalPrice =  Cart::where('customerId', $customerId)->sum('totalPrice');
 
         $governorates = Governorate::where('status', 'active')->get();
+        if (COUNT($carts) == 0) {
+            return redirect()->back()
+                ->with('success', __('master.messages_edit'));
+        }
         return view('site.payment', compact('carts', 'totalPrice', 'governorates'));
-    }
-
-    public function addInvoice()
-    {
-        $customerId = Cookie::get('customerId');
-        $carts = Cart::where('customerId', $customerId)->get();
-        $totalPrice =  Cart::where('customerId', $customerId)->sum('totalPrice');
-        // return $totalPrice;
-        return view('site.payment', compact('carts', 'totalPrice'));
     }
 
 
@@ -40,10 +36,10 @@ class paymentController extends Controller
         return response()->json($data);
     }
 
-    public function storePayment(Request $request)
+    public function storePayment(StorePaymentRquest $request)
     {
         $customerId = Cookie::get('customerId');
-        $name = $request->first_name . ' ' . $request->last_name;
+        $name = $request->firstName . ' ' . $request->lastName;
         $totalPrice = $totalPrice =  Cart::where('customerId', $customerId)->sum('totalPrice');
 
         $totalPrice += 150;
@@ -78,11 +74,8 @@ class paymentController extends Controller
         }
 
         if ($request->paymet == 'cash') {
-            
+
         }
-
-
-
 
     }
 }

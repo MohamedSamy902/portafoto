@@ -11,6 +11,7 @@ class GovernorateController extends Controller
     {
         $this->middleware('permission:governorate-list',   ['only' => ['index']]);
         $this->middleware('permission:governorate-chengStatus', ['only' => ['chengStatus']]);
+        $this->middleware('permission:governorate-edit', ['only' => ['edit', 'update']]);
     }
 
     public function index()

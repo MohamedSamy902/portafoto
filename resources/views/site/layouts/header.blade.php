@@ -21,13 +21,13 @@
                     </button>
 
                     <ul class="dropdown-menu wide" id="favorites-list" aria-labelledby="dropdownMenuButton1">
+                        <p class="text-center">Empty Cart</p>
                     </ul>
                 </div>
                 <div class="dropdown shop">
                     <button class="action-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <ion-icon name="bag-handle-outline"></ion-icon> <i class="fas fa-sort-down"></i>
-                        {{-- <span class="count">0</span> --}}
                     </button>
                     <ul class="dropdown-menu wide" aria-labelledby="dropdownMenuButton1">
                         @foreach ($carts as $cart)
@@ -47,11 +47,19 @@
                                 </div>
                             </li>
                         @endforeach
+                        @if (COUNT($carts) != 0)
+                            <li class="checkout">
+                                <a class="dropdown-item" href="{{ route('customers.payment.show') }}">
+                                    <button type="button" class="btn btn-dark btn-block">
+                                        Cart <i class="fa-solid fa-cart-shopping cartt"></i>
+                                    </button>
+                                </a>
+                            </li>
+                        @else
+                            <p class="text-center">Empty Cart</p>
+                        @endif
 
-                        <li class="checkout"><a class="dropdown-item"
-                                href="{{ route('customers.payment.show') }}"><button type="button"
-                                    class="btn btn-dark btn-block">Cart <i
-                                        class="fa-solid fa-cart-shopping cartt"></i></button></a></li>
+
                     </ul>
                 </div>
                 <div class="dropdown shop lang">
@@ -68,8 +76,7 @@
                                 </a>
                             </li>
                         @endforeach
-                        {{-- <li><a class="dropdown-item" href="#">English</a></li>
-                        <li><a class="dropdown-item" href="#">Arabic</a></li> --}}
+
                     </ul>
                 </div>
             </div>
@@ -102,14 +109,11 @@
 @push('js')
     <script>
         $('#favorite').on('click', function() {
-            // console.log('good');
-
             $.ajax({
                 url: "{{ route('favorites.show') }}",
                 type: 'get',
 
                 success: function(response) {
-                    // console.log(response.favorites);
                     var $favoritesList = $('#favorites-list');
                     $favoritesList.empty();
                     $.each(response.favorites, function(index, favorite) {
@@ -120,9 +124,6 @@
                                 <span>` + favorite.name.{{ App::getLocale() }} + `</span>
 
                             </div>`);
-
-
-                        // console.log(favorite.name );
                     });
                     $('.remove').on('click', function(event) {
                         var productId = $(this).data('product-id-remove');
@@ -135,13 +136,10 @@
                                 id: productId,
                                 _token: '{{ csrf_token() }}'
                             },
-
                             success: function(response) {
                                 console.log(response);
-
                             },
                             error: function(xhr) {
-                                // Handle the error response
                                 console.log(xhr);
                             }
                         });

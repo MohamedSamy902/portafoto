@@ -107,32 +107,7 @@
                             </div>
 
                             <div class="row g-2 element" id="div_1">
-                                {{-- <div  class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">{{ __('master.size') }}</label>
-                                    <select class="form-select col-sm-12" name="sizes[]">
-                                        <option selected value="">{{ __('master.size') }}</option>
-                                        @foreach ($sizes as $size)
-                                            <option value="{{ $size->id }}">{{ $size->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
-                                    <div class="invalid-feedback">{{ __('validation.invalid_feedback') }}</div>
-                                </div>
 
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">{{ __('master.price') }}</label>
-                                    <input class="form-control" id="validationCustom05" type="text" name="price_size[]"
-                                       />
-                                    <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
-                                    <div class="invalid-feedback">{{ __('validation.invalid_feedback') }}</div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">{{ __('master.discount') }}</label>
-                                    <input class="form-control" id="validationCustom05" type="text" name="discount_size[]"
-                                        />
-                                    <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
-                                    <div class="invalid-feedback">{{ __('validation.invalid_feedback') }}</div>
-                                </div> --}}
                                 <div class="col-2">
                                     <div class="mb-3" style="margin-top: 32px;">
                                         <span class="add btn btn-primary">{{ __('product.addSizes') }}</span>
@@ -163,6 +138,20 @@
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label" for="validationDefault06">{{ __('product.showBest') }}</label>
                                     <select class="form-select" id="validationDefault06" required="" name="best">
+                                        <option value="no" selected> {{ __('product.no') }}</option>
+                                        <option value="yes"> {{ __('product.yes') }}</option>
+
+
+                                    </select>
+                                    <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
+                                    <div class="invalid-feedback">{{ __('validation.invalid_feedback') }}</div>
+                                </div>
+                            </div>
+
+                            <div class="row g-1">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label" for="validationDefault06">{{ __('product.showSlider') }}</label>
+                                    <select class="form-select" id="validationDefault06" required="" name="slider">
                                         <option value="no" selected> {{ __('product.no') }}</option>
                                         <option value="yes"> {{ __('product.yes') }}</option>
 

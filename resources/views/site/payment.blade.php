@@ -5,73 +5,84 @@
         <div class="container">
             <div class="row">
                 <div class="payment col-md-6 col-lg-8">
-                    <h3 class="text-center text-uppercase pb-5">Payment</h3>
+                    <h3 class="text-center text-uppercase pb-5">{{ __('site.PAYMENT') }}</h3>
                     <form method="POST" action="{{ route('customers.payment.store') }}">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputFirst">First Name</label>
-                                <input type="text" class="form-control" id="inputFirst" placeholder="First Name"
-                                    name="firstName" />
+                                {{-- <label for="inputFirst">{{ __('site.firstName') }}</label> --}}
+                                <input type="text" class="form-control" id="inputFirst" placeholder="{{ __('site.firstName') }}"
+                                    name="firstName" value="{{ old('firstName') }}" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputLast">Last Name</label>
-                                <input type="text" class="form-control" id="inputLast" placeholder="Last Name"
-                                    name="lastName" />
+                                {{-- <label for="inputLast">{{ __('site.lastName') }}</label> --}}
+                                <input type="text" class="form-control" id="inputLast" placeholder="{{ __('site.lastName') }}"
+                                    name="lastName" value="{{ old('lastName') }}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email Address"
-                                name="email" />
+                            {{-- <label for="inputEmail4">{{ __('site.email') }}</label> --}}
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="{{ __('site.email') }}"
+                                name="email" value="{{ old('email') }}" />
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
-                                    name="address_1" />
+                                {{-- <label for="inputAddress">{{ __('site.address_1') }}</label> --}}
+                                <input type="text" class="form-control" id="inputAddress" placeholder="{{ __('site.address_1') }}"
+                                    name="address_1" value="{{ old('address_1') }}" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputAddress2">Address 2</label>
+                                {{-- <label for="inputAddress2">Address 2</label> --}}
                                 <input type="text" class="form-control" id="inputAddress2"
-                                    placeholder="Apartment, studio, or floor" name="address_2" />
+                                    placeholder="{{ __('site.address_2') }}" name="address_2"
+                                    value="{{ old('address_2') }}" />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="country" class="form-label">Country</label>
+                                {{-- <label for="country" class="form-label">Country</label> --}}
                                 <select class="form-select" id="country" name="governorate_id">
-                                    <option disabled value="" selected name="">-- Please Chose governorate --
+                                    <option disabled value="" selected>{{ __('site.governorate') }}
                                     </option>
                                     @foreach ($governorates as $governorate)
-                                        <option data-price="150" value="{{ $governorate->id }}">{{ $governorate->name }}
+                                        <option {{ old('governorate_id') == $governorate->id ? 'selected' : '' }}
+                                            data-price="{{ $governorate->price }}" value="{{ $governorate->id }}">
+                                            {{ $governorate->name }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="city-dropdown" class="form-label">State</label>
+                                {{-- <label for="city-dropdown" class="form-label">City</label> --}}
                                 <select class="form-select" id="city-dropdown" name="city_id">
-                                    <option disabled value="" selected name="">-- Please Chose governorate --
+                                    <option disabled value="" selected name="">{{__('site.area')}}
                                     </option>
+                                    @if (old('governorate_id') != null)
+                                        @foreach ($governorates->where('id', old('governorate_id'))->first()->city as $governorateCity)
+                                            <option {{ old('city_id') == $governorateCity->id ? 'selected' : '' }}
+                                                value="{{ $governorateCity->id }}">
+                                                {{ $governorateCity->name }}
+                                            </option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip" placeholder="Zip Code"
-                                    name="zip_code" />
+                                {{-- <label for="inputZip">Zip</label> --}}
+                                <input type="text" class="form-control" id="inputZip" placeholder="{{ __('site.zip') }}"
+                                    name="zip_code" value="{{ old('zip_code') }}" />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputPhone">Phone Number</label>
-                                <input type="text" class="form-control" id="inputPhone" placeholder="Phone Number"
-                                    name="mobile_1" />
+                                {{-- <label for="inputPhone">Phone Number</label> --}}
+                                <input type="text" class="form-control" id="inputPhone" placeholder="{{ __('site.mobile_1') }}"
+                                    name="mobile_1" value="{{ old('mobile_1') }}" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPhone">Phone Number</label>
-                                <input type="text" class="form-control" id="inputPhone" placeholder="Phone Number"
-                                    name="mobile_2" />
+                                {{-- <label for="inputPhone">{{ __('site.mobile_1') }}</label> --}}
+                                <input type="text" class="form-control" id="inputPhone" placeholder="{{ __('site.mobile_2') }}"
+                                    name="mobile_2" value="{{ old('mobile_2') }}" />
                             </div>
 
                         </div>
@@ -79,16 +90,21 @@
                         <div class="form-row">
 
                             <div class="form-group col-md-12">
-                                <label for="validationCustom17" class="form-label">Payment Method</label>
+                                {{-- <label for="validationCustom17" class="form-label">Payment Method</label> --}}
                                 <select class="form-select" id="validationCustom17" name="payment">
-                                    <option selected value="">Vodafone Cash</option>
-                                    <option value="">InstaPay</option>
-                                    <option value="">Fawry</option>
+                                    <option {{ old('payment') == '' ? 'selected' : '' }} value="">{{ __('site.payment') }}
+                                    </option>
+                                    <option {{ old('payment') == 'Vodafone Cash' ? 'selected' : '' }}
+                                        value="Vodafone Cash">Vodafone Cash</option>
+                                    <option {{ old('payment') == 'InstaPay' ? 'selected' : '' }} value="InstaPay">InstaPay
+                                    </option>
+                                    <option {{ old('payment') == 'Cash On Delivery' ? 'selected' : '' }}
+                                        value="Cash On Delivery">Cash On Delivery</option>
                                 </select>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-dark mt-2 mb-3 w-25">
-                            Submit <i class="fa-solid fa-credit-card ml-1"></i>
+                            {{ __('site.send') }} <i class="fa-solid fa-credit-card ml-1"></i>
                         </button>
                     </form>
                 </div>
@@ -128,7 +144,7 @@
 
 
                             <li class="d-flex justify-content-start gap-3 align-items-center pt-4 ar-flex">
-                                <h5>Total Price:</h4>
+                                <h5>{{ __('site.Total Price') }}:</h4>
                                     <h6 class="price" id="totalPrice">{{ $totalPrice }} {{ __('site.EGP') }}</h6>
                             </li>
                         </ul>

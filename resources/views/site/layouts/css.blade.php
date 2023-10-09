@@ -28,4 +28,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/sweetalert2.css') }}">
+
+<!-- OR -->
+{!! SEO::generate() !!}
+
+<!-- MINIFIED -->
+{{-- {!! SEO::generate(true) !!} --}}
+
+<!-- LUMEN -->
+{{-- {!! app('seotools')->generate() !!} --}}
 @stack('css')

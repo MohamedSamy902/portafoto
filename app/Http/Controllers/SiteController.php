@@ -14,10 +14,11 @@ class SiteController extends Controller
 
         $products = Product::where('status', '!=', 'inactive')->get();
         $productsBest =  Product::where('status', '!=', 'inactive')->where('best', 'yes')->limit(4)->get();
+        $productsSlider =  Product::where('status', '!=', 'inactive')->where('slider', 'yes')->limit(4)->get();
         // return $productsBest;
         $customerId = Cookie::get('customerId');
         $carts = Cart::where('customerId', $customerId)->get();
-        return view('site.index', compact('products', 'carts', 'productsBest'));
+        return view('site.index', compact('products', 'carts', 'productsBest', 'productsSlider'));
     }
 
     public function showProduct($slug) {

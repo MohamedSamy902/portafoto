@@ -67,9 +67,11 @@
                                                 <span class="digits">{{ $invoice->mobile_1 }}</span> /
                                                 <span class="digits">{{ $invoice->mobile_2 }}</span>
                                             </p>
-                                            <p style="color: #000;
+                                            <p
+                                                style="color: #000;
                                             font-size: 20px;
-                                            font-weight: 700;">{{ $invoice->payment }}</p>
+                                            font-weight: 700;">
+                                                {{ $invoice->payment }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +146,19 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <a class="btn btn-info" href="{{ route('invoice.approved', $invoice->id) }}">Approved</a>
+                                        @if ($invoice->status == 'panning')
+                                            <a class="btn btn-info"
+                                                href="{{ route('invoice.approved', $invoice->id) }}">Approv</a>
+                                            <a class="btn btn-danger"
+                                                href="{{ route('invoice.refusal', $invoice->id) }}">Refusal</a>
+                                        @else
+                                        <p style="    color: #000;
+                                        text-align: center;
+                                        background-color: #d1d7cd;
+                                        border-radius: 5px;">{{ $invoice->status }}</p>
+
+                                        @endif
+
                                         {{-- <form class="text-end invo-pal">
                                             <input type="submit" class="btn btn-info" value="Approved" name="" id="">
 
@@ -157,13 +171,13 @@
                         {{-- <div class="col-sm-12 text-center mt-3">
                             <button class="btn btn btn-primary me-2" type="button" onclick="myFunction()">Print</button>
                             <button class="btn btn-secondary" type="button">Cancel</button> --}}
-                        </div>
-                        <!-- End Invoice-->
-                        <!-- End Invoice Holder-->
                     </div>
+                    <!-- End Invoice-->
+                    <!-- End Invoice Holder-->
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     @push('scripts')

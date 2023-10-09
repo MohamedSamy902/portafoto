@@ -16,7 +16,7 @@ class Product extends Model implements HasMedia
 
 
 
-    protected $fillable = ['name', 'description', 'price', 'discount', 'slug', 'status', 'best'];
+    protected $fillable = ['name', 'description', 'price', 'discount', 'slug', 'status', 'best', 'slider'];
 
     public $translatable = ['name', 'description'];
     public function color()

@@ -27,6 +27,7 @@ return new class extends Migration
 
             $table->enum('status', ['active', 'inactive', 'SOLD OUT'])->default('active');
             $table->enum('best', ['yes', 'no'])->default('no');
+            $table->enum('slider', ['yes', 'no'])->default('no');
 
             $table->timestamps();
         });

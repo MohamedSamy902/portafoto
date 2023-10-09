@@ -144,14 +144,16 @@
                                 <li><a href="{{ route('invoices.index') }}"
                                         class="{{ routeActive('invoices.index') }}">{{ __('invoice.invoice_list') }}</a>
                                 </li>
-                                {{-- @can('invoice-create') --}}
-                                <li><a href="{{ route('invoice.pendingList') }}"
-                                        class="{{ routeActive('invoice.pendingList') }}">{{ __('invoice.pendingList') }}
-                                    </a></li>
-                                <li><a href="{{ route('invoice.approvedList') }}"
-                                        class="{{ routeActive('invoice.approvedList') }}">{{ __('invoice.approvedList') }}
-                                    </a></li>
-                                {{-- @endcan --}}
+                                @can('invoice-invoice-pendingList')
+                                    <li><a href="{{ route('invoice.pendingList') }}"
+                                            class="{{ routeActive('invoice.pendingList') }}">{{ __('invoice.pendingList') }}
+                                        </a></li>
+                                @endcan
+                                @can('invoice-invoice-approvedList')
+                                    <li><a href="{{ route('invoice.approvedList') }}"
+                                            class="{{ routeActive('invoice.approvedList') }}">{{ __('invoice.approvedList') }}
+                                        </a></li>
+                                @endcan
                             </ul>
                         </li>
                     @endcan

@@ -15,6 +15,15 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:product-list',   ['only' => ['index']]);
+        $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:product-edit',   ['only' => ['edit', 'update']]);
+        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -65,6 +74,7 @@ class ProductController extends Controller
                 'discount' => $request->discount,
                 'status'  => $request->status,
                 'best' => $request->best,
+                'slider' => $request->slider,
             ]);
 
             if ($request->standard_size_id) {

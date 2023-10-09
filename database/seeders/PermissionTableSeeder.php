@@ -21,10 +21,10 @@ class PermissionTableSeeder extends Seeder
             'user-edit',
             'user-delete',
 
-            'customer-list',
-            'customer-create',
-            'customer-edit',
-            'customer-delete',
+            // 'customer-list',
+            // 'customer-create',
+            // 'customer-edit',
+            // 'customer-delete',
 
 
             'role-list',
@@ -37,6 +37,7 @@ class PermissionTableSeeder extends Seeder
 
             'governorate-list',
             'governorate-chengStatus',
+            'governorate-edit',
 
             'product-list',
             'product-create',
@@ -44,7 +45,27 @@ class PermissionTableSeeder extends Seeder
             'product-delete',
 
             'invoice-list',
-            
+            'invoice-pendingList',
+            'invoice-approvedList',
+            'invoice-approvedChengStatus',
+            'invoice-refusal',
+
+            'slider-list',
+            'slider-create',
+            'slider-edit',
+            'slider-delete',
+
+            'standardColor-list',
+            'standardColor-create',
+            'standardColor-edit',
+            'standardColor-delete',
+
+            'standardSize-list',
+            'standardSize-create',
+            'standardSize-edit',
+            'standardSize-delete',
+
+
         ];
 
         foreach ($permissions as $permission) {

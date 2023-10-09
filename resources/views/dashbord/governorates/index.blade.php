@@ -37,27 +37,21 @@
                                     @foreach ($governorates as $governorate)
                                         <tr>
                                             <td>{{ $governorate->name }}</td>
-                                            <td style="{{  $governorate->status == 'inactive' ? 'background-color: #e17575;' : ''}}">{{ $governorate->status }}</td>
+                                            <td
+                                                style="{{ $governorate->status == 'inactive' ? 'background-color: #e17575;' : '' }}">
+                                                {{ $governorate->status }}</td>
                                             <td>
                                                 <div style="display: flex;">
                                                     @can('governorate-chengStatus')
                                                         <a class="btn btn-outline-primary-2x" style="margin:0 20px;"
                                                             href="{{ route('governorates.chengStatus', $governorate->slug) }}">{{ __('master.chengStatus') }}</a>
+                                                    @endcan
 
-                                                            <a class="btn btn-outline-primary-2x" style="margin:0 20px;"
+                                                    @can('governorate-edit')
+                                                        <a class="btn btn-outline-primary-2x" style="margin:0 20px;"
                                                             href="{{ route('governorates.edit', $governorate->id) }}">{{ __('master.chengPrice') }}</a>
                                                     @endcan
 
-                                                    {{-- @can('user-delete')
-                                                        <form action="{{ route('cities.destroy', $city->id) }}" method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <input style="border-color: #d22d3d;"
-                                                                class="btn btn-outline-danger-2x"
-                                                                value="{{ __('master.delete') }}" type="submit">
-
-                                                        </form>
-                                                    @endcan --}}
                                                 </div>
                                             </td>
                                         </tr>

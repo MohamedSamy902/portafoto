@@ -50,6 +50,7 @@ class StoreProductRequest extends FormRequest
             'photos.*'          => 'required|file|image',
             'status'            => 'required|in:active,inactive,SOLD OUT',
             'best'              => 'required|in:no,yes',
+            'slider'              => 'required|in:no,yes',
 
 
         ];

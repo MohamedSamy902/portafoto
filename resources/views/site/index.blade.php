@@ -10,66 +10,27 @@
             <div class="container">
 
                 <div class="slider-container has-scrollbar">
+                    @foreach ($productsSlider as $slider)
+                        <div class="slider-item">
 
-                    <div class="slider-item">
+                            <img src="{{ $slider->getFirstMediaUrl('products') }}" alt="{{ $slider->name }}" class="banner-img">
 
-                        <img src="./assets/img/1.jpg" alt="The Finest Wall Frames" class="banner-img">
+                            <div class="banner-content">
 
-                        <div class="banner-content">
+                                <p class="banner-subtitle">{{ $slider->name }}</p>
 
-                            <p class="banner-subtitle">Trending item</p>
+                                <h2 class="banner-title">{{ $slider->name }}</h2>
 
-                            <h2 class="banner-title">The Finest Wall Frames</h2>
+                                {{-- <p class="banner-text">
+                                    starting at &dollar; <b>20</b>.00
+                                </p> --}}
 
-                            <p class="banner-text">
-                                starting at &dollar; <b>20</b>.00
-                            </p>
+                                <a href="{{ route('showProduct', $slider->slug) }}" class="banner-btn">{{ __('site.shopNow') }}</a>
 
-                            <a href="#" class="banner-btn">Shop now</a>
-
-                        </div>
-
-                    </div>
-
-                    <div class="slider-item">
-
-                        <img src="./assets/img/6.jpg" alt="modern sunglasses" class="banner-img">
-
-                        <div class="banner-content">
-
-                            <p class="banner-subtitle">Trending accessories</p>
-
-                            <h2 class="banner-title">Modern sunglasses</h2>
-
-                            <p class="banner-text">
-                                starting at &dollar; <b>15</b>.00
-                            </p>
-
-                            <a href="#" class="banner-btn">Shop now</a>
+                            </div>
 
                         </div>
-
-                    </div>
-
-                    <div class="slider-item">
-
-                        <img src="./assets/img/7.jpg" alt="new fashion summer sale" class="banner-img">
-
-                        <div class="banner-content">
-
-                            <p class="banner-subtitle">Sale Offer</p>
-
-                            <h2 class="banner-title">New fashion summer sale</h2>
-
-                            <p class="banner-text">
-                                starting at &dollar; <b>29</b>.99
-                            </p>
-
-                            <a href="#" class="banner-btn">Shop now</a>
-
-                        </div>
-
-                    </div>
+                    @endforeach
 
                 </div>
 
@@ -91,7 +52,7 @@
 
                     <div class="product-showcase">
 
-                        <h3 class="showcase-heading">best sellers</h3>
+                        <h3 class="showcase-heading">{{ __('site.bestSellers') }}</h3>
 
                         <div class="showcase-wrapper">
 
@@ -100,8 +61,8 @@
                                     <div class="showcase">
 
                                         <a href="{{ route('showProduct', $best->slug) }}" class="showcase-img-box">
-                                            <img src="{{ $best->getFirstMediaUrl('products') }}" alt="Wall Frame" width="75" height="75"
-                                                class="showcase-img">
+                                            <img src="{{ $best->getFirstMediaUrl('products') }}" alt="Wall Frame"
+                                                width="75" height="75" class="showcase-img">
                                         </a>
 
                                         <div class="showcase-content">
@@ -156,8 +117,7 @@
                                 <div class="showcase">
                                     <div class="showcase-banner">
                                         <img src="{{ $product->getFirstMediaUrl('products') }}"
-                                            alt="Mens Winter Leathers Jackets" width="300"
-                                            class="product-img default">
+                                            alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
                                         <img src="{{ $product->getFirstMediaUrl('products') }}"
                                             alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
 

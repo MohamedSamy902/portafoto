@@ -31,7 +31,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::where('roles_name', '!=', 'Volunteer')->get();
+        $users = User::get();
         return view('dashbord.users.index', compact('users'));
     }
     /**

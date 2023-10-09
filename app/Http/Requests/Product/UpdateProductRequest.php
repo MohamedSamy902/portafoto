@@ -44,6 +44,8 @@ class UpdateProductRequest extends FormRequest
             'discount_size.*'   => 'nullable|numeric',
 
             'best'              => 'required|in:no,yes',
+            'slider'              => 'required|in:no,yes',
+
 
             'photos'            => 'nullable|array',
             'photos.*'          => 'nullable|file|image',
