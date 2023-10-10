@@ -325,7 +325,9 @@
                                                 <div class="input-icons">
                                                     {{-- <i style="position: absolute;color:#FFF" class="fa-solid fa-cart-shopping"></i> --}}
                                                     <input type="submit" class="btn btn-dark" value="{{ __('site.addToCart') }}">
-
+                                                    <a class="checkoutt text-decoration-none" href="#"><button
+                                                        type="button" class="btn btn-primary">Show On Facebook <i
+                                                            class="fa-brands fa-facebook"></i></button></a>
                                                 </div>
                                             </div>
                                         </form>

@@ -1,155 +1,128 @@
 @extends('site.layouts.master')
 
 @section('content')
-    <section class="pay pt-5">
+    <section class="pay pt-5 pb-5">
         <div class="container">
             <div class="row">
-                <div class="payment col-md-6 col-lg-8">
-                    <h3 class="text-center text-uppercase pb-5">{{ __('site.PAYMENT') }}</h3>
-                    <form method="POST" action="{{ route('customers.payment.store') }}">
-                        @csrf
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                {{-- <label for="inputFirst">{{ __('site.firstName') }}</label> --}}
-                                <input type="text" class="form-control" id="inputFirst" placeholder="{{ __('site.firstName') }}"
-                                    name="firstName" value="{{ old('firstName') }}" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                {{-- <label for="inputLast">{{ __('site.lastName') }}</label> --}}
-                                <input type="text" class="form-control" id="inputLast" placeholder="{{ __('site.lastName') }}"
-                                    name="lastName" value="{{ old('lastName') }}" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {{-- <label for="inputEmail4">{{ __('site.email') }}</label> --}}
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="{{ __('site.email') }}"
-                                name="email" value="{{ old('email') }}" />
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                {{-- <label for="inputAddress">{{ __('site.address_1') }}</label> --}}
-                                <input type="text" class="form-control" id="inputAddress" placeholder="{{ __('site.address_1') }}"
-                                    name="address_1" value="{{ old('address_1') }}" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                {{-- <label for="inputAddress2">Address 2</label> --}}
-                                <input type="text" class="form-control" id="inputAddress2"
-                                    placeholder="{{ __('site.address_2') }}" name="address_2"
-                                    value="{{ old('address_2') }}" />
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                {{-- <label for="country" class="form-label">Country</label> --}}
-                                <select class="form-select" id="country" name="governorate_id">
-                                    <option disabled value="" selected>{{ __('site.governorate') }}
-                                    </option>
-                                    @foreach ($governorates as $governorate)
-                                        <option {{ old('governorate_id') == $governorate->id ? 'selected' : '' }}
-                                            data-price="{{ $governorate->price }}" value="{{ $governorate->id }}">
-                                            {{ $governorate->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-4">
-                                {{-- <label for="city-dropdown" class="form-label">City</label> --}}
-                                <select class="form-select" id="city-dropdown" name="city_id">
-                                    <option disabled value="" selected name="">{{__('site.area')}}
-                                    </option>
-                                    @if (old('governorate_id') != null)
-                                        @foreach ($governorates->where('id', old('governorate_id'))->first()->city as $governorateCity)
-                                            <option {{ old('city_id') == $governorateCity->id ? 'selected' : '' }}
-                                                value="{{ $governorateCity->id }}">
-                                                {{ $governorateCity->name }}
-                                            </option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                {{-- <label for="inputZip">Zip</label> --}}
-                                <input type="text" class="form-control" id="inputZip" placeholder="{{ __('site.zip') }}"
-                                    name="zip_code" value="{{ old('zip_code') }}" />
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                {{-- <label for="inputPhone">Phone Number</label> --}}
-                                <input type="text" class="form-control" id="inputPhone" placeholder="{{ __('site.mobile_1') }}"
-                                    name="mobile_1" value="{{ old('mobile_1') }}" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                {{-- <label for="inputPhone">{{ __('site.mobile_1') }}</label> --}}
-                                <input type="text" class="form-control" id="inputPhone" placeholder="{{ __('site.mobile_2') }}"
-                                    name="mobile_2" value="{{ old('mobile_2') }}" />
-                            </div>
 
-                        </div>
-
-                        <div class="form-row">
-
-                            <div class="form-group col-md-12">
-                                {{-- <label for="validationCustom17" class="form-label">Payment Method</label> --}}
-                                <select class="form-select" id="validationCustom17" name="payment">
-                                    <option {{ old('payment') == '' ? 'selected' : '' }} value="">{{ __('site.payment') }}
-                                    </option>
-                                    <option {{ old('payment') == 'Vodafone Cash' ? 'selected' : '' }}
-                                        value="Vodafone Cash">Vodafone Cash</option>
-                                    <option {{ old('payment') == 'InstaPay' ? 'selected' : '' }} value="InstaPay">InstaPay
-                                    </option>
-                                    <option {{ old('payment') == 'Cash On Delivery' ? 'selected' : '' }}
-                                        value="Cash On Delivery">Cash On Delivery</option>
-                                </select>
+                    <section class="checkout-form">
+                        <form action="#!" method="get">
+                            <h6>Contact information</h6>
+                            <div class="form-controll">
+                                <label for="checkout-email">E-mail</label>
+                                <div>
+                                    <span class="fa fa-envelope"></span>
+                                    <input type="email" id="checkout-email" name="checkout-email" placeholder="Enter your email...">
+                                </div>
                             </div>
+                            <div class="form-controll">
+                                <label for="checkout-phone">Phone</label>
+                                <div>
+                                    <span class="fa fa-phone"></span>
+                                    <input type="tel" name="checkout-phone" id="checkout-phone" placeholder="Enter you phone...">
+                                </div>
+                            </div>
+                            <br>
+                            <h6>Shipping address</h6>
+                            <div class="form-controll">
+                                <label for="checkout-name">Full name</label>
+                                <div>
+                                    <span class="fa fa-user-circle"></span>
+                                    <input type="text" id="checkout-name" name="checkout-name" placeholder="Enter you name...">
+                                </div>
+                            </div>
+                            <div class="form-controll">
+                                <label for="checkout-address">Address</label>
+                                <div>
+                                    <span class="fa fa-home"></span>
+                                    <input type="text" name="checkout-address" id="checkout-address" placeholder="Your address...">
+                                </div>
+                            </div>
+                            <div class="form-controll">
+                                <label for="checkout-city">City</label>
+                                <div>
+                                    <span class="fa fa-building"></span>
+                                    <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-controll">
+                                    <label for="checkout-country">Country</label>
+                                    <div>
+                                        <span class="fa fa-globe"></span>
+                                        <input type="text" name="checkout-country" id="checkout-country" placeholder="Your country..." list="country-list">
+                                        <datalist id="country-list">
+                                            <option value="India"></option>
+                                            <option value="USA"></option>
+                                            <option value="Russia"></option>
+                                            <option value="Japan"></option>
+                                            <option value="Egypt"></option>
+                                        </datalist>
+                                    </div>
+                                </div>
+                                <div class="form-controll">
+                                    <label for="checkout-postal">Postal code</label>
+                                    <div>
+                                        <span class="fa fa-archive"></span>
+                                        <input type="numeric" name="checkout-postal" id="checkout-postal" placeholder="Your postal code...">
                         </div>
-                        <button type="submit" class="btn btn-dark mt-2 mb-3 w-25">
-                            {{ __('site.send') }} <i class="fa-solid fa-credit-card ml-1"></i>
-                        </button>
-                    </form>
-                </div>
+                                </div>
+                            </div>
+                            <div class="form-controll checkbox-control">
+                                <input type="checkbox" name="checkout-checkbox" id="checkout-checkbox">
+                                <label for="checkout-checkbox">Save this information for next time</label>
+                            </div>
+                            <div class="form-controll-btn">
+                                <button>Continue</button>
+                            </div>
+                        </form>
+                    </section>
 
-                <div class="carr col-md-6 col-lg-4">
-                    <div class="car">
-                        <ul class="list-unstyled">
-                            <li class="d-flex justify-content-between align-items-center pb-2 ar-flex">
-                                <h3>{{ __('site.cart') }}</h3>
-                                <div class="position-relative pr-2"><i class="fa-solid fa-cart-shopping fa-xl"></i> <span
-                                        class="count">{{ COUNT($carts) }}</span></div>
-                            </li>
-                            @foreach ($carts as $cart)
-                                <li class="shop-content">
-
-                                    <img src="{{ $cart->product->getFirstMediaUrl('products') }}"
-                                        alt="{{ $cart->product->name }}">
-                                    <div class="shop-body">
-                                        <div>
-                                            <a href="{{ route('product.remove.cart', $cart->id) }}" class="remove"><i
-                                                    class="fas fa-times"></i></a>
-
+                    <section class="checkout-details">
+                        <div class="checkout-details-inner">
+                            <div class="checkout-lists">
+                                <div class="cardd">
+                                    <a href="" class="remove"><i
+                                        class="fas fa-times"></i></a>
+                                    <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo1.png" alt=""></div>
+                                    <div class="card-details">
+                                        <div class="card-name">Vintage Backbag</div>
+                                        <div class="card-price">$54.99 <span>$94.99</span></div>
+                                        <div class="card-wheel">
+                                            <button>-</button>
+                                            <span>1</span>
+                                            <button>+</button>
                                         </div>
-                                        <span>{{ $cart->product->name }}</span>
-                                        <p class="text-black-50">{{ $cart->standardColor->name }}</p>
-                                        @if ($cart->size != '')
-                                            <p class="text-black-50" style="margin-top: -10px">{{ $cart->size }}</p>
-                                        @endif
-                                        <p class="text-black-50" style="margin-top: -10px">{{ __('site.quantity') }}:
-                                            {{ $cart->quantity }}</p>
-                                    </div>
-                                    <div class="price-field">
-                                        <p class="price">{{ $cart->price }}</p>
-                                    </div>
-                                </li>
-                            @endforeach
 
+                                    </div>
+                                </div>
+                                <div class="cardd">
+                                    <a href="" class="remove"><i
+                                        class="fas fa-times"></i></a>
 
-                            <li class="d-flex justify-content-start gap-3 align-items-center pt-4 ar-flex">
-                                <h5>{{ __('site.Total Price') }}:</h4>
-                                    <h6 class="price" id="totalPrice">{{ $totalPrice }} {{ __('site.EGP') }}</h6>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                                    <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo2.png" alt=""></div>
+                                    <div class="card-details">
+                                        <div class="card-name">Levi Shoes</div>
+                                        <div class="card-price">$74.99 <span>$124.99</span></div>
+                                        <div class="card-wheel">
+                                            <button>-</button>
+                                            <span>1</span>
+                                            <button>+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout-shipping">
+                                <h6>Shipping</h6>
+                                <p>$19</p>
+                            </div>
+                            <div class="checkout-total">
+                                <h6>Total</h6>
+                                <p>$148.98</p>
+                            </div>
+                        </div>
+                    </section>
+
             </div>
         </div>
 
@@ -190,7 +163,16 @@
 
         });
     </script>
+    <script>
+        function checkMe(selected) {
+            if (selected) {
+                document.getElementById("divcheck").style.display = "";
+            } else {
+                document.getElementById("divcheck").style.display = "none";
+            }
 
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $('#country').on('change', function() {

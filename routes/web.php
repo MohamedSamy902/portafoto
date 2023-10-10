@@ -120,6 +120,10 @@ Route::group(
                 Route::post('/remove/product/favorite{id}', 'removeFromCookies')->name('remove.product');
             });
 
+            Route::get('/order', function () {
+                return view('site.order');
+            })->name('order');
+
             Route::controller(ProductCartController::class)->group(function () {
                 Route::post('/product/add/cart/{slug}', 'addToCart')->name('product.add.cart');
                 Route::get('/product/remove/cart/{id}', 'removeToCart')->name('product.remove.cart');

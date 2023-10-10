@@ -12,6 +12,11 @@
                 </button>
             </div>
             <div class="header-user-actions">
+                <a href="#"><button class="action-btn truck" type="button">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACRklEQVR4nO2YO0sdQRiGH1GPQtQjksJYhXTpE4hVwE6IaKws/APxQpr0sdNTJ4VC2hTBSv9CiDfMpfGSIkUSNShoYRQlKCcMfAuDObM7M3thA/PCNLPffM++55vbHggKCgoKCgoKCgqyUAcwDxwD9QLaCbAA3CJjLRRk4GZ7nbWRY0n8gGL0SHhHWSeuSytSuTDrwYi/QkXKOrV+Wexuh8A74L5t0iLls12fAUM2SYtUxBy3iL0HLEn8BdCflLRIuTKbgTcy5jvQk0XSLGRiVoAacJAwzZaBJtukecrErDmsmRe2SfOUibkv/U9ixg4C18Cfm+ulTEbqlu8yK3E/gNuug8tkpAV4L7GLroPLZETpLnAp8Y//ZyNoW/Lbshn5Kf1jlnkGJP5bXNI8ZWLOeF5frspmpEXMRJVxaaUy4qNgJAuFiqSdWu3Ac2ADOJe2DkwDbWngCZwzYBWYkptxKiN9wJeY3eIzcCcDI0mcTxLjZaRNS74FDAOd0kaAHQ1SSWHElvOxAcfKyLQ82waqDZ5XNchECiMunElTroOY7+cVeaZ+IZOeSswHSxMPNfiQB2dV6xuXvn3brzJVYpO6PK8VvpzTBuNmo/lZ077OXAFVx5dVf5q/Al4Cex6cUy1evfOczfqMSq4WnEmjjlMrLWfFBzAlg3cMi7Ab+Coxz3wAHpwJH0BFzgmVYFcWXJe0US15o20xD84m0OoL6dMgpoOqN4UJW86mx8H7j9SGoMq/JteG6Oqg9vQ0lUji/Ja1p6ZTbCX+Anf7zx/UhtX/AAAAAElFTkSuQmCC">
+
+
+                </button></a>
 
                 <div class="dropdown fav" id="favorite">
                     <button class="action-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
