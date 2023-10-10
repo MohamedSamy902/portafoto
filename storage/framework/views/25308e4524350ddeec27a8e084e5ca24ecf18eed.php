@@ -1,5 +1,5 @@
 <!--  favicon -->
-<link rel="shortcut icon" href="<?php echo e(asset('site')); ?>/assets/images/logo/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="<?php echo e(asset('site')); ?>/assets/images/logo/logo.jpg" >
 <link rel="stylesheet" href="<?php echo e(asset('site')); ?>/assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo e(asset('site')); ?>/assets/fontawesome-free-6.4.2-web/css/all.min.css">
 <!-- custom css link -->

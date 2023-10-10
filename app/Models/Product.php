@@ -16,7 +16,7 @@ class Product extends Model implements HasMedia
 
 
 
-    protected $fillable = ['name', 'description', 'price', 'discount', 'slug', 'status', 'best', 'slider'];
+    protected $fillable = ['name', 'description', 'price', 'discount', 'slug', 'status', 'best', 'slider', 'category_id'];
 
     public $translatable = ['name', 'description'];
     public function color()
@@ -38,10 +38,10 @@ class Product extends Model implements HasMedia
         return $this->hasMany(Cart::class);
     }
 
-    // public function invoice()
-    // {
-    //     return $this->hasMany(Invoice::class);
-    // }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     protected static function boot()
     {

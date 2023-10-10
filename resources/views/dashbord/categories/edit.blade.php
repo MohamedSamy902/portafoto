@@ -33,7 +33,7 @@
                                     <label class="form-label" for="validationCustom01">{{ __('master.name_en') }}</label>
                                     <input class="form-control" id="validationCustom01" type="text" required=""
                                         name="name" placeholder=""
-                                        value="{{ old('name') ? old('name') : $product->getTranslation('name', 'en') }}" />
+                                        value="{{ old('name') ? old('name') : $category->getTranslation('name', 'en') }}" />
                                     <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
                                     <div class="invalid-feedback">{{ __('validation.invalid_feedback') }}</div>
                                 </div>
@@ -44,7 +44,7 @@
                                     <label class="form-label" for="validationCustom01">{{ __('master.name_ar') }}</label>
                                     <input class="form-control" id="validationCustom01" type="text" required=""
                                         name="name_ar" placeholder=""
-                                        value="{{ old('name') ? old('name') : $product->getTranslation('name', 'ar') }}" />
+                                        value="{{ old('name') ? old('name') : $category->getTranslation('name', 'ar') }}" />
                                     <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
                                     <div class="invalid-feedback">{{ __('validation.invalid_feedback') }}</div>
                                 </div>

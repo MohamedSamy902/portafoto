@@ -65,7 +65,8 @@
                 <div class="dropdown shop lang">
                     <button class="action-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <ion-icon name="language-outline"></ion-icon> <i class="fas fa-sort-down"></i>
+                        {{ LaravelLocalization::getCurrentLocale() }}
+                        <i class="fas fa-sort-down"></i>
                     </button>
                     <ul class="dropdown-menu profile" aria-labelledby="dropdownMenuButton1">
                         @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)

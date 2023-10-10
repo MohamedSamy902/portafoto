@@ -146,7 +146,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        @if ($invoice->status == 'panning')
+                                        @if ($invoice->status == 'pending')
                                             <a class="btn btn-info"
                                                 href="{{ route('invoice.approved', $invoice->id) }}">Approv</a>
                                             <a class="btn btn-danger"

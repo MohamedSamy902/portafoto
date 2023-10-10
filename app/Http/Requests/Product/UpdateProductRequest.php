@@ -27,8 +27,8 @@ class UpdateProductRequest extends FormRequest
             'name'              => 'required|string|min:3|max:200',
             'name_ar'           => 'required|string|min:3|max:200',
 
-            'description'       => 'required|string|min:3|max:200',
-            'description_ar'    => 'required|string|min:3|max:200',
+            'description'       => 'nullable|string|min:3|',
+            'description_ar'    => 'nullable|string|min:3|',
 
             'price'             => 'nullable|numeric',
             'discount'          => 'nullable|numeric',
@@ -44,8 +44,8 @@ class UpdateProductRequest extends FormRequest
             'discount_size.*'   => 'nullable|numeric',
 
             'best'              => 'required|in:no,yes',
-            'slider'              => 'required|in:no,yes',
-
+            'slider'            => 'required|in:no,yes',
+            'category_id'       => 'required|exists:categories,id',
 
             'photos'            => 'nullable|array',
             'photos.*'          => 'nullable|file|image',

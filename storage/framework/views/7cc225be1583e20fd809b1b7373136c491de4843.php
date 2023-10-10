@@ -114,7 +114,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <?php if($invoice->status == 'panning'): ?>
+                                        <?php if($invoice->status == 'pending'): ?>
                                             <a class="btn btn-info"
                                                 href="<?php echo e(route('invoice.approved', $invoice->id)); ?>">Approv</a>
                                             <a class="btn btn-danger"

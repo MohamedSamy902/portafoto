@@ -13,7 +13,8 @@
                     @foreach ($productsSlider as $slider)
                         <div class="slider-item">
 
-                            <img src="{{ $slider->getFirstMediaUrl('products') }}" alt="{{ $slider->name }}" class="banner-img">
+                            <img src="{{ $slider->getFirstMediaUrl('products') }}" alt="{{ $slider->name }}"
+                                class="banner-img">
 
                             <div class="banner-content">
 
@@ -25,7 +26,8 @@
                                     starting at &dollar; <b>20</b>.00
                                 </p> --}}
 
-                                <a href="{{ route('showProduct', $slider->slug) }}" class="banner-btn">{{ __('site.shopNow') }}</a>
+                                <a href="{{ route('showProduct', $slider->slug) }}"
+                                    class="banner-btn">{{ __('site.shopNow') }}</a>
 
                             </div>
 
@@ -57,6 +59,7 @@
                         <div class="showcase-wrapper">
 
                             <div class="showcase-container">
+
                                 @foreach ($productsBest as $best)
                                     <div class="showcase">
 
@@ -112,59 +115,9 @@
 
                     <div class="product-main">
 
-                        <div class="product-grid">
-                            @foreach ($products as $product)
-                                <div class="showcase">
-                                    <div class="showcase-banner">
-                                        <img src="{{ $product->getFirstMediaUrl('products') }}"
-                                            alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
-                                        <img src="{{ $product->getFirstMediaUrl('products') }}"
-                                            alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
+                        <div class="product-grid" id="products-container">
+                            @include('site.partialsProduct')
 
-                                        <div class="showcase-actions">
-
-                                            <button class="btn-action favorite-button"
-                                                data-product-id="{{ $product->id }}">
-                                                <ion-icon name="heart-outline"></ion-icon>
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="showcase-content">
-
-                                        <a href="{{ route('showProduct', $product->slug) }}"
-                                            class="showcase-category">{{ $product->name }}</a>
-                                        @if (COUNT($product->size) > 0)
-                                            <a href="#">
-                                                <h3 class="showcase-title">
-                                                    {{ $product->size()->first()->standardSize->name }}</h3>
-                                            </a>
-                                        @endif
-
-
-
-                                        <div class="price-box">
-                                            @if (COUNT($product->size) > 0)
-                                                <p class="price">{{ $product->size()->first()->price }}
-                                                    {{ __('site.EGP') }}</p>
-                                                @if ($product->size()->first()->discount != null)
-                                                    <del>{{ $product->size()->first()->discount }}
-                                                        {{ __('site.EGP') }}</del>
-                                                @endif
-                                            @else
-                                                <p class="price">{{ $product->price }} {{ __('site.EGP') }}</p>
-                                                @if ($product->discount != null)
-                                                    <del>{{ $product->discount }} {{ __('site.EGP') }}</del>
-                                                @endif
-                                            @endif
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            @endforeach
                         </div>
 
                     </div>
@@ -179,10 +132,27 @@
 
     @push('js')
         <script src="https://releases.jquery.com/git/jquery-git.js"></script>
-        {{-- <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script> --}}
         <script>
             $(document).ready(function() {
-                $('.favorite-button').on('click', function(event) {
+                var page = 1;
+                $(window).scroll(function() {
+                    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                        page++;
+                        console.log(page);
+                        $.ajax({
+                            url: "/get-products-ajax?skip=" + ((page - 1) * 10),
+                            success: function(data) {
+                                $('#products-container').append(data);
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $(document).on('click', '.favorite-button', function(event) {
                     event.preventDefault();
                     var productId = $(this).data('product-id');
                     var url = "{{ route('favorites.add', ':productId') }}";
@@ -204,25 +174,9 @@
                                 timer: 2000
                             });
 
-                            // Update the header favorite list
-                            // var $favoritesCount = $('#favorites-count');
-                            // var count = $favoritesCount.text() ? parseInt($favoritesCount.text()) :
-                            //     0;
-                            // var newCount = count + 1;
-                            // $favoritesCount.text(newCount);
-                            // var $favoritesList = $('#favorites-list');
-                            // $favoritesList.empty();
-                            // console.log(response);
-                            // $.each(response.favorites, function(index, favorite) {
-                            //     console.log(favorite);
-                            //     $favoritesList.append('<li>' + favorite.name + '</li>');
-                            // });
-                            // // Show success message
-                            // alert(response.message);
                         }
                     });
                 });
-
 
             });
         </script>

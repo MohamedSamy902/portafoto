@@ -96,7 +96,7 @@
 
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
-                                    <label class="col-form-label">Colors</label>
+                                    <label class="col-form-label">{{ __('site.color') }}</label>
                                     <select class="js-example-basic-multiple col-sm-12" multiple="multiple" name="colors[]">
                                         @foreach ($colors as $color)
                                             <option selected value="{{ $color->id }}">{{ $color->name }}</option>
@@ -104,6 +104,26 @@
                                     </select>
                                 </div>
 
+                            </div>
+
+
+
+
+                            <div class="row g-1">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label"
+                                        for="category">{{ __('category.category') }}</label>
+                                    <select class="form-select" id="category" required="" name="category_id">
+                                        <option selected="" disabled="" value="">
+                                            {{ __('category.category') }}
+                                        </option>
+                                        @foreach ($categories as $category)
+                                            <option selected value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
+                                    <div class="invalid-feedback">{{ __('validation.invalid_feedback') }}</div>
+                                </div>
                             </div>
 
                             <div class="row g-2 element" id="div_1">
@@ -136,7 +156,8 @@
 
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
-                                    <label class="form-label" for="validationDefault06">{{ __('product.showBest') }}</label>
+                                    <label class="form-label"
+                                        for="validationDefault06">{{ __('product.showBest') }}</label>
                                     <select class="form-select" id="validationDefault06" required="" name="best">
                                         <option value="no" selected> {{ __('product.no') }}</option>
                                         <option value="yes"> {{ __('product.yes') }}</option>
@@ -150,7 +171,8 @@
 
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
-                                    <label class="form-label" for="validationDefault06">{{ __('product.showSlider') }}</label>
+                                    <label class="form-label"
+                                        for="validationDefault06">{{ __('product.showSlider') }}</label>
                                     <select class="form-select" id="validationDefault06" required="" name="slider">
                                         <option value="no" selected> {{ __('product.no') }}</option>
                                         <option value="yes"> {{ __('product.yes') }}</option>

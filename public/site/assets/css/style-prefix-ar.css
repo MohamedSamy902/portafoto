@@ -694,7 +694,7 @@
     flex-direction: row-reverse;
   }
 
-  .header-logo { margin-bottom: 20px; font-family: 'Great Vibes', cursive; color: var(--eerie-black); font-size: 34px; font-weight: 550; text-align: center; }
+  .header-logo { margin-bottom: 20px;  color: var(--eerie-black); font-size: 34px; font-weight: 550; text-align: center; }
   .header-logo:hover {
     text-decoration: none;
     color: var(--eerie-black);

@@ -784,7 +784,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .header-logo {
     margin-bottom: 20px;
-    font-family: 'Great Vibes', cursive;
+    /* font-family: 'Great Vibes', cursive; */
     color: var(--eerie-black);
     font-size: 34px;
     font-weight: 550;

@@ -21,7 +21,7 @@ return
 
     // product Page
     'inStock' => '',
-    'color' => 'الالوان',
+    'color' => 'لون الاطار',
     'quantity' => 'الكميه',
     'addToCart' => 'اضف الي السله',
     'choose' => 'اختار... ',

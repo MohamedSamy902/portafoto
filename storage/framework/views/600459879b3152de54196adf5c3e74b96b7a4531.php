@@ -95,7 +95,7 @@
 
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
-                                    <label class="col-form-label">Colors</label>
+                                    <label class="col-form-label"><?php echo e(__('site.color')); ?></label>
                                     <select class="js-example-basic-multiple col-sm-12" multiple="multiple" name="colors[]">
                                         <?php $__currentLoopData = $colors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $color): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option selected value="<?php echo e($color->id); ?>"><?php echo e($color->name); ?></option>
@@ -103,6 +103,27 @@
                                     </select>
                                 </div>
 
+                            </div>
+
+
+
+
+                            <div class="row g-1">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label"
+                                        for="category"><?php echo e(__('category.category')); ?></label>
+                                    <select class="form-select" id="category" required="" name="category_id">
+                                        <option selected="" disabled="" value="">
+                                            <?php echo e(__('category.category')); ?>
+
+                                        </option>
+                                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option selected value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                    <div class="valid-feedback"><?php echo e(__('validation.valid_feedback')); ?></div>
+                                    <div class="invalid-feedback"><?php echo e(__('validation.invalid_feedback')); ?></div>
+                                </div>
                             </div>
 
                             <div class="row g-2 element" id="div_1">
@@ -136,7 +157,8 @@
 
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
-                                    <label class="form-label" for="validationDefault06"><?php echo e(__('product.showBest')); ?></label>
+                                    <label class="form-label"
+                                        for="validationDefault06"><?php echo e(__('product.showBest')); ?></label>
                                     <select class="form-select" id="validationDefault06" required="" name="best">
                                         <option value="no" selected> <?php echo e(__('product.no')); ?></option>
                                         <option value="yes"> <?php echo e(__('product.yes')); ?></option>
@@ -150,7 +172,8 @@
 
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
-                                    <label class="form-label" for="validationDefault06"><?php echo e(__('product.showSlider')); ?></label>
+                                    <label class="form-label"
+                                        for="validationDefault06"><?php echo e(__('product.showSlider')); ?></label>
                                     <select class="form-select" id="validationDefault06" required="" name="slider">
                                         <option value="no" selected> <?php echo e(__('product.no')); ?></option>
                                         <option value="yes"> <?php echo e(__('product.yes')); ?></option>

@@ -20,7 +20,7 @@ return
 
         // product Page
         'inStock' => 'In Stock',
-        'color' => 'Color',
+        'color' => 'Frame Color',
         'quantity' => 'quantity',
         'addToCart' => 'Add To Cart',
         'choose' => 'Choose... ',

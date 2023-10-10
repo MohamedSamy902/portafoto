@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\Category\StoreCategoryRequest;
+use App\Http\Requests\Category\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+    function __construct()
+    {
+        $this->middleware('permission:category-list',   ['only' => ['index']]);
+        $this->middleware('permission:category-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:category-edit',   ['only' => ['edit', 'update']]);
+        $this->middleware('permission:category-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +25,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('dashbord.category.index');
+        $categories = Category::get();
+        return view('dashbord.categories.index', \compact('categories'));
     }
 
     /**
@@ -30,123 +36,104 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('dashbord.category.create');
+        return view('dashbord.categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StorecategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
         try {
-            // Request All In Form
-            $category = $request->validated();
-            // return $category;
-            // Cereat Request
-            $cat = Category::create([
+            // return $request->validated();
+
+            $category = Category::create([
                 'name' => [
                     'en' => $request->name,
                     'ar' => $request->name_ar,
                 ],
-                'status' => $request->status,
+
             ]);
-            // Check Done Or Fil
-            if ($cat) {
-                // Redirect Success Masseg
-                return redirect()->back()->with(['success' => 'Success Save']);
+
+            if ($category) {
+
+                return redirect()->route('categories.create')->with('success', __('master.messages_save'));
             } else {
-                // Return Error Massege
-                return redirect()->back()->with(['error' => 'Please Try Again']);
+                return redirect()->route('categories.index')->with('error', __('master.messages_error'));
             }
         } catch (\Exception $ex) {
-            // Massege Error
-            return redirect()->back()->with(['error' => 'Please Try Again']);
+            return redirect()->route('categories.index')->with('error', __('master.messages_error'));
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    // public function show(Category $category)
-    // {
-    //     $categories = Category::all();
-    //     return view('dashbord.category.show', compact('categories'));
-    // }
+    public function show(category $category)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(category $category)
     {
-        try {
-            // Check Id In Request Or No
-            if (isset($id) && !empty($id)) {
-                // return $id;
-                // Get Category With Id
-                $category = Category::findOrFail($id);
-                // return $category;
-                // Check Category Found Or Fil
-                if ($category) {
-                    // Requrn Redirect With Success Massege
-                    return view('dashbord.category.edit', compact('category', 'languages'));
-                } else {
-                    // Requrn Redirect With Error Massege
-                    return redirect()->route('category.index')->with(['error' => 'Please Try Again']);
-                }
-            }
-        } catch (\Exception $ex) {
-            return redirect()->route('category.index')->with(['error' => 'Please Try Again']);
-        }
+        $category = Category::findOrFail($category->id);
+        return view('dashbord.categories.edit', \compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  \App\Http\Requests\UpdatecategoryRequest  $request
+     * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, category $category)
     {
-        try {
-            // $category = Category::findOrFail($id);
-            if ($category) {
-                $data = $request->all();
-                $status = $category->fill($data)->save();
-                if ($status) {
-                    return redirect()->route('category.index')->with(['success' => 'Success Update']);
-                } else {
-                    return redirect()->route('category.index')->with(['error' => 'Please Try Again']);
-                }
-            }
-        } catch (\Exception $ex) {
-            return redirect()->route('category.index')->with(['error' => 'Please Try Again']);
+
+        if ($category) {
+            $category->update([
+                'name' => [
+                    'en' => $request->name,
+                    'ar' => $request->name_ar,
+                ],
+
+            ]);
+            return redirect()->route('categories.index')->with('success', __('master.messages_edit'));
+
         }
+        return redirect()->route('categories.index')->with('error', __('master.messages_error'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(category $category)
     {
         try {
-            $category = Category::find($id);
-            $category->delete();
-            return redirect()->route('category.index')->with(['success' => 'Success Delete']);
+            $category = Category::findOrFail($category->id);
+            if ($category->product->count() == 0) {
+                $category->delete();
+            } else {
+                return redirect()->route('categories.index')->with(['error' => 'هناك موظفين في هذا القسم']);
+            }
+            return redirect()->route('categories.index')->with('success', __('master.messages_delete'));
         } catch (\Exception $ex) {
-            return redirect()->route('category.index')->with(['error' => 'Please Try Again']);
+            return redirect()->route('categories.index')->with('error', __('master.messages_error'));
         }
     }
 }

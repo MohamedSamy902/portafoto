@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Product\StoreProductRequest;
-use App\Http\Requests\Product\UpdateProductRequest;
-use App\Models\Product;
 use App\Models\Size;
-use App\Models\StandardColor;
+use App\Models\Product;
+use App\Models\Category;
 use App\Models\StandardSize;
 use Illuminate\Http\Request;
+use App\Models\StandardColor;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
@@ -44,7 +45,8 @@ class ProductController extends Controller
     {
         $colors = StandardColor::get();
         $sizes  = StandardSize::get();
-        return view('dashbord.products.create', compact('colors', 'sizes'));
+        $categories = Category::get();
+        return view('dashbord.products.create', compact('colors', 'sizes', 'categories'));
     }
 
     /**
@@ -56,10 +58,9 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         try {
+            $photo = $request->file('photos');
             DB::beginTransaction();
-
             $data = $request->validated();
-            // return $data;
             $product = Product::create([
                 'name' => [
                     'en' => $request->name,
@@ -75,6 +76,7 @@ class ProductController extends Controller
                 'status'  => $request->status,
                 'best' => $request->best,
                 'slider' => $request->slider,
+                'category_id' => $request->category_id,
             ]);
 
             if ($request->standard_size_id) {
@@ -100,8 +102,8 @@ class ProductController extends Controller
                 }
             }
 
-            if ($request->file('photos')) {
-                foreach ($request->file('photos') as $photo) {
+            if ($photo) {
+                foreach ($photo as $photo) {
                     $product->addMedia($photo)->toMediaCollection('products');
                 }
             }
@@ -117,20 +119,9 @@ class ProductController extends Controller
             return redirect()->back()
                 ->with('error', __('master.messages_error'));
         }
-
-        // return $request->file('photos');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -224,7 +215,6 @@ class ProductController extends Controller
     public function delete(Product $product)
     {
         return $product;
-
     }
 
     public function deleteImage($productId, $mediaId)
@@ -239,6 +229,6 @@ class ProductController extends Controller
 
         // Redirect back to the product edit page
         return redirect()->back()
-                ->with('success', __('master.messages_delete'));
+            ->with('success', __('master.messages_delete'));
     }
 }

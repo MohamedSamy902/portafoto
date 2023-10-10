@@ -1,5 +1,5 @@
 <!--  favicon -->
-<link rel="shortcut icon" href="{{ asset('site') }}/assets/images/logo/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="{{ asset('site') }}/assets/images/logo/logo.jpg" >
 <link rel="stylesheet" href="{{ asset('site') }}/assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="{{ asset('site') }}/assets/fontawesome-free-6.4.2-web/css/all.min.css">
 <!-- custom css link -->
@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/sweetalert2.css') }}">
-
+{{-- <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-1ItPrW0cdtzxx8rVg3CTvhR/qIIuOMSD52l+ATF8jxjRXmDVtX7yBtlTnkJn5nVb" crossorigin="anonymous"></script> --}}
 <!-- OR -->
 {!! SEO::generate() !!}
 

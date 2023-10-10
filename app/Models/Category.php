@@ -2,20 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
-    use HasFactory;
-    protected $fillable = ['name', 'language_id'];
+    use HasFactory, HasRoles, HasTranslations;
+    protected $fillable = ['name'];
 
-    public function blog()
+    public $translatable = ['name'];
+
+
+    public function product()
     {
-        return $this->hasMany(Blog::class, 'category_id','id');
+        return $this->hasMany(Product::class);
     }
 
-    public function language(){
-        return $this->belongsTo(Language::class);
-    }
 }

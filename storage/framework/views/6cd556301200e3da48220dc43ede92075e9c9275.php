@@ -12,7 +12,8 @@
                     <?php $__currentLoopData = $productsSlider; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slider): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="slider-item">
 
-                            <img src="<?php echo e($slider->getFirstMediaUrl('products')); ?>" alt="<?php echo e($slider->name); ?>" class="banner-img">
+                            <img src="<?php echo e($slider->getFirstMediaUrl('products')); ?>" alt="<?php echo e($slider->name); ?>"
+                                class="banner-img">
 
                             <div class="banner-content">
 
@@ -22,7 +23,8 @@
 
                                 
 
-                                <a href="<?php echo e(route('showProduct', $slider->slug)); ?>" class="banner-btn"><?php echo e(__('site.shopNow')); ?></a>
+                                <a href="<?php echo e(route('showProduct', $slider->slug)); ?>"
+                                    class="banner-btn"><?php echo e(__('site.shopNow')); ?></a>
 
                             </div>
 
@@ -54,6 +56,7 @@
                         <div class="showcase-wrapper">
 
                             <div class="showcase-container">
+
                                 <?php $__currentLoopData = $productsBest; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $best): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="showcase">
 
@@ -111,61 +114,9 @@
 
                     <div class="product-main">
 
-                        <div class="product-grid">
-                            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="showcase">
-                                    <div class="showcase-banner">
-                                        <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>"
-                                            alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
-                                        <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>"
-                                            alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
+                        <div class="product-grid" id="products-container">
+                            <?php echo $__env->make('site.partialsProduct', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                                        <div class="showcase-actions">
-
-                                            <button class="btn-action favorite-button"
-                                                data-product-id="<?php echo e($product->id); ?>">
-                                                <ion-icon name="heart-outline"></ion-icon>
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="showcase-content">
-
-                                        <a href="<?php echo e(route('showProduct', $product->slug)); ?>"
-                                            class="showcase-category"><?php echo e($product->name); ?></a>
-                                        <?php if(COUNT($product->size) > 0): ?>
-                                            <a href="#">
-                                                <h3 class="showcase-title">
-                                                    <?php echo e($product->size()->first()->standardSize->name); ?></h3>
-                                            </a>
-                                        <?php endif; ?>
-
-
-
-                                        <div class="price-box">
-                                            <?php if(COUNT($product->size) > 0): ?>
-                                                <p class="price"><?php echo e($product->size()->first()->price); ?>
-
-                                                    <?php echo e(__('site.EGP')); ?></p>
-                                                <?php if($product->size()->first()->discount != null): ?>
-                                                    <del><?php echo e($product->size()->first()->discount); ?>
-
-                                                        <?php echo e(__('site.EGP')); ?></del>
-                                                <?php endif; ?>
-                                            <?php else: ?>
-                                                <p class="price"><?php echo e($product->price); ?> <?php echo e(__('site.EGP')); ?></p>
-                                                <?php if($product->discount != null): ?>
-                                                    <del><?php echo e($product->discount); ?> <?php echo e(__('site.EGP')); ?></del>
-                                                <?php endif; ?>
-                                            <?php endif; ?>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
 
                     </div>
@@ -180,10 +131,27 @@
 
     <?php $__env->startPush('js'); ?>
         <script src="https://releases.jquery.com/git/jquery-git.js"></script>
-        
         <script>
             $(document).ready(function() {
-                $('.favorite-button').on('click', function(event) {
+                var page = 1;
+                $(window).scroll(function() {
+                    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                        page++;
+                        console.log(page);
+                        $.ajax({
+                            url: "/get-products-ajax?skip=" + ((page - 1) * 10),
+                            success: function(data) {
+                                $('#products-container').append(data);
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $(document).on('click', '.favorite-button', function(event) {
                     event.preventDefault();
                     var productId = $(this).data('product-id');
                     var url = "<?php echo e(route('favorites.add', ':productId')); ?>";
@@ -205,25 +173,9 @@
                                 timer: 2000
                             });
 
-                            // Update the header favorite list
-                            // var $favoritesCount = $('#favorites-count');
-                            // var count = $favoritesCount.text() ? parseInt($favoritesCount.text()) :
-                            //     0;
-                            // var newCount = count + 1;
-                            // $favoritesCount.text(newCount);
-                            // var $favoritesList = $('#favorites-list');
-                            // $favoritesList.empty();
-                            // console.log(response);
-                            // $.each(response.favorites, function(index, favorite) {
-                            //     console.log(favorite);
-                            //     $favoritesList.append('<li>' + favorite.name + '</li>');
-                            // });
-                            // // Show success message
-                            // alert(response.message);
                         }
                     });
                 });
-
 
             });
         </script>

@@ -27,11 +27,9 @@ class StoreProductRequest extends FormRequest
             'name'              => 'required|string|min:3|max:200',
             'name_ar'           => 'required|string|min:3|max:200',
 
-            'description'       => 'required|string|min:3|max:200',
-            'description_ar'    => 'required|string|min:3|max:200',
+            'description'       => 'nullable|string|min:3',
+            'description_ar'    => 'nullable|string|min:3',
 
-            // 'colors'            => 'required|array',
-            // 'colors.*'          => 'required|numeric',
 
             'price'             => 'nullable|numeric',
             'discount'          => 'nullable|numeric',
@@ -45,12 +43,14 @@ class StoreProductRequest extends FormRequest
 
             'discount_size'     => 'nullable|array',
             'discount_size.*'   => 'nullable|numeric',
+            'category_id'       => 'required|exists:categories,id',
+
 
             'photos'            => 'required|array',
             'photos.*'          => 'required|file|image',
             'status'            => 'required|in:active,inactive,SOLD OUT',
             'best'              => 'required|in:no,yes',
-            'slider'              => 'required|in:no,yes',
+            'slider'            => 'required|in:no,yes',
 
 
         ];

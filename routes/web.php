@@ -51,7 +51,7 @@ Route::group(
                 /** End Route Roles **/
 
                 /** Start Route Roles **/
-                Route::resource('sliders', SliderController::class)->except(['show']);
+                Route::resource('categories', CategoryController::class)->except(['show']);
                 /** End Route Roles **/
 
                 /** Start Route Roles **/
@@ -109,7 +109,9 @@ Route::group(
         Route::group(['middleware' => 'customerId'], function () {
             Route::controller(SiteController::class)->group(function () {
                 Route::get('/', 'index')->name('site');
+                Route::get('/get-products-ajax', 'getProductsAjax');
                 Route::get('/product/{slug}', 'showProduct')->name('showProduct');
+
             });
 
             Route::controller(ProductFavoriteController::class)->group(function () {

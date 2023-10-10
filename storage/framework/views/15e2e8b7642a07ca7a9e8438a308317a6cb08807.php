@@ -66,7 +66,9 @@
                 <div class="dropdown shop lang">
                     <button class="action-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <ion-icon name="language-outline"></ion-icon> <i class="fas fa-sort-down"></i>
+                        <?php echo e(LaravelLocalization::getCurrentLocale()); ?>
+
+                        <i class="fas fa-sort-down"></i>
                     </button>
                     <ul class="dropdown-menu profile" aria-labelledby="dropdownMenuButton1">
                         <?php $__currentLoopData = LaravelLocalization::getSupportedLocales(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $localeCode => $properties): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

@@ -29,7 +29,7 @@
                         </div>
                     </li>
 
-                    {{-- @can('role-list')
+                    @can('role-list')
                         <li class="dropdown">
                             <a class="nav-link menu-title {{ prefixActive('roles') }}" href="javascript:void(0)">
                                 <i data-feather="home"></i>
@@ -46,7 +46,7 @@
                                 @endcan
                             </ul>
                         </li>
-                    @endcan --}}
+                    @endcan
 
                     @can('user-list')
                         <li class="dropdown">
@@ -111,6 +111,25 @@
                                         class="{{ routeActive('governorates.index') }}">{{ __('city.governorate_list') }}</a>
                                 </li>
 
+                            </ul>
+                        </li>
+                    @endcan
+
+                    @can('category-list')
+                        <li class="dropdown">
+                            <a class="nav-link menu-title {{ prefixActive('categories') }}" href="javascript:void(0)">
+                                <i data-feather="home"></i>
+                                <span>{{ __('category.categorys') }}</span>
+                            </a>
+                            <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('categories') }};">
+                                <li><a href="{{ route('categories.index') }}"
+                                        class="{{ routeActive('categories.index') }}">{{ __('category.category_list') }}</a>
+                                </li>
+                                @can('category-create')
+                                    <li><a href="{{ route('categories.create') }}"
+                                            class="{{ routeActive('categories.create') }}">{{ __('category.category_add') }}
+                                        </a></li>
+                                @endcan
                             </ul>
                         </li>
                     @endcan

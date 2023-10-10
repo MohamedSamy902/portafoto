@@ -29,7 +29,25 @@
                         </div>
                     </li>
 
-                    
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('role-list')): ?>
+                        <li class="dropdown">
+                            <a class="nav-link menu-title <?php echo e(prefixActive('roles')); ?>" href="javascript:void(0)">
+                                <i data-feather="home"></i>
+                                <span><?php echo e(__('role.role')); ?></span>
+                            </a>
+                            <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('roles')); ?>;">
+                                <li><a href="<?php echo e(route('roles.index')); ?>"
+                                        class="<?php echo e(routeActive('roles.index')); ?>"><?php echo e(__('role.role_list')); ?></a>
+                                </li>
+                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('role-create')): ?>
+                                    <li><a href="<?php echo e(route('roles.create')); ?>"
+                                            class="<?php echo e(routeActive('roles.create')); ?>"><?php echo e(__('role.add_role')); ?>
+
+                                        </a></li>
+                                <?php endif; ?>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
 
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('user-list')): ?>
                         <li class="dropdown">
@@ -78,6 +96,26 @@
                                         class="<?php echo e(routeActive('governorates.index')); ?>"><?php echo e(__('city.governorate_list')); ?></a>
                                 </li>
 
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('category-list')): ?>
+                        <li class="dropdown">
+                            <a class="nav-link menu-title <?php echo e(prefixActive('categories')); ?>" href="javascript:void(0)">
+                                <i data-feather="home"></i>
+                                <span><?php echo e(__('category.categorys')); ?></span>
+                            </a>
+                            <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('categories')); ?>;">
+                                <li><a href="<?php echo e(route('categories.index')); ?>"
+                                        class="<?php echo e(routeActive('categories.index')); ?>"><?php echo e(__('category.category_list')); ?></a>
+                                </li>
+                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('category-create')): ?>
+                                    <li><a href="<?php echo e(route('categories.create')); ?>"
+                                            class="<?php echo e(routeActive('categories.create')); ?>"><?php echo e(__('category.category_add')); ?>
+
+                                        </a></li>
+                                <?php endif; ?>
                             </ul>
                         </li>
                     <?php endif; ?>

@@ -26,7 +26,7 @@ class StorePaymentRquest extends FormRequest
         return [
             'firstName'         => 'required|string|min:3|max:200',
             'lastName'          => 'required|string|min:3|max:200',
-            'email'             => 'required|email',
+            'email'             => 'nullable|email',
             'address_1'         => 'required|string',
             'address_2'         => 'nullable|string|different:address_1',
             'mobile_1'          => 'required|string|digits:11|regex:/^([0-9\s\-\+\(\)]*)$/',

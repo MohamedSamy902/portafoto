@@ -39,14 +39,14 @@ class StanderColorSeeder extends Seeder
 
         StandardColor::create([
             'name' => [
-                'en' => 'light wood',
+                'en' => 'light wooden',
                 'ar' => 'الخشبى الفاتح',
             ],
         ]);
 
         StandardColor::create([
             'name' => [
-                'en' => 'dark wood',
+                'en' => 'dark wooden',
                 'ar' => 'الخشبى الغامق',
             ],
         ]);

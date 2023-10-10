@@ -46,7 +46,7 @@
                                 </div>
                                 
                                 <p><?php echo e(__('category.cat')); ?></p>
-                                <div class="parrten">
+                                <div class="    ">
                                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                         viewbox="0 0 448.057 448.057" style="enable-background:new 0 0 448.057 448.057;"
