@@ -1,6 +1,6 @@
-@extends('site.layouts.master')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <section class="pay pb-5">
         <div class="container">
             <div class="row flex-direction-column-reverse flex-direction-lg-row">
@@ -151,10 +151,10 @@
         </div>
 
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@push('js')
+<?php $__env->startPush('js'); ?>
     <script src="https://releases.jquery.com/git/jquery-git.js"></script>
     <script>
         $(document).ready(function() {
@@ -163,7 +163,7 @@
 
                 var governorateId = this.value;
                 $("#state-dropdown").html('');
-                var url = "{{ route('customers.getCitiesInSite', ':governorateId') }}";
+                var url = "<?php echo e(route('customers.getCitiesInSite', ':governorateId')); ?>";
                 url = url.replace(':governorateId', governorateId);
                 $.ajax({
                     url: url,
@@ -175,7 +175,7 @@
                         $.each(result, function(key, value) {
                             $("#city-dropdown").append('<option value="' + value
 
-                                .id + '">' + value.name.{{ App::getLocale() }} +
+                                .id + '">' + value.name.<?php echo e(App::getLocale()); ?> +
                                 '</option>');
                         });
 
@@ -201,8 +201,8 @@
         $(document).ready(function() {
             $('#country').on('change', function() {
                 var dilevary = $(this).find(':selected').attr('data-price');
-                var price = '{{ $totalPrice }}';
-                var total = parseInt(price) + parseInt(dilevary) + "{{ __('site.EGP') }}";
+                var price = '<?php echo e($totalPrice); ?>';
+                var total = parseInt(price) + parseInt(dilevary) + "<?php echo e(__('site.EGP')); ?>";
                 $('#totalPrice').html(total);
 
             });
@@ -243,4 +243,6 @@
             want1.classList.remove("active")
         })
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('site.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\Programming\new\portafoto\resources\views/site/payment.blade.php ENDPATH**/ ?>
