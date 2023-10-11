@@ -1,13 +1,13 @@
 @extends('site.layouts.master')
 
 @section('content')
-    <section class="pay pb-5">
+    <section class="pay pt-5 pb-5">
         <div class="container">
             <div class="row flex-direction-column-reverse flex-direction-lg-row">
 
                 <section class="checkout-form">
                     <form action="#!" method="get">
-                        <h4>Contact information</h4>
+                        <h4>Contact Information</h4>
                         <div class="form-controll">
                             <label for="checkout-email">E-mail</label>
                             <div>
@@ -149,7 +149,6 @@
 
             </div>
         </div>
-
     </section>
 @endsection
 
@@ -205,14 +204,6 @@
                 var total = parseInt(price) + parseInt(dilevary) + "{{ __('site.EGP') }}";
                 $('#totalPrice').html(total);
 
-            });
-
-            $('#r11').on('click', function() {
-                $(this).parent().find('a').trigger('click')
-            });
-
-            $('#r12').on('click', function() {
-                $(this).parent().find('a').trigger('click')
             });
         });
     </script>

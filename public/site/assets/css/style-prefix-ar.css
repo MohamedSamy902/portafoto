@@ -4041,12 +4041,22 @@ footer .telephone span:hover {
 .pay .row {
     flex-wrap: nowrap;
     gap: 25px;
+    flex-direction: row;
 }
 
 @media (max-width: 991px) {
     .pay .row {
         flex-wrap: wrap;
         gap: 20px;
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+    .checkout-form {
+        width: auto !important;
+        margin-top: 150px;
+    }
+    .checkout-details {
+        width: auto !important;
     }
 }
 
@@ -4432,4 +4442,68 @@ table th {
 
 
 
+.voda {
+    background: #eee;
+    padding: 10px 50px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
 
+.form-check-label {
+    padding: 0 25px;
+}
+
+.want {
+    display: none;
+    flex-direction: column;
+    line-height: 15px;
+    padding-top: 20px;
+}
+.want p {
+    font-weight: 550;
+}
+.want span {
+    font-weight: normal;
+}
+.want.active {
+    display: flex;
+}
+
+.bord {
+    border-color: #007bb5;
+}
+.bord label {
+    color: #007bb5;
+}
+
+
+.mobfav {
+    padding: 10px;
+    display: flex;
+    background-color: rgb(247, 247, 247);
+    border: 1px solid #ccc;
+    position: relative;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.mobfav img {
+    border-radius: 5px;
+    width: 100px;
+}
+.mobfav .details {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+}
+.mobfav .remove {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 0;
+    border: 1px solid red;
+    color: white;
+}
