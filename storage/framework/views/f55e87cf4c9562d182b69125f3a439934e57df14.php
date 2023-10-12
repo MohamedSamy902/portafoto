@@ -175,13 +175,13 @@
 
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('setting-list')): ?>
                         <li class="dropdown">
-                            <a class="nav-link menu-title <?php echo e(prefixActive('invoices')); ?>" href="javascript:void(0)">
+                            <a class="nav-link menu-title <?php echo e(prefixActive('settings')); ?>" href="javascript:void(0)">
                                 <i data-feather="home"></i>
-                                <span><?php echo e(__('invoice.invoices')); ?></span>
+                                <span><?php echo e(__('master.setting')); ?></span>
                             </a>
                             <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('invoices')); ?>;">
-                                <li><a href="<?php echo e(route('invoices.index')); ?>"
-                                        class="<?php echo e(routeActive('invoices.index')); ?>"><?php echo e(__('invoice.invoice_list')); ?></a>
+                                <li><a href="<?php echo e(route('setting.edit')); ?>"
+                                        class="<?php echo e(routeActive('setting.edit')); ?>"><?php echo e(__('master.setting')); ?></a>
                                 </li>
 
                             </ul>

@@ -8,6 +8,7 @@ return  [
     'data'          => 'Data',
     'image'         => 'Image',
     'list'          => 'list',
+    'setting'   => 'Setting',
     // 'email_mobile'  => 'Email Or Mobile',
     'countProductInvoice' => 'Count Product Invoice',
     'chengPrice'  => 'Cheng Price Dlivare',

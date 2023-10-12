@@ -155,6 +155,8 @@
                                 </div>
                             </div>
 
+
+
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label"
@@ -174,6 +176,20 @@
                                 </div>
                             </div>
 
+                            <div class="row g-1">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label"
+                                        for="validationDefault06"><?php echo e(__('product.showSlider')); ?></label>
+                                    <select class="form-select" id="validationDefault06" required="" name="slider">
+                                        <option value="no" <?php if($product->slider == 'no'): echo 'selected'; endif; ?>> <?php echo e(__('product.no')); ?></option>
+                                        <option value="yes" <?php if($product->slider == 'yes'): echo 'selected'; endif; ?>> <?php echo e(__('product.yes')); ?></option>
+
+
+                                    </select>
+                                    <div class="valid-feedback"><?php echo e(__('validation.valid_feedback')); ?></div>
+                                    <div class="invalid-feedback"><?php echo e(__('validation.invalid_feedback')); ?></div>
+                                </div>
+                            </div>
 
 
                             <div class="row g-1">

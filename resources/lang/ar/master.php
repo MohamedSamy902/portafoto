@@ -11,6 +11,7 @@ return  [
     'list'                      => 'القائمه',
     'countProductInvoice'  => 'عدد المنتجات في الفاتوره',
     'chengPrice' => 'تعديل سعر الشحن',
+    'setting' => 'الاعدادات',
 
     // 'email_mobile'              => 'البريد الالكتروني او رقم الهاتف',
 

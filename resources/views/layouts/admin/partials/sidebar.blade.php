@@ -185,13 +185,13 @@
 
                     @can('setting-list')
                         <li class="dropdown">
-                            <a class="nav-link menu-title {{ prefixActive('invoices') }}" href="javascript:void(0)">
+                            <a class="nav-link menu-title {{ prefixActive('settings') }}" href="javascript:void(0)">
                                 <i data-feather="home"></i>
-                                <span>{{ __('invoice.invoices') }}</span>
+                                <span>{{ __('master.setting') }}</span>
                             </a>
                             <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('invoices') }};">
-                                <li><a href="{{ route('invoices.index') }}"
-                                        class="{{ routeActive('invoices.index') }}">{{ __('invoice.invoice_list') }}</a>
+                                <li><a href="{{ route('setting.edit') }}"
+                                        class="{{ routeActive('setting.edit') }}">{{ __('master.setting') }}</a>
                                 </li>
 
                             </ul>
