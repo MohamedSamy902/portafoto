@@ -257,6 +257,7 @@
 
                                             {!! $product->description !!}
                                         </p>
+                                        <p>{!! __('site.decProduct') !!}</p>
                                         <form class="row g-3 needs-validation" novalidate method="post"
                                             action="{{ route('product.add.cart', $product->slug) }}">
                                             @csrf

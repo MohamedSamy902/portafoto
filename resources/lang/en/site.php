@@ -24,6 +24,10 @@ return
         'quantity' => 'quantity',
         'addToCart' => 'Add To Cart',
         'choose' => 'Choose... ',
+        'decProduct' => '- A frame made of natural musky wood <br>
+        - We determine the frame color between black, golden, light or dark wooden <br>
+        - It has a glass front and a wooden back <br>
+        - Among them is a poster with the highest print quality <br>',
 
 
         // Payment Page

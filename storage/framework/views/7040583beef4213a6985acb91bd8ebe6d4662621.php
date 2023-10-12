@@ -256,6 +256,7 @@
                                             <?php echo $product->description; ?>
 
                                         </p>
+                                        <p><?php echo __('site.decProduct'); ?></p>
                                         <form class="row g-3 needs-validation" novalidate method="post"
                                             action="<?php echo e(route('product.add.cart', $product->slug)); ?>">
                                             <?php echo csrf_field(); ?>
