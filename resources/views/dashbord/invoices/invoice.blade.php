@@ -10,12 +10,17 @@
 
 @section('content')
     @component('components.breadcrumb')
-        @slot('breadcrumb_title')
+        {{-- @slot('breadcrumb_title')
             <h3>Invoice</h3>
         @endslot
         <li class="breadcrumb-item">Pages</li>
         <li class="breadcrumb-item">Ecommerce</li>
-        <li class="breadcrumb-item active">Invoice</li>
+        <li class="breadcrumb-item active">Invoice</li> --}}
+        @slot('breadcrumb_title')
+            <h3>{{ __('invoice.invoice') }}</h3>
+        @endslot
+        <li class="breadcrumb-item">{{ __('invoice.invoice') }}</li>
+        <li class="breadcrumb-item active">{{ __('invoice.invoiceShow') }}</li>
     @endcomponent
 
     <div class="container invoice">
@@ -24,37 +29,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div>
-                            {{-- <div>
-                                <div class="row invo-header">
-                                    <div class="col-sm-6">
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <a href="{{ route('index') }}"><img class="media-object img-60"
-                                                        src="{{ asset('assets/images/logo/logo-1.png') }}"
-                                                        alt="" /></a>
-                                            </div>
-                                            <div class="media-body m-l-20">
-                                                <h4 class="media-heading f-w-600">Viho</h4>
-                                                <p>
-                                                    hello@viho.in<br />
-                                                    <span class="digits">289-335-6503</span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <!-- End Info-->
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="text-md-end text-xs-center">
-                                            <h3>Invoice #<span class="digits counter">1069</span></h3>
-                                            <p>
-                                                Issued: May<span class="digits"> 27, 2015</span><br />
-                                                Payment Due: June <span class="digits">27, 2015</span>
-                                            </p>
-                                        </div>
-                                        <!-- End Title                                 -->
-                                    </div>
-                                </div>
-                            </div> --}}
+
                             <!-- End InvoiceTop-->
                             <div class="row invo-profile">
                                 <div class="col-xl-4">
@@ -77,7 +52,6 @@
                                 </div>
                                 <div class="col-xl-8">
                                     <div class="text-xl-end" id="project">
-                                        {{-- <h6>Project Description</h6> --}}
                                         <p>
                                             {{ $invoice->address_1 }} <br>
                                             {{ $invoice->address_2 }} <br>
@@ -147,30 +121,30 @@
                                     </div>
                                     <div class="col-md-4">
                                         @if ($invoice->status == 'pending')
-                                            <a class="btn btn-info"
-                                                href="{{ route('invoice.approved', $invoice->id) }}">Approv</a>
-                                            <a class="btn btn-danger"
-                                                href="{{ route('invoice.refusal', $invoice->id) }}">Refusal</a>
+                                            @can('invoice-refusal')
+                                                <a class="btn btn-danger"
+                                                    href="{{ route('invoice.refusal', $invoice->id) }}">Refusal</a>
+                                            @endcan
+                                            @can('invoice-approvedChengStatus')
+                                                <a class="btn btn-info"
+                                                    href="{{ route('invoice.approved', $invoice->id) }}">Approv</a>
+                                            @endcan
+                                        @elseif($invoice->status == 'approved')
+                                            <p
+                                                style="color: #000; text-align: center; background-color: #d1d7cd; border-radius: 5px;">
+                                                {{ $invoice->status }}</p>
                                         @else
-                                        <p style="    color: #000;
-                                        text-align: center;
-                                        background-color: #d1d7cd;
-                                        border-radius: 5px;">{{ $invoice->status }}</p>
-
+                                            <p
+                                                style="color: #000; text-align: center; background-color: #ff6161; border-radius: 5px;">
+                                                {{ $invoice->status }}</p>
                                         @endif
 
-                                        {{-- <form class="text-end invo-pal">
-                                            <input type="submit" class="btn btn-info" value="Approved" name="" id="">
-
-                                        </form> --}}
                                     </div>
                                 </div>
                             </div>
                             <!-- End InvoiceBot-->
                         </div>
-                        {{-- <div class="col-sm-12 text-center mt-3">
-                            <button class="btn btn btn-primary me-2" type="button" onclick="myFunction()">Print</button>
-                            <button class="btn btn-secondary" type="button">Cancel</button> --}}
+
                     </div>
                     <!-- End Invoice-->
                     <!-- End Invoice Holder-->
@@ -178,7 +152,7 @@
             </div>
         </div>
     </div>
-    </div>
+
 
     @push('scripts')
         <script src="{{ asset('assets/js/counter/jquery.waypoints.min.js') }}"></script>

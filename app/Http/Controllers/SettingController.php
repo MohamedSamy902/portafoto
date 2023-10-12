@@ -7,47 +7,7 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Setting $setting)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -55,9 +15,10 @@ class SettingController extends Controller
      * @param  \App\Models\Setting  $setting
      * @return \Illuminate\Http\Response
      */
-    public function edit(Setting $setting)
+    public function edit()
     {
-        //
+        $setting = Setting::find(1)->first();
+        return view('dashbord.settings.edit', compact('setting'));
     }
 
     /**
@@ -67,9 +28,34 @@ class SettingController extends Controller
      * @param  \App\Models\Setting  $setting
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Setting $setting)
+    public function update(Request $request)
     {
-        //
+        $setting = Setting::find(1);
+        $setting->update([
+            // 'name' => [
+            //     'en' => $request->name,
+            //     'ar' => $request->name_ar,
+            // ],
+            'description' => [
+                'en' => $request->description,
+                'ar' => $request->description_ar,
+            ],
+            'keywords' => [
+                'en' => $request->keywords,
+                'ar' => $request->keywords_ar,
+            ],
+
+            'facebook' =>  $request->facebook,
+            'instagram' => $request->instagram,
+            'twitter'  => $request->twitter,
+            'messenger' => $request->messenger,
+            'mobile_1' => $request->mobile_1,
+            'mobile_2' => $request->mobile_2,
+            'vodafoneCash' => $request->vodafoneCash,
+            'instapay' => $request->instapay,
+        ]);
+        return redirect()->back()
+                ->with('success', __('master.messages_edit'));
     }
 
     /**
@@ -80,6 +66,6 @@ class SettingController extends Controller
      */
     public function destroy(Setting $setting)
     {
-        //
+        abort(404);
     }
 }

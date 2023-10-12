@@ -57,7 +57,6 @@
                                 <label class="form-label"
                                     for="validationTextarea">{{ __('master.description_en') }}</label>
                                 <textarea id="editor1" cols="30" rows="10" name="description">
-                                    test EN
                                 </textarea>
 
                             </div>
@@ -66,7 +65,6 @@
                                 <label class="form-label"
                                     for="validationTextarea">{{ __('master.description_ar') }}</label>
                                 <textarea id="editor2" cols="30" rows="10" name="description_ar">
-                                    test Ar
                                 </textarea>
 
                             </div>

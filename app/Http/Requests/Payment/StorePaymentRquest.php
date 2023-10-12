@@ -24,8 +24,8 @@ class StorePaymentRquest extends FormRequest
     public function rules()
     {
         return [
-            'firstName'         => 'required|string|min:3|max:200',
-            'lastName'          => 'required|string|min:3|max:200',
+            'name'         => 'required|string|min:3|max:200',
+            // 'lastName'          => 'required|string|min:3|max:200',
             'email'             => 'nullable|email',
             'address_1'         => 'required|string',
             'address_2'         => 'nullable|string|different:address_1',

@@ -14,12 +14,9 @@ class Invoice extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'address_1', 'address_2', 'mobile_1', 'mobile_2', 'zip_code', 'payment', 'totalPrice', 'governorate_id', 'city_id', 'status', 'customerId'];
+    protected $fillable = ['name', 'email', 'customerId', 'address_1', 'address_2', 'mobile_1', 'mobile_2', 'zip_code', 'payment', 'totalPrice', 'governorate_id', 'city_id', 'status', 'customerId'];
 
-    // public function getNameAttribute()
-    // {
-    //    return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
-    // }
+
 
     public function cart()
     {

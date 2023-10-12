@@ -62,4 +62,11 @@ class InvoiceController extends Controller
 
     }
 
+    public function refusalList()
+    {
+        $invoises = Invoice::where('status', 'refusal')->get();
+        return view('dashbord.invoices.index', compact('invoises'));
+
+    }
+
 }

@@ -324,8 +324,8 @@
                                                 <div class="input-icons">
                                                     
                                                     <input type="submit" class="btn btn-dark" value="<?php echo e(__('site.addToCart')); ?>">
-                                                    <a class="checkoutt text-decoration-none" href="#"><button
-                                                        type="button" class="btn btn-primary">Show On Facebook <i
+                                                    <a class="checkoutt text-decoration-none" href="<?php echo e($setting->messenger); ?>"><button
+                                                        type="button" class="btn btn-primary">Custom Size <i
                                                             class="fa-brands fa-facebook"></i></button></a>
                                                 </div>
                                             </div>

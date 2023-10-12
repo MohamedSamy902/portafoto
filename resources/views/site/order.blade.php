@@ -12,63 +12,64 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="accordion pt-5 pb-5" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button trace" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <div class="trr">
-                                        <h4>#15</h4>
-                                        <p>Available</p>
-                                        <a href="" class="btn btn-danger cancel">Cancel</a>
+                        @foreach ($orders as $order)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" style="background-color: #e7f1ff;
+                                box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);">
+                                    <button class="accordion-button trace" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 75%;
+                                        display: -webkit-inline-box;">
+                                        <div class="trr">
+                                            <h4>#{{ $order->id }}</h4>
+                                            <p>{{ $order->status }}</p>
+                                            <p>{{ $order->created_at }}</p>
+                                            {{-- @if ($order->status == 'pending')
+                                                <a href="{{ route('cancelOrder', $order->id) }}" class="btn btn-danger cancel">Cancel</a>
+                                            @endif --}}
+                                        </div>
+                                    </button>
+                                    @if ($order->status == 'pending')
+                                    <a href="{{ route('cancelOrder', $order->id) }}" class="btn btn-danger cancel">Cancel</a>
+                                    @endif
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <table>
+                                            <caption>{{ __('site.Total Price') }} : {{ $order->totalPrice }}</caption>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">{{ __('master.image') }}</th>
+                                                    <th scope="col">{{ __('product.product') }}</th>
+                                                    <th scope="col">{{ __('site.color') }}</th>
+                                                    <th scope="col">{{ __('site.quantity') }}</th>
+                                                    <th scope="col">{{ __('master.size') }}</th>
+                                                    <th scope="col">{{ __('site.Total Price') }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($order->cart as $cart)
+                                                    <tr>
+                                                        <td data-label=""><img class="t-img" width="200"
+                                                                src="{{ $cart->product->getFirstMediaUrl('products') }}"
+                                                                alt="">
+                                                        </td>
+                                                        <td data-label="Due Date">{{ $cart->product->name }}</td>
+                                                        <td data-label="Amount">{{ $cart->standardColor->name }}</td>
+                                                        <td data-label="Period">{{ $cart->quantity }}</td>
+                                                        <td data-label="Period">{!! $cart->size == null ? $cart->product->description :  $cart->size !!}</td>
+                                                        <td data-label="Period">{{ $cart->totalPrice }}</td>
+                                                    </tr>
+                                                @endforeach
+
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <table>
-                                        <caption>Statement Summary</caption>
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Product</th>
-                                                <th scope="col">Due Date</th>
-                                                <th scope="col">Amount</th>
-                                                <th scope="col">Period</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td data-label=""><img class="t-img" width="200"
-                                                        src="{{ asset('site/assets/images/banner-1.jpg') }}" alt="">
-                                                </td>
-                                                <td data-label="Due Date">04/01/2016</td>
-                                                <td data-label="Amount">$1,190</td>
-                                                <td data-label="Period">03/01/2016 - 03/31/2016</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row" data-label="Account">Visa - 6076</td>
-                                                <td data-label="Due Date">03/01/2016</td>
-                                                <td data-label="Amount">$2,443</td>
-                                                <td data-label="Period">02/01/2016 - 02/29/2016</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row" data-label="Account">Corporate AMEX</td>
-                                                <td data-label="Due Date">03/01/2016</td>
-                                                <td data-label="Amount">$1,181</td>
-                                                <td data-label="Period">02/01/2016 - 02/29/2016</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row" data-label="Acount">Visa - 3412</td>
-                                                <td data-label="Due Date">02/01/2016</td>
-                                                <td data-label="Amount">$842</td>
-                                                <td data-label="Period">01/01/2016 - 01/31/2016</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
-                        </div>
-                        <div class="accordion-item">
+                        @endforeach
+
+                        {{-- <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -111,14 +112,12 @@
                                     <code>.accordion-body</code>, though the transition does limit overflow.
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    
 @endsection
 
 @push('js')

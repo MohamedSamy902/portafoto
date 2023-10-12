@@ -116,7 +116,10 @@
 
                         <div class="product-grid" id="products-container">
                             <?php echo $__env->make('site.partialsProduct', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
+                            <div class="ajax-loading" style="display:none">
+                                test
+                                
+                            </div>
                         </div>
 
                     </div>
@@ -130,23 +133,43 @@
     </main>
 
     <?php $__env->startPush('js'); ?>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script src="https://releases.jquery.com/git/jquery-git.js"></script>
+
         <script>
             $(document).ready(function() {
-                var page = 1;
+                var page = 2; // initialize page to 2
+                var loading = false; // set loading to false
+                var product_container_offset = $('#products-container').offset().top;
+                var window_height = $(window).height();
+
                 $(window).scroll(function() {
-                    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-                        page++;
-                        console.log(page);
+                    var scroll_height = $(document).height() - $(window).height();
+                    var scroll_position = $(window).scrollTop();
+                    console.log(scroll_position);
+                    console.log(scroll_height);
+                    if (((scroll_position == scroll_height) || ((scroll_position + 5) >= scroll_height)) && !loading) {
+
+                        loading = true;
+                        $('.ajax-loading').show();
                         $.ajax({
-                            url: "/get-products-ajax?skip=" + ((page - 1) * 10),
+                            url: "/get-products-ajax?skip=" + page,
+                            type: "get",
                             success: function(data) {
                                 $('#products-container').append(data);
+                                loading = false;
+                                page++;
+                                console.log(page);
+                            },
+                            complete: function() {
+                                $('.ajax-loading').hide();
                             }
                         });
                     }
                 });
             });
+
         </script>
 
         <script>

@@ -36,8 +36,8 @@ return new class extends Migration
 
             $table->unsignedInteger('city_id')->nullable();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
-
-            $table->enum('status', ['pending', 'withDelivery', 'Confirmed', 'delivered', 'approved', 'Returned'])->default('pending');
+            $table->string('customerId');
+            $table->enum('status', ['pending', 'refusal', 'approved', 'Cancel OrderBy Customer'])->default('pending');
 
 
             $table->timestamps();

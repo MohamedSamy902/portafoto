@@ -163,19 +163,41 @@
                                 <li><a href="{{ route('invoices.index') }}"
                                         class="{{ routeActive('invoices.index') }}">{{ __('invoice.invoice_list') }}</a>
                                 </li>
-                                @can('invoice-invoice-pendingList')
+                                @can('invoice-pendingList')
                                     <li><a href="{{ route('invoice.pendingList') }}"
                                             class="{{ routeActive('invoice.pendingList') }}">{{ __('invoice.pendingList') }}
                                         </a></li>
                                 @endcan
-                                @can('invoice-invoice-approvedList')
+
+                                @can('invoice-approvedList')
                                     <li><a href="{{ route('invoice.approvedList') }}"
                                             class="{{ routeActive('invoice.approvedList') }}">{{ __('invoice.approvedList') }}
+                                        </a></li>
+                                @endcan
+                                @can('invoice-refusalList')
+                                    <li><a href="{{ route('invoice.refusalList') }}"
+                                            class="{{ routeActive('invoice.refusalList') }}">{{ __('invoice.refusalList') }}
                                         </a></li>
                                 @endcan
                             </ul>
                         </li>
                     @endcan
+
+                    @can('setting-list')
+                        <li class="dropdown">
+                            <a class="nav-link menu-title {{ prefixActive('invoices') }}" href="javascript:void(0)">
+                                <i data-feather="home"></i>
+                                <span>{{ __('invoice.invoices') }}</span>
+                            </a>
+                            <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('invoices') }};">
+                                <li><a href="{{ route('invoices.index') }}"
+                                        class="{{ routeActive('invoices.index') }}">{{ __('invoice.invoice_list') }}</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    @endcan
+
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

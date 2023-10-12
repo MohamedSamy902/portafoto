@@ -11,9 +11,8 @@
 
 <body>
     <div class="messanger">
-        <a href="">
+        <a href="{{ $setting->messenger }}" target="_blank">
             <div class="ii">
-                {{-- <i class="fa-brands fa-facebook-messenger fa-xl"></i> --}}
                 <img src="https://img.icons8.com/3d-fluency/94/facebook-messenger.png" alt="facebook-messenger" />
             </div>
         </a>
@@ -74,17 +73,23 @@
                         Social Links --}}
                     {{-- </a> --}}
                     <div class="rounded-social-buttons">
-                        <a class="social-button facebook" href="https://www.facebook.com/" target="_blank"><i
+                        <a class="social-button facebook" href="{{ $setting->facebook }}" target="_blank"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a class="social-button twitter" href="https://www.twitter.com/" target="_blank"><i
+                        <a class="social-button twitter" href="{{ $setting->twitter }}" target="_blank"><i
                                 class="fab fa-twitter"></i></a>
-                        <a class="social-button instagram" href="https://www.instagram.com/" target="_blank"><i
+                        <a class="social-button instagram" href="{{ $setting->instagram }}" target="_blank"><i
                                 class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-sm-12 col-lg-4">
-                    <p class="telephone"><i class="fa-solid fa-mobile-screen"></i> <span> +201124982599</span></p>
-                    <p class="telephone"><i class="fa-solid fa-mobile-screen"></i> <span> +201124982599</span></p>
+                    @if ($setting->mobile_1)
+                        <p class="telephone"><i class="fa-solid fa-mobile-screen"></i> <span>
+                                {{ $setting->mobile_1 }}</span></p>
+                    @endif
+                    @if ($setting->mobile_2)
+                        <p class="telephone"><i class="fa-solid fa-mobile-screen"></i> <span>
+                                {{ $setting->mobile_2 }}</span></p>
+                    @endif
 
                 </div>
                 <p class="copyright pb-sm-3 pb-md-0 text-center">2023-2024 All Rights&copy; Reserved</p>

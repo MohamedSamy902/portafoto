@@ -4,20 +4,30 @@ namespace App\Http\Controllers\Site;
 
 use App\Models\Cart;
 use App\Models\City;
+use App\Models\Invoice;
+use App\Models\Setting;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Payment\StorePaymentRquest;
-use App\Models\Invoice;
 use Illuminate\Support\Facades\Cookie;
+use App\Http\Requests\Payment\StorePaymentRquest;
 
 
 class paymentController extends Controller
 {
-    public function showPayment()
+
+    public function getCart()
     {
         $customerId = Cookie::get('customerId');
-        $carts = Cart::where('customerId', $customerId)->get();
+        $carts = Cart::where('customerId', $customerId)->where('status', 'outInvoice')->get();
+        return $carts;
+    }
+
+    public function showPayment()
+    {
+        $setting = Setting::first();
+        $carts = $this->getCart();
+        $customerId = Cookie::get('customerId');
         $totalPrice =  Cart::where('customerId', $customerId)->sum('totalPrice');
 
         $governorates = Governorate::where('status', 'active')->get();
@@ -25,7 +35,7 @@ class paymentController extends Controller
             return redirect()->back()
                 ->with('success', __('master.messages_edit'));
         }
-        return view('site.payment', compact('carts', 'totalPrice', 'governorates'));
+        return view('site.payment', compact('carts', 'totalPrice', 'governorates', 'setting'));
     }
 
 
@@ -39,14 +49,13 @@ class paymentController extends Controller
     public function storePayment(StorePaymentRquest $request)
     {
         $customerId = Cookie::get('customerId');
-        $name = $request->firstName . ' ' . $request->lastName;
         $totalPrice = $totalPrice =  Cart::where('customerId', $customerId)->sum('totalPrice');
 
-        $totalPrice += 150;
+        $totalPrice += Governorate::where('id', $request->governorate_id)->first()->price;
         $carts =  Cart::where('customerId', $customerId)->get();
 
         $invoice = Invoice::create([
-            'name' => $name,
+            'name' => $request->name,
             'address_1' => $request->address_1,
             'address_2' => $request->address_2,
             'mobile_1' => $request->mobile_1,
@@ -66,16 +75,12 @@ class paymentController extends Controller
         }
 
         if ($request->paymet == 'vodafon') {
-
         }
 
-        if ($request->paymet == 'instaPay'){
-
+        if ($request->paymet == 'instaPay') {
         }
 
         if ($request->paymet == 'cash') {
-
         }
-
     }
 }

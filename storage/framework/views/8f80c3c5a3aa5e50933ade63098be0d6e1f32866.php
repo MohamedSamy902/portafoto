@@ -29,7 +29,7 @@
                                         <th><?php echo e(__('master.name')); ?></th>
                                         <th><?php echo e(__('master.countProductInvoice')); ?></th>
                                         <th><?php echo e(__('site.payment')); ?></th>
-                                        
+                                        <th><?php echo e(__('master.status')); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -38,7 +38,7 @@
                                             <td><a href="<?php echo e(route('invoices.show', $invoise->id)); ?>"><?php echo e($invoise->name); ?></a> </td>
                                             <td><?php echo e(count($invoise->cart)); ?></td>
                                             <td><?php echo e($invoise->payment); ?></td>
-
+                                            <td><?php echo e($invoise->status); ?></td>
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>

@@ -9,12 +9,12 @@
 
 <?php $__env->startSection('content'); ?>
     <?php $__env->startComponent('components.breadcrumb'); ?>
+        
         <?php $__env->slot('breadcrumb_title'); ?>
-            <h3>Invoice</h3>
+            <h3><?php echo e(__('invoice.invoice')); ?></h3>
         <?php $__env->endSlot(); ?>
-        <li class="breadcrumb-item">Pages</li>
-        <li class="breadcrumb-item">Ecommerce</li>
-        <li class="breadcrumb-item active">Invoice</li>
+        <li class="breadcrumb-item"><?php echo e(__('invoice.invoice')); ?></li>
+        <li class="breadcrumb-item active"><?php echo e(__('invoice.invoiceShow')); ?></li>
     <?php echo $__env->renderComponent(); ?>
 
     <div class="container invoice">
@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div>
-                            
+
                             <!-- End InvoiceTop-->
                             <div class="row invo-profile">
                                 <div class="col-xl-4">
@@ -45,7 +45,6 @@
                                 </div>
                                 <div class="col-xl-8">
                                     <div class="text-xl-end" id="project">
-                                        
                                         <p>
                                             <?php echo e($invoice->address_1); ?> <br>
                                             <?php echo e($invoice->address_2); ?> <br>
@@ -115,25 +114,30 @@
                                     </div>
                                     <div class="col-md-4">
                                         <?php if($invoice->status == 'pending'): ?>
-                                            <a class="btn btn-info"
-                                                href="<?php echo e(route('invoice.approved', $invoice->id)); ?>">Approv</a>
-                                            <a class="btn btn-danger"
-                                                href="<?php echo e(route('invoice.refusal', $invoice->id)); ?>">Refusal</a>
+                                            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoice-refusal')): ?>
+                                                <a class="btn btn-danger"
+                                                    href="<?php echo e(route('invoice.refusal', $invoice->id)); ?>">Refusal</a>
+                                            <?php endif; ?>
+                                            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoice-approvedChengStatus')): ?>
+                                                <a class="btn btn-info"
+                                                    href="<?php echo e(route('invoice.approved', $invoice->id)); ?>">Approv</a>
+                                            <?php endif; ?>
+                                        <?php elseif($invoice->status == 'approved'): ?>
+                                            <p
+                                                style="color: #000; text-align: center; background-color: #d1d7cd; border-radius: 5px;">
+                                                <?php echo e($invoice->status); ?></p>
                                         <?php else: ?>
-                                        <p style="    color: #000;
-                                        text-align: center;
-                                        background-color: #d1d7cd;
-                                        border-radius: 5px;"><?php echo e($invoice->status); ?></p>
-
+                                            <p
+                                                style="color: #000; text-align: center; background-color: #ff6161; border-radius: 5px;">
+                                                <?php echo e($invoice->status); ?></p>
                                         <?php endif; ?>
 
-                                        
                                     </div>
                                 </div>
                             </div>
                             <!-- End InvoiceBot-->
                         </div>
-                        
+
                     </div>
                     <!-- End Invoice-->
                     <!-- End Invoice Holder-->
@@ -141,7 +145,7 @@
             </div>
         </div>
     </div>
-    </div>
+
 
     <?php $__env->startPush('scripts'); ?>
         <script src="<?php echo e(asset('assets/js/counter/jquery.waypoints.min.js')); ?>"></script>

@@ -6,22 +6,31 @@
             <div class="row flex-direction-column-reverse flex-direction-lg-row">
 
                 <section class="checkout-form">
-                    <form action="#!" method="get">
-                        <h4>Contact Information</h4>
+                    <form method="POST" action="{{ route('customers.payment.store') }}">
+                        @csrf
+                        <h3>{{ __('site.PAYMENT') }}</h3>
                         <div class="form-controll">
-                            <label for="checkout-email">E-mail</label>
+                            {{-- <label for="checkout-email">E-mail</label> --}}
                             <div>
                                 <span class="fa fa-envelope"></span>
-                                <input type="email" id="checkout-email" name="checkout-email"
-                                    placeholder="Enter your email...">
+                                <input type="email" id="checkout-email"
+                                    placeholder="{{ __('site.email') }}" name="email" value="{{ old('email') }}">
                             </div>
                         </div>
                         <div class="form-controll">
-                            <label for="checkout-phone">Phone</label>
+                            {{-- <label for="checkout-phone">Phone</label> --}}
                             <div>
                                 <span class="fa fa-phone"></span>
-                                <input type="tel" name="checkout-phone" id="checkout-phone"
-                                    placeholder="Enter you phone...">
+                                <input type="tel" id="checkout-phone"
+                                    placeholder="{{ __('site.mobile_1') }}" name="mobile_1">
+                            </div>
+                            <div class="form-controll">
+
+                                <div>
+                                    <span class="fa fa-phone"></span>
+                                    <input type="tel" id="checkout-phone"
+                                        placeholder="{{ __('site.mobile_2') }}" name="mobile_2">
+                                </div>
                             </div>
                         </div>
                         <br>
@@ -30,54 +39,72 @@
                             <label for="checkout-name">Full name</label>
                             <div>
                                 <span class="fa fa-user-circle"></span>
-                                <input type="text" id="checkout-name" name="checkout-name"
-                                    placeholder="Enter you name...">
+                                <input type="text" id="checkout-name" name="name" placeholder="{{ __('site.name') }}"
+                                    value="{{ old('name') }}">
                             </div>
                         </div>
                         <div class="form-controll">
-                            <label for="checkout-address">Address</label>
+                            {{-- <label for="checkout-address">Address</label> --}}
                             <div>
                                 <span class="fa fa-home"></span>
-                                <input type="text" name="checkout-address" id="checkout-address"
-                                    placeholder="Your address...">
+                                <input type="text" id="checkout-address" placeholder="{{ __('site.address_1') }}"
+                                    name="address_1" value="{{ old('address_1') }}">
                             </div>
                         </div>
                         <div class="form-controll">
+                            {{-- <label for="checkout-address">Address</label> --}}
+                            <div>
+                                <span class="fa fa-home"></span>
+                                <input type="text" id="checkout-address" placeholder="{{ __('site.address_2') }}"
+                                    name="address_2" value="{{ old('address_2') }}">
+                            </div>
+                        </div>
+                        {{-- <div class="form-controll">
                             <label for="checkout-city">City</label>
                             <div>
                                 <span class="fa fa-building"></span>
-                                <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city...">
+                                <input type="text"  id="checkout-city" placeholder="Your city...">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-controll">
-                                <label for="checkout-country">Country</label>
-                                <div>
-                                    <span class="fa fa-globe"></span>
-                                    <input type="text" name="checkout-country" id="checkout-country"
-                                        placeholder="Your country..." list="country-list">
-                                    <datalist id="country-list">
-                                        <option value="India"></option>
-                                        <option value="USA"></option>
-                                        <option value="Russia"></option>
-                                        <option value="Japan"></option>
-                                        <option value="Egypt"></option>
-                                    </datalist>
-                                </div>
+                        </div> --}}
+                        <div class="form-controll" style="display: flex;">
+                            <div class="form-controll" style="width: 50%; padding: 5px">
+
+
+                                <select class="form-select" id="country" name="governorate_id">
+                                    <option disabled value="" selected>{{ __('site.governorate') }}
+                                    </option>
+                                    @foreach ($governorates as $governorate)
+                                        <option {{ old('governorate_id') == $governorate->id ? 'selected' : '' }}
+                                            data-price="{{ $governorate->price }}" value="{{ $governorate->id }}">
+                                            {{ $governorate->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                {{-- <span class="fa fa-globe"></span> --}}
                             </div>
-                            <div class="form-controll">
-                                <label for="checkout-postal">Postal code</label>
-                                <div>
-                                    <span class="fa fa-archive"></span>
-                                    <input type="numeric" name="checkout-postal" id="checkout-postal"
-                                        placeholder="Your postal code...">
-                                </div>
+                            <div class="form-controll" style="width: 50%; padding: 5px">
+                                {{-- <span class="fa fa-globe"></span> --}}
+
+                                <select class="form-select" id="city-dropdown" name="city_id">
+                                    <option disabled value="" selected >{{ __('site.area') }}
+                                    </option>
+                                    @if (old('governorate_id') != null)
+                                        @foreach ($governorates->where('id', old('governorate_id'))->first()->city as $governorateCity)
+                                            <option {{ old('city_id') == $governorateCity->id ? 'selected' : '' }}
+                                                value="{{ $governorateCity->id }}">
+                                                {{ $governorateCity->name }}
+                                            </option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
+
                         </div>
 
                         <h4>Payment Method</h4>
                         <div class="form-check voda">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                            <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault1"
+                                checked  value="InstaPay">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Cash on Delivery (COD)
                             </label>
@@ -89,7 +116,7 @@
                             </label>
                             <div class="want one">
                                 <p>Note: <span>We will process your order after we receive the payment</span></p>
-                                <p>Account: <span>admin@cybog.com</span></p>
+                                <p>Account: <span>{{ $setting->vodafoneCash }}</span></p>
                             </div>
                         </div>
                         <div class="form-check voda two">
@@ -99,7 +126,7 @@
                             </label>
                             <div class="want two">
                                 <p>Note: <span>We will process your order after we receive the payment</span></p>
-                                <p>Account: <span>admin@cybog.com</span></p>
+                                <p>Account: <span>{{ $setting->instapay }}</span></p>
                             </div>
                         </div>
 
@@ -113,36 +140,31 @@
                 <section class="checkout-details">
                     <div class="checkout-details-inner">
                         <div class="checkout-lists">
-                            <div class="cardd">
-                                <a href="" class="remove"><i class="fas fa-times"></i></a>
-                                <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo1.png"
-                                        alt=""></div>
-                                <div class="card-details">
-                                    <div class="card-name">Vintage Backbag</div>
-                                    <div class="card-price">$54.99 <span>$94.99</span></div>
+                            @foreach ($carts as $cart)
+                                <div class="cardd">
+                                    {{-- <a href="{{ route('product.remove.cart', $cart->id) }}" class="remove"><i
+                                            class="fas fa-times"></i></a> --}}
+                                    <div class="card-image"><img src="{{ $cart->product->getFirstMediaUrl('products') }}"
+                                            alt=""></div>
+                                    <div class="card-details">
+                                        <div class="card-name">{{ $cart->product->name }}</div>
+                                        @if ($cart->size != '')
+                                            <p class="text-black-50 pt-2">{{ $cart->size }}</p>
+                                        @endif
+                                        <p class="text-black-50 pt-2">{{ __('site.quantity') }}:
+                                            {{ $cart->quantity }}</p>
+                                        <div class="card-price">{{ $cart->price }} <span></span></div>
 
 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="cardd">
-                                <a href="" class="remove"><i class="fas fa-times"></i></a>
+                            @endforeach
 
-                                <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo2.png"
-                                        alt=""></div>
-                                <div class="card-details">
-                                    <div class="card-name">Levi Shoes</div>
-                                    <div class="card-price">$74.99 <span>$124.99</span></div>
+                        </div>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="checkout-shipping">
-                            <h6>Shipping</h6>
-                            <p>$19</p>
-                        </div>
                         <div class="checkout-total">
-                            <h6>Total</h6>
-                            <p>$148.98</p>
+                            <h6>{{ __('site.Total Price') }}:</h6>
+                            <p id="totalPrice">{{ $totalPrice }} {{ __('site.EGP') }}</p>
                         </div>
                     </div>
                 </section>

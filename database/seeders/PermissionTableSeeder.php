@@ -48,6 +48,7 @@ class PermissionTableSeeder extends Seeder
             'invoice-list',
             'invoice-pendingList',
             'invoice-approvedList',
+            'invoice-refusalList',
             'invoice-approvedChengStatus',
             'invoice-refusal',
 
@@ -66,7 +67,8 @@ class PermissionTableSeeder extends Seeder
             'standardSize-edit',
             'standardSize-delete',
 
-
+            'setting-list',
+            'setting-edit',
         ];
 
         foreach ($permissions as $permission) {

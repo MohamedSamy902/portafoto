@@ -11,6 +11,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\GovernorateController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Site\OrderController;
 use App\Http\Controllers\Site\paymentController;
 use App\Http\Controllers\Site\ProductCartController;
 use App\Http\Controllers\Site\ProductFavoriteController;
@@ -50,9 +52,17 @@ Route::group(
                 Route::resource('roles', RoleController::class)->except(['show']);
                 /** End Route Roles **/
 
-                /** Start Route Roles **/
+                /** Start Route Setting **/
+                // Route::resource('settings', SettingController::class)->except(['show']);
+                Route::controller(SettingController::class)->group(function () {
+                    Route::get('settings', 'edit')->name('setting.edit');
+                    Route::post('settings', 'update')->name('setting.update');
+                });
+                /** End Route Setting **/
+
+                /** Start Route Category **/
                 Route::resource('categories', CategoryController::class)->except(['show']);
-                /** End Route Roles **/
+                /** End Route Category **/
 
                 /** Start Route Roles **/
                 Route::resource('invoices', InvoiceController::class);
@@ -60,6 +70,7 @@ Route::group(
                 Route::get('approved/invoice/{id}', [InvoiceController::class, 'approvedChengStatus'])->name('invoice.approved');
                 Route::get('refusal/invoice/{id}',  [InvoiceController::class, 'refusal'])->name('invoice.refusal');
                 Route::get('invoice/pending',       [InvoiceController::class, 'pendingList'])->name('invoice.pendingList');
+                Route::get('invoice/refusal',       [InvoiceController::class, 'refusalList'])->name('invoice.refusalList');
                 Route::get('invoice/approved',      [InvoiceController::class, 'approvedList'])->name('invoice.approvedList');
                 /** End Route Roles **/
 
@@ -112,6 +123,7 @@ Route::group(
                 Route::get('/get-products-ajax', 'getProductsAjax');
                 Route::get('/product/{slug}', 'showProduct')->name('showProduct');
 
+
             });
 
             Route::controller(ProductFavoriteController::class)->group(function () {
@@ -120,9 +132,6 @@ Route::group(
                 Route::post('/remove/product/favorite{id}', 'removeFromCookies')->name('remove.product');
             });
 
-            Route::get('/order', function () {
-                return view('site.order');
-            })->name('order');
 
             Route::controller(ProductCartController::class)->group(function () {
                 Route::post('/product/add/cart/{slug}', 'addToCart')->name('product.add.cart');
@@ -133,6 +142,11 @@ Route::group(
                 Route::post('payment/store', 'storePayment')->name('customers.payment.store');
                 Route::get('payment', 'showPayment')->name('customers.payment.show');
                 Route::get('getCities/{governorateId}', 'getCities')->name('customers.getCitiesInSite');
+            });
+
+            Route::controller(OrderController::class)->group(function () {
+                Route::get('/order/track', 'trackOrder')->name('trackOrder');
+                Route::get('/order/cancel/{id}', 'cancelOrder')->name('cancelOrder');
             });
         });
     }

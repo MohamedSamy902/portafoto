@@ -150,21 +150,44 @@
                                 <li><a href="<?php echo e(route('invoices.index')); ?>"
                                         class="<?php echo e(routeActive('invoices.index')); ?>"><?php echo e(__('invoice.invoice_list')); ?></a>
                                 </li>
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoice-invoice-pendingList')): ?>
+                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoice-pendingList')): ?>
                                     <li><a href="<?php echo e(route('invoice.pendingList')); ?>"
                                             class="<?php echo e(routeActive('invoice.pendingList')); ?>"><?php echo e(__('invoice.pendingList')); ?>
 
                                         </a></li>
                                 <?php endif; ?>
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoice-invoice-approvedList')): ?>
+
+                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoice-approvedList')): ?>
                                     <li><a href="<?php echo e(route('invoice.approvedList')); ?>"
                                             class="<?php echo e(routeActive('invoice.approvedList')); ?>"><?php echo e(__('invoice.approvedList')); ?>
+
+                                        </a></li>
+                                <?php endif; ?>
+                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('invoice-refusalList')): ?>
+                                    <li><a href="<?php echo e(route('invoice.refusalList')); ?>"
+                                            class="<?php echo e(routeActive('invoice.refusalList')); ?>"><?php echo e(__('invoice.refusalList')); ?>
 
                                         </a></li>
                                 <?php endif; ?>
                             </ul>
                         </li>
                     <?php endif; ?>
+
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('setting-list')): ?>
+                        <li class="dropdown">
+                            <a class="nav-link menu-title <?php echo e(prefixActive('invoices')); ?>" href="javascript:void(0)">
+                                <i data-feather="home"></i>
+                                <span><?php echo e(__('invoice.invoices')); ?></span>
+                            </a>
+                            <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('invoices')); ?>;">
+                                <li><a href="<?php echo e(route('invoices.index')); ?>"
+                                        class="<?php echo e(routeActive('invoices.index')); ?>"><?php echo e(__('invoice.invoice_list')); ?></a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

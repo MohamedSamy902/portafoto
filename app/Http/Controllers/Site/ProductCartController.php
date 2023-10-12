@@ -53,15 +53,6 @@ class ProductCartController extends Controller
             ->with('success', __('site.messages_removeToCart'));
     }
 
-    public function getCart($id)
-    {
-        $customerId = Cookie::get('customerId');
-        $carts = Cart::where('id', $id)->where('customerId', $customerId)->first()->delete();
-    }
 
-    public function showPayment($id)
-    {
-        $customerId = Cookie::get('customerId');
-        $carts = Cart::where('id', $id)->where('customerId', $customerId)->first()->delete();
-    }
+
 }
