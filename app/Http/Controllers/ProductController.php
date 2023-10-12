@@ -133,7 +133,9 @@ class ProductController extends Controller
     {
         $colors = StandardColor::get();
         $sizes  = StandardSize::get();
-        return view('dashbord.products.edit', compact('product', 'colors', 'sizes'));
+        $categories = Category::get();
+
+        return view('dashbord.products.edit', compact('product', 'colors', 'sizes', 'categories'));
     }
 
     /**

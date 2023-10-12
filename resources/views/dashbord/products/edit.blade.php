@@ -59,7 +59,7 @@
                                 <label class="form-label"
                                     for="validationTextarea">{{ __('master.description_en') }}</label>
                                 <textarea id="editor1" cols="30" rows="10" name="description">
-                                    {{ old('description') ? old('description') : $product->getTranslation('description', 'ar') }}
+                                    {{ old('description') ? old('description') : $product->getTranslation('description', 'en') }}
                                 </textarea>
 
                             </div>
@@ -102,18 +102,21 @@
                                 </div>
                             @endif
 
-                            {{-- <div class="row g-1">
+                            <div class="row g-1">
                                 <div class="col-md-12 mb-3">
-                                    <label class="col-form-label">Colors</label>
-                                    <select class="js-example-basic-multiple col-sm-12" multiple="multiple" name="colors[]">
-                                        @foreach ($colors as $color)
-                                            <option selected value="{{ $color->id }}">{{ $color->name }}</option>
+                                    <label class="form-label" for="category">{{ __('category.category') }}</label>
+                                    <select class="form-select" id="category" required="" name="category_id">
+                                        <option selected="" disabled="" value="">
+                                            {{ __('category.category') }}
+                                        </option>
+                                        @foreach ($categories as $category)
+                                            <option @selected($category->id == $product->id) value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
+                                    <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
+                                    <div class="invalid-feedback">{{ __('validation.invalid_feedback') }}</div>
                                 </div>
-
-                            </div> --}}
-
+                            </div>
 
                             @if ($product->price == null)
                                 <div class="row g-2 element" id="div_1">
@@ -151,8 +154,10 @@
                                     <label class="form-label"
                                         for="validationDefault06">{{ __('product.showBest') }}</label>
                                     <select class="form-select" id="validationDefault06" required="" name="best">
-                                        <option value="no" @selected($product->best == 'no')> {{ __('product.no') }}</option>
-                                        <option value="yes" @selected($product->best == 'yes')> {{ __('product.yes') }}</option>
+                                        <option value="no" @selected($product->best == 'no')> {{ __('product.no') }}
+                                        </option>
+                                        <option value="yes" @selected($product->best == 'yes')> {{ __('product.yes') }}
+                                        </option>
 
 
                                     </select>
