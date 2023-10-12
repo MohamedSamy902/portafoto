@@ -20,7 +20,7 @@ return new class extends Migration
             $table->longText('keywords')->nullable();
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
-            $table->string('twitter')->nullable();
+            // $table->string('twitter')->nullable();
             $table->string('messenger')->nullable();
             $table->string('mobile_1')->nullable();
             $table->string('mobile_2')->nullable();

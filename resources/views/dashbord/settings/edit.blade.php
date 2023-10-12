@@ -72,9 +72,7 @@
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label" for="validationCustom01">{{ __('master.keywords') }}</label>
-                                    {{-- <input class="form-control" id="validationCustom01" type="text" name="keywords"
-                                        placeholder=""
-                                        value="{{ old('keywords') ? old('keywords') : $setting->getTranslation('keywords', 'en') }}" /> --}}
+
                                         <textarea class="form-control"  cols="30" rows="10" name="keywords">{{ old('keywords') ? old('keywords') : $setting->getTranslation('keywords', 'en') }}</textarea>
 
                                     <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
@@ -113,13 +111,13 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12 mb-3">
+                            {{-- <div class="col-md-12 mb-3">
                                 <label class="form-label" for="validationCustom01">{{ __('master.twitter') }}</label>
                                 <input class="form-control" id="validationCustom01" type="text" name="twitter"
                                     placeholder="" value="{{ old('twitter') ? old('twitter') : $setting->twitter }}" />
                                 <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
                                 <div class="invalid-feedback">{{ __('validation.invalid_feedback') }}</div>
-                            </div>
+                            </div> --}}
 
 
                             <div class="col-md-12 mb-3">

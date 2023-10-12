@@ -55,19 +55,14 @@
                             <div class="mb-3">
                                 <label class="form-label"
                                     for="validationTextarea"><?php echo e(__('master.description_en')); ?></label>
-                                <textarea id="editor1" cols="30" rows="10" name="description">
-                                </textarea>
-
+                                <textarea id="editor1" cols="30" rows="10" name="description"><?php echo e(old('description')); ?></textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label"
                                     for="validationTextarea"><?php echo e(__('master.description_ar')); ?></label>
-                                <textarea id="editor2" cols="30" rows="10" name="description_ar">
-                                </textarea>
-
+                                <textarea id="editor2" cols="30" rows="10" name="description_ar"><?php echo e(old('description_ar')); ?></textarea>
                             </div>
-
 
 
                             <div class="row g-1" id="price">
@@ -95,6 +90,7 @@
                                 <div class="col-md-12 mb-3">
                                     <label class="col-form-label"><?php echo e(__('site.color')); ?></label>
                                     <select class="js-example-basic-multiple col-sm-12" multiple="multiple" name="colors[]">
+
                                         <?php $__currentLoopData = $colors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $color): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option selected value="<?php echo e($color->id); ?>"><?php echo e($color->name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -108,15 +104,14 @@
 
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
-                                    <label class="form-label"
-                                        for="category"><?php echo e(__('category.category')); ?></label>
+                                    <label class="form-label" for="category"><?php echo e(__('category.category')); ?></label>
                                     <select class="form-select" id="category" required="" name="category_id">
                                         <option selected="" disabled="" value="">
                                             <?php echo e(__('category.category')); ?>
 
                                         </option>
                                         <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option selected value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+                                            <option selected <?php if(old('category_id') == $category->id): echo 'selected'; endif; ?> value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                     <div class="valid-feedback"><?php echo e(__('validation.valid_feedback')); ?></div>
@@ -158,8 +153,8 @@
                                     <label class="form-label"
                                         for="validationDefault06"><?php echo e(__('product.showBest')); ?></label>
                                     <select class="form-select" id="validationDefault06" required="" name="best">
-                                        <option value="no" selected> <?php echo e(__('product.no')); ?></option>
-                                        <option value="yes"> <?php echo e(__('product.yes')); ?></option>
+                                        <option value="no" <?php if(old('best') == 'no'): echo 'selected'; endif; ?>> <?php echo e(__('product.no')); ?></option>
+                                        <option value="yes" <?php if(old('best') == 'yes'): echo 'selected'; endif; ?>> <?php echo e(__('product.yes')); ?></option>
 
 
                                     </select>
@@ -173,8 +168,8 @@
                                     <label class="form-label"
                                         for="validationDefault06"><?php echo e(__('product.showSlider')); ?></label>
                                     <select class="form-select" id="validationDefault06" required="" name="slider">
-                                        <option value="no" selected> <?php echo e(__('product.no')); ?></option>
-                                        <option value="yes"> <?php echo e(__('product.yes')); ?></option>
+                                        <option value="no" <?php if(old('slider') == 'no'): echo 'selected'; endif; ?>> <?php echo e(__('product.no')); ?></option>
+                                        <option value="yes"> <?php if(old('slider') == 'yes'): echo 'selected'; endif; ?> <?php echo e(__('product.yes')); ?></option>
 
 
                                     </select>

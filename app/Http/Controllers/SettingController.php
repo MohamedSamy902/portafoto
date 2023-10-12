@@ -47,7 +47,7 @@ class SettingController extends Controller
 
             'facebook' =>  $request->facebook,
             'instagram' => $request->instagram,
-            'twitter'  => $request->twitter,
+            // 'twitter'  => $request->twitter,
             'messenger' => $request->messenger,
             'mobile_1' => $request->mobile_1,
             'mobile_2' => $request->mobile_2,

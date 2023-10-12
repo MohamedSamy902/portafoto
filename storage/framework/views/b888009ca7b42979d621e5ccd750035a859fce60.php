@@ -58,8 +58,7 @@
                     <div class="rounded-social-buttons">
                         <a class="social-button facebook" href="<?php echo e($setting->facebook); ?>" target="_blank"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a class="social-button twitter" href="<?php echo e($setting->twitter); ?>" target="_blank"><i
-                                class="fab fa-twitter"></i></a>
+                        
                         <a class="social-button instagram" href="<?php echo e($setting->instagram); ?>" target="_blank"><i
                                 class="fab fa-instagram"></i></a>
                     </div>

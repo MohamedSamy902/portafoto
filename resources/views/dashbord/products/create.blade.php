@@ -56,19 +56,14 @@
                             <div class="mb-3">
                                 <label class="form-label"
                                     for="validationTextarea">{{ __('master.description_en') }}</label>
-                                <textarea id="editor1" cols="30" rows="10" name="description">
-                                </textarea>
-
+                                <textarea id="editor1" cols="30" rows="10" name="description">{{ old('description') }}</textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label"
                                     for="validationTextarea">{{ __('master.description_ar') }}</label>
-                                <textarea id="editor2" cols="30" rows="10" name="description_ar">
-                                </textarea>
-
+                                <textarea id="editor2" cols="30" rows="10" name="description_ar">{{ old('description_ar') }}</textarea>
                             </div>
-
 
 
                             <div class="row g-1" id="price">
@@ -96,6 +91,7 @@
                                 <div class="col-md-12 mb-3">
                                     <label class="col-form-label">{{ __('site.color') }}</label>
                                     <select class="js-example-basic-multiple col-sm-12" multiple="multiple" name="colors[]">
+
                                         @foreach ($colors as $color)
                                             <option selected value="{{ $color->id }}">{{ $color->name }}</option>
                                         @endforeach
@@ -109,14 +105,13 @@
 
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
-                                    <label class="form-label"
-                                        for="category">{{ __('category.category') }}</label>
+                                    <label class="form-label" for="category">{{ __('category.category') }}</label>
                                     <select class="form-select" id="category" required="" name="category_id">
                                         <option selected="" disabled="" value="">
                                             {{ __('category.category') }}
                                         </option>
                                         @foreach ($categories as $category)
-                                            <option selected value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option selected @selected(old('category_id') == $category->id) value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
@@ -157,8 +152,8 @@
                                     <label class="form-label"
                                         for="validationDefault06">{{ __('product.showBest') }}</label>
                                     <select class="form-select" id="validationDefault06" required="" name="best">
-                                        <option value="no" selected> {{ __('product.no') }}</option>
-                                        <option value="yes"> {{ __('product.yes') }}</option>
+                                        <option value="no" @selected(old('best') == 'no')> {{ __('product.no') }}</option>
+                                        <option value="yes" @selected(old('best') == 'yes')> {{ __('product.yes') }}</option>
 
 
                                     </select>
@@ -172,8 +167,8 @@
                                     <label class="form-label"
                                         for="validationDefault06">{{ __('product.showSlider') }}</label>
                                     <select class="form-select" id="validationDefault06" required="" name="slider">
-                                        <option value="no" selected> {{ __('product.no') }}</option>
-                                        <option value="yes"> {{ __('product.yes') }}</option>
+                                        <option value="no" @selected(old('slider') == 'no')> {{ __('product.no') }}</option>
+                                        <option value="yes"> @selected(old('slider') == 'yes') {{ __('product.yes') }}</option>
 
 
                                     </select>

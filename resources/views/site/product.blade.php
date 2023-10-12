@@ -248,8 +248,8 @@
                                         <h4><span
                                                 id="price">{{ $product->price != null? $product->price: $product->size()->latest()->first()->price }}</span>
                                             {{ __('site.EGP') }}</h4>
-                                        <span class="text-success font-weight-bold pb-2" id="SOLDOUT" @if ($product->status == 'SOLD OUT')
-                                            style="color: red !important"  @endif >{{ $product->status != 'SOLD OUT' ? 'In Stock' : 'SOLD OUT' }}</span>
+                                        <span class="text-success font-weight-bold pb-2" id="SOLDOUT"
+                                            @if ($product->status == 'SOLD OUT') style="color: red !important" @endif>{{ $product->status != 'SOLD OUT' ? 'In Stock' : 'SOLD OUT' }}</span>
 
 
                                         <p class="pt-3">
@@ -269,8 +269,10 @@
                                                             @foreach ($product->size as $size)
                                                                 <label class="label ">
                                                                     <input class="input size"
-                                                                        data-price="{{ $size->price }}" data-available="{{ $product->status }}" type="radio"
-                                                                        name="size" checked value="{{ $size->id }}">
+                                                                        data-price="{{ $size->price }}"
+                                                                        data-available="{{ $product->status }}"
+                                                                        type="radio" name="size" checked
+                                                                        value="{{ $size->id }}">
                                                                     <span class="label__checkmark">
                                                                         <svg class="shape"
                                                                             xmlns="http://www.w3.org/2000/svg">
@@ -292,8 +294,10 @@
 
                                                 <div>
                                                     <label for="color" class="form-label">{{ __('site.color') }}</label>
-                                                    <select required class="form-select" id="color" name="standard_color_id">
-                                                        <option selected disabled value="">{{ __('site.choose') }}</option>
+                                                    <select required class="form-select" id="color"
+                                                        name="standard_color_id">
+                                                        <option selected disabled value="">{{ __('site.choose') }}
+                                                        </option>
                                                         @foreach ($colors as $color)
                                                             <option value="{{ $color->id }}">
                                                                 {{ $color->name }}</option>
@@ -311,7 +315,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <label for="validationCustom05" class="form-label">{{ __('site.quantity') }}</label>
+                                                <label for="validationCustom05"
+                                                    class="form-label">{{ __('site.quantity') }}</label>
 
                                                 <div class="wrapper">
                                                     <span class="minus">-</span>
@@ -325,10 +330,12 @@
                                             <div class="col-12">
                                                 <div class="input-icons">
                                                     {{-- <i style="position: absolute;color:#FFF" class="fa-solid fa-cart-shopping"></i> --}}
-                                                    <input type="submit" class="btn btn-dark" value="{{ __('site.addToCart') }}">
-                                                    <a class="checkoutt text-decoration-none" href="{{ $setting->messenger }}"><button
-                                                        type="button" class="btn btn-primary">Custom Size <i
-                                                            class="fa-brands fa-facebook"></i></button></a>
+                                                    <input type="submit" class="btn btn-dark"
+                                                        value="{{ __('site.addToCart') }}">
+                                                    <a class="checkoutt text-decoration-none"
+                                                        href="{{ $setting->messenger }}"><button type="button"
+                                                            class="btn btn-primary">Custom Size <i
+                                                                class="fa-brands fa-facebook"></i></button></a>
                                                 </div>
                                             </div>
                                         </form>
@@ -348,28 +355,18 @@
                 <!-- <h2 class="title">New Products</h2> -->
 
                 <div class="product-grid product-grid-product prod">
-
-                    <div class="showcase">
-
+                    @foreach ($product->category->product()->where('id', '!=', $product->id)->limit(3)->get() as $product)
+<div class="showcase product-item">
                         <div class="showcase-banner">
-
-                            <img src="{{ asset('site') }}/assets/img/1.jpg" alt="Mens Winter Leathers Jackets"
-                                width="300" class="product-img default">
-                            <img src="{{ asset('site') }}/assets/img/1.jpg" alt="Mens Winter Leathers Jackets"
-                                width="300" class="product-img hover">
-
-                            <p class="showcase-badge">15%</p>
+                            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="Mens Winter Leathers Jackets" width="300"
+                                class="product-img default">
+                            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="Mens Winter Leathers Jackets" width="300"
+                                class="product-img hover">
 
                             <div class="showcase-actions">
 
-                                <button class="btn-action">
+                                <button class="btn-action favorite-button" data-product-id="{{ $product->id }}">
                                     <ion-icon name="heart-outline"></ion-icon>
-                                </button>
-
-
-
-                                <button class="btn-action">
-                                    <ion-icon name="bag-add-outline"></ion-icon>
                                 </button>
 
                             </div>
@@ -378,133 +375,39 @@
 
                         <div class="showcase-content">
 
-                            <a href="product.html" class="showcase-category">Wall Frame </a>
+                            <a href="{{ route('showProduct', $product->slug) }}" class="showcase-category">{{ $product->name }}</a>
+                            @if (COUNT($product->size) > 0)
+<a href="#">
+                                    <h3 class="showcase-title">
+                                        {{ $product->size()->first()->standardSize->name }}</h3>
+                                </a>
+@endif
 
-                            <a href="#">
-                                <h3 class="showcase-title">Frame 30 x 90</h3>
-                            </a>
+
 
                             <div class="price-box">
-                                <p class="price">$48.00</p>
-                                <del>$75.00</del>
+                                @if (COUNT($product->size) > 0)
+<p class="price">{{ $product->size()->first()->price }}
+                                        {{ __('site.EGP') }}</p>
+                                    @if ($product->size()->first()->discount != null)
+<del>{{ $product->size()->first()->discount }}
+                                            {{ __('site.EGP') }}</del>
+@endif
+@else
+<p class="price">{{ $product->price }} {{ __('site.EGP') }}</p>
+                                    @if ($product->discount != null)
+<del>{{ $product->discount }} {{ __('site.EGP') }}</del>
+@endif
+@endif
                             </div>
 
                         </div>
 
                     </div>
-
-                    <div class="showcase">
-
-                        <div class="showcase-banner">
-                            <img src="{{ asset('site') }}/assets/img/2.jpg" alt="Pure Garment Dyed Cotton Shirt"
-                                class="product-img default" width="300">
-                            <img src="{{ asset('site') }}/assets/img/2.jpg" alt="Pure Garment Dyed Cotton Shirt"
-                                class="product-img hover" width="300">
-
-                            <p class="showcase-badge angle black">sale</p>
-
-                            <div class="showcase-actions">
-                                <button class="btn-action">
-                                    <ion-icon name="heart-outline"></ion-icon>
-                                </button>
-
-
-                                <button class="btn-action">
-                                    <ion-icon name="bag-add-outline"></ion-icon>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="showcase-content">
-                            <a href="#" class="showcase-category">Wall Frame</a>
-
-                            <h3>
-                                <a href="#" class="showcase-title">Frame 30 x 60</a>
-                            </h3>
-
-                            <div class="price-box">
-                                <p class="price">$45.00</p>
-                                <del>$56.00</del>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="showcase">
-
-                        <div class="showcase-banner">
-                            <img src="{{ asset('site') }}/assets/img/3.jpg" alt="MEN Yarn Fleece Full-Zip Jacket"
-                                class="product-img default" width="300">
-                            <img src="{{ asset('site') }}/assets/img/3.jpg" alt="MEN Yarn Fleece Full-Zip Jacket"
-                                class="product-img hover" width="300">
-
-                            <div class="showcase-actions">
-                                <button class="btn-action">
-                                    <ion-icon name="heart-outline"></ion-icon>
-                                </button>
+@endforeach
 
 
 
-                                <button class="btn-action">
-                                    <ion-icon name="bag-add-outline"></ion-icon>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="showcase-content">
-                            <a href="#" class="showcase-category">Wall Frame</a>
-
-                            <h3>
-                                <a href="#" class="showcase-title">Frame 60 x 90</a>
-                            </h3>
-
-                            <div class="price-box">
-                                <p class="price">$58.00</p>
-                                <del>$65.00</del>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="showcase">
-
-                        <div class="showcase-banner">
-                            <img src="{{ asset('site') }}/assets/img/4.jpg" alt="Black Floral Wrap Midi Skirt"
-                                class="product-img default" width="300">
-                            <img src="{{ asset('site') }}/assets/img/4.jpg" alt="Black Floral Wrap Midi Skirt"
-                                class="product-img hover" width="300">
-
-                            <p class="showcase-badge angle pink">new</p>
-
-                            <div class="showcase-actions">
-                                <button class="btn-action">
-                                    <ion-icon name="heart-outline"></ion-icon>
-                                </button>
-
-
-                                <button class="btn-action">
-                                    <ion-icon name="bag-add-outline"></ion-icon>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="showcase-content">
-                            <a href="#" class="showcase-category">Wall Frame</a>
-
-                            <h3>
-                                <a href="#" class="showcase-title">Frame 20 x 40</a>
-                            </h3>
-
-                            <div class="price-box">
-                                <p class="price">$25.00</p>
-                                <del>$35.00</del>
-                            </div>
-
-                        </div>
-
-                    </div>
 
                 </div>
 
@@ -519,67 +422,67 @@
 @push('js')
     <script src="https://releases.jquery.com/git/jquery-git.js"></script>
 
-    <script src="{{ asset('site') }}/assets/fontawesome-free-6.4.2-web/js/all.min.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="{{ asset('site') }}/assets/fontawesome-free-6.4.2-web/js/all.min.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            // Bind click event to size options
-            $('.size').click(function() {
-                // Get selected size and price
-                var size = $(this).data('size');
-                var price = $(this).data('price');
-                var available = $(this).data('available');
-                console.log(available);
+        <script>
+            $(document).ready(function() {
+                // Bind click event to size options
+                $('.size').click(function() {
+                    // Get selected size and price
+                    var size = $(this).data('size');
+                    var price = $(this).data('price');
+                    var available = $(this).data('available');
+                    console.log(available);
 
-                // Update price display
-                $('#price').text(' ' + price.toFixed(2));
-                if (available == 'SOLD OUT') {
-                    available = 'SOLD OUT';
-                    $('#SOLDOUT').removeClass('text-success');
-                    $('#SOLDOUT').css('color', 'red');
+                    // Update price display
+                    $('#price').text(' ' + price.toFixed(2));
+                    if (available == 'SOLD OUT') {
+                        available = 'SOLD OUT';
+                        $('#SOLDOUT').removeClass('text-success');
+                        $('#SOLDOUT').css('color', 'red');
 
-                    $('#SOLDOUT').text(' ' + available);
-                }
+                        $('#SOLDOUT').text(' ' + available);
+                    }
 
+                });
             });
-        });
-    </script>
-    <script src="{{ asset('site') }}/assets/js/magiczoomplus.js"></script>
+        </script>
+        <script src="{{ asset('site') }}/assets/js/magiczoomplus.js"></script>
 
-    <script>
-        const plus = document.querySelector(".plus"),
-            minus = document.querySelector(".minus"),
-            num = document.querySelector(".num");
-        let a = 1;
-        plus.addEventListener("click", () => {
-            a++;
-            a = (a < 5) ? "0" + a : a;
-            num.value = a;
-        });
-        minus.addEventListener("click", () => {
-            if (a > 1) {
-                a--;
+        <script>
+            const plus = document.querySelector(".plus"),
+                minus = document.querySelector(".minus"),
+                num = document.querySelector(".num");
+            let a = 1;
+            plus.addEventListener("click", () => {
+                a++;
                 a = (a < 5) ? "0" + a : a;
                 num.value = a;
-            }
-        });
-    </script>
+            });
+            minus.addEventListener("click", () => {
+                if (a > 1) {
+                    a--;
+                    a = (a < 5) ? "0" + a : a;
+                    num.value = a;
+                }
+            });
+        </script>
 
 
-    <script>
-        document.querySelector("form").addEventListener("submit", function(event) {
-            if (document.getElementById("color").value === "") {
-                event.preventDefault();
-                swal({
-                    position: 'center',
-                    icon: 'error',
-                    title: "{{ __('site.errorSelectColor') }}",
-                    showConfirmButton: false,
-                    timer: 2000
-                });
-            }
-        });
-    </script>
-@endpush
+        <script>
+            document.querySelector("form").addEventListener("submit", function(event) {
+                if (document.getElementById("color").value === "") {
+                    event.preventDefault();
+                    swal({
+                        position: 'center',
+                        icon: 'error',
+                        title: "{{ __('site.errorSelectColor') }}",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            });
+        </script>
+@endpush)

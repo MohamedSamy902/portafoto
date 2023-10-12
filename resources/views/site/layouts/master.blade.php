@@ -75,8 +75,8 @@
                     <div class="rounded-social-buttons">
                         <a class="social-button facebook" href="{{ $setting->facebook }}" target="_blank"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a class="social-button twitter" href="{{ $setting->twitter }}" target="_blank"><i
-                                class="fab fa-twitter"></i></a>
+                        {{-- <a class="social-button twitter" href="{{ $setting->twitter }}" target="_blank"><i
+                                class="fab fa-twitter"></i></a> --}}
                         <a class="social-button instagram" href="{{ $setting->instagram }}" target="_blank"><i
                                 class="fab fa-instagram"></i></a>
                     </div>

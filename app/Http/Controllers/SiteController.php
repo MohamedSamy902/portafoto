@@ -34,8 +34,9 @@ class SiteController extends Controller
 
     public function getProductsAjax(Request $request)
     {
-        $products = Product::limit(10)->get();
-        return view('site.partialsProduct', ['products' => $products])->render();
+
+        $products = Product::paginate(10)->get();
+        return view('site.partialsProduct', ['products' => $products]);
     }
 
 
