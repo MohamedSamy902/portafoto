@@ -149,6 +149,8 @@
                                 </div>
                             </div>
 
+
+
                             <div class="row g-1">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label"
@@ -166,6 +168,20 @@
                                 </div>
                             </div>
 
+                            <div class="row g-1">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label"
+                                        for="validationDefault06">{{ __('product.showSlider') }}</label>
+                                    <select class="form-select" id="validationDefault06" required="" name="slider">
+                                        <option value="no" @selected($product->slider == 'no')> {{ __('product.no') }}</option>
+                                        <option value="yes" @selected($product->slider == 'yes')> {{ __('product.yes') }}</option>
+
+
+                                    </select>
+                                    <div class="valid-feedback">{{ __('validation.valid_feedback') }}</div>
+                                    <div class="invalid-feedback">{{ __('validation.invalid_feedback') }}</div>
+                                </div>
+                            </div>
 
 
                             <div class="row g-1">
