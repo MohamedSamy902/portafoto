@@ -139,8 +139,10 @@ Route::group(
             });
 
             Route::controller(paymentController::class)->group(function () {
+
                 Route::post('payment/store', 'storePayment')->name('customers.payment.store');
                 Route::get('payment', 'showPayment')->name('customers.payment.show');
+                Route::get('buy/now/{id}', 'buyNow')->name('buyNow');
                 Route::get('getCities/{governorateId}', 'getCities')->name('customers.getCitiesInSite');
             });
 

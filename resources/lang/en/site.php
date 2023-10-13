@@ -33,8 +33,10 @@ return
         // Payment Page
         'PAYMENT' => 'Contact',
         'Total Price' => 'Total Price',
+        'Shipping address' => 'Shipping Address',
         // Payment Form
         'firstName' => 'First Name',
+        'name' => 'Full Name',
         'lastName' => 'Last Name',
         'email' => 'Email Address',
         'address_1' => 'Address 1',
@@ -46,6 +48,7 @@ return
         'mobile_2' => 'Phone Number 2',
         'payment' => 'Payment Method',
         'send' => 'Sending Order',
+        'Buy Now' => 'Buy Now',
 
 
         //

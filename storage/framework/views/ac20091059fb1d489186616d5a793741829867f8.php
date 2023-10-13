@@ -32,9 +32,9 @@
                             </div>
                         </div>
                         <br>
-                        <h6>Shipping address</h6>
+                        <h6><?php echo e(__('site.Shipping address')); ?></h6>
                         <div class="form-controll">
-                            <label for="checkout-name">Full name</label>
+                            
                             <div>
                                 <span class="fa fa-user-circle"></span>
                                 <input type="text" id="checkout-name" name="name" placeholder="<?php echo e(__('site.name')); ?>"
@@ -99,7 +99,7 @@
 
                         </div>
 
-                        <h4>Payment Method</h4>
+                        <h4><?php echo e(__('site.payment')); ?></h4>
                         <div class="form-check voda">
                             <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault1"
                                 checked  value="InstaPay">

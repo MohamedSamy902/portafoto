@@ -1,18 +1,20 @@
 @foreach ($products as $product)
     <div class="showcase product-item">
         <div class="showcase-banner">
-            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="Mens Winter Leathers Jackets" width="300"
-                class="product-img default">
-            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="Mens Winter Leathers Jackets" width="300"
-                class="product-img hover">
+            <a href="{{ route('showProduct', $product->slug) }}">
+                <img src="{{ $product->getFirstMediaUrl('products') }}" alt="Mens Winter Leathers Jackets" width="300"
+                    class="product-img default">
+                <img src="{{ $product->getFirstMediaUrl('products') }}" alt="Mens Winter Leathers Jackets" width="300"
+                    class="product-img hover">
 
-            <div class="showcase-actions">
+                <div class="showcase-actions">
 
-                <button class="btn-action favorite-button" data-product-id="{{ $product->id }}">
-                    <ion-icon name="heart-outline"></ion-icon>
-                </button>
+                    <button class="btn-action favorite-button" data-product-id="{{ $product->id }}">
+                        <ion-icon name="heart-outline"></ion-icon>
+                    </button>
 
-            </div>
+                </div>
+            </a>
 
         </div>
 

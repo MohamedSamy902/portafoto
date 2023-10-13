@@ -140,7 +140,7 @@
 
         <script>
             $(document).ready(function() {
-                var page = 2; // initialize page to 2
+                var page = 1; // initialize page to 2
                 var loading = false; // set loading to false
                 var product_container_offset = $('#products-container').offset().top;
                 var window_height = $(window).height();

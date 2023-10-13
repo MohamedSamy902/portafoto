@@ -42,13 +42,14 @@ class SiteController extends Controller
 
     public function showProduct($slug)
     {
-
+        // $product->category->product()->where('id', '!=', $product->id)->limit(3)->get()
         $product = Product::where('slug', $slug)->first();
+        $productsLike = $product->category->product()->where('id', '!=', $product->id)->limit(3)->get();
         $colors = StandardColor::get();
 
         $carts = $this->getCart();
         $setting = Setting::first();
-        return view('site.product', compact('product', 'colors', 'carts', 'setting'));
+        return view('site.product', compact('product', 'colors', 'carts', 'setting', 'productsLike'));
     }
 
 

@@ -107,7 +107,7 @@
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label" for="category"><?php echo e(__('category.category')); ?></label>
                                     <select class="form-select" id="category" required="" name="category_id">
-                                        <option selected="" disabled="" value="">
+                                        <option  disabled="" value="">
                                             <?php echo e(__('category.category')); ?>
 
                                         </option>

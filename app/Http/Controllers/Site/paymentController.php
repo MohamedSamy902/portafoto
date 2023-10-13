@@ -23,6 +23,17 @@ class paymentController extends Controller
         return $carts;
     }
 
+
+    public function buyNow($id)
+    {
+        
+        // $customerId = Cookie::get('customerId');
+        // $carts = Cart::where('customerId', $customerId)->where('status', 'outInvoice')->get();
+        // return $carts;
+    }
+
+
+
     public function showPayment()
     {
         $setting = Setting::first();
@@ -65,6 +76,7 @@ class paymentController extends Controller
             'totalPrice' => $totalPrice,
             'governorate_id' => $request->governorate_id,
             'city_id' => $request->city_id,
+            'customerId' => $customerId,
         ]);
         $id =  $invoice->id;
         foreach ($carts as $cart) {
@@ -73,6 +85,9 @@ class paymentController extends Controller
                 'status' => 'inInvoice',
             ]);
         }
+
+        return redirect()->back()
+            ->with('success', __('master.save'));
 
         if ($request->paymet == 'vodafon') {
         }

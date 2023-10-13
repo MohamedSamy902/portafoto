@@ -33,8 +33,10 @@ return
     // Payment Page
     'PAYMENT' => 'بيانات ',
     'Total Price' => 'السعر الكلي',
+    'Shipping address' => 'بيانات التوصيل',
     // Payment Form
     'firstName' => 'الاسم الاول',
+    'name' => 'الاسم بالكامل',
     'lastName' => 'الاسم الاخير',
     'email' => 'البريد الالكتروني',
     'address_1' => 'العوان 1',
@@ -45,6 +47,7 @@ return
     'mobile_1' => 'رقم الموبايل 1',
     'mobile_2' => 'رقم الموبايل 2',
     'payment' => 'طريقه الدفع',
+    'Buy Now' => 'شراء الان',
     'send' => 'طلب',
     //
     'EGP' => 'جنيه',

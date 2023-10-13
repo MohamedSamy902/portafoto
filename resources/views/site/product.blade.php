@@ -332,13 +332,24 @@
                                                     {{-- <i style="position: absolute;color:#FFF" class="fa-solid fa-cart-shopping"></i> --}}
                                                     <input type="submit" class="btn btn-dark"
                                                         value="{{ __('site.addToCart') }}">
+                                                    <input name="buyNow" type="submit" class="btn btn-info pt-2 mt-2"
+                                                        value="{{ __('site.Buy Now') }}">
                                                     <a class="checkoutt text-decoration-none"
-                                                        href="{{ $setting->messenger }}"><button type="button"
-                                                            class="btn btn-primary">Custom Size <i
-                                                                class="fa-brands fa-facebook"></i></button></a>
+                                                        href="{{ $setting->messenger }}">
+                                                        <button type="button" class="btn btn-primary">Custom Size
+                                                            <i class="fa-brands fa-facebook"></i>
+                                                        </button>
+                                                    </a>
+
+
                                                 </div>
                                             </div>
                                         </form>
+                                        <div class="col-12" style="padding: 0;">
+                                            {{-- <div class="input-icons"> --}}
+                                            {{-- <a class="btn btn-primary" style="min-width: 100%" href="{{ route('buynow', $product->slug) }}">Buy Now</a> --}}
+                                            {{-- </div> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -355,56 +366,60 @@
                 <!-- <h2 class="title">New Products</h2> -->
 
                 <div class="product-grid product-grid-product prod">
-                    @foreach ($product->category->product()->where('id', '!=', $product->id)->limit(3)->get() as $product)
-<div class="showcase product-item">
-                        <div class="showcase-banner">
-                            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="Mens Winter Leathers Jackets" width="300"
-                                class="product-img default">
-                            <img src="{{ $product->getFirstMediaUrl('products') }}" alt="Mens Winter Leathers Jackets" width="300"
-                                class="product-img hover">
+                    {{-- @foreach ($product->category->product()->where('id', '!=', $product->id)->limit(3)->get() as $product) --}}
+                    @foreach ($productsLike as $product)
+                        <div class="showcase product-item">
+                            <a href="{{ route('showProduct', $product->slug) }}">
+                                <div class="showcase-banner">
+                                    <img src="{{ $product->getFirstMediaUrl('products') }}"
+                                        alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
+                                    <img src="{{ $product->getFirstMediaUrl('products') }}"
+                                        alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
 
-                            <div class="showcase-actions">
+                                    <div class="showcase-actions">
 
-                                <button class="btn-action favorite-button" data-product-id="{{ $product->id }}">
-                                    <ion-icon name="heart-outline"></ion-icon>
-                                </button>
+                                        <button class="btn-action favorite-button" data-product-id="{{ $product->id }}">
+                                            <ion-icon name="heart-outline"></ion-icon>
+                                        </button>
 
-                            </div>
+                                    </div>
 
-                        </div>
+                                </div>
+                            </a>
 
-                        <div class="showcase-content">
+                            <div class="showcase-content">
 
-                            <a href="{{ route('showProduct', $product->slug) }}" class="showcase-category">{{ $product->name }}</a>
-                            @if (COUNT($product->size) > 0)
-<a href="#">
-                                    <h3 class="showcase-title">
-                                        {{ $product->size()->first()->standardSize->name }}</h3>
-                                </a>
-@endif
-
-
-
-                            <div class="price-box">
+                                <a href="{{ route('showProduct', $product->slug) }}"
+                                    class="showcase-category">{{ $product->name }}</a>
                                 @if (COUNT($product->size) > 0)
-<p class="price">{{ $product->size()->first()->price }}
-                                        {{ __('site.EGP') }}</p>
-                                    @if ($product->size()->first()->discount != null)
-<del>{{ $product->size()->first()->discount }}
-                                            {{ __('site.EGP') }}</del>
-@endif
-@else
-<p class="price">{{ $product->price }} {{ __('site.EGP') }}</p>
-                                    @if ($product->discount != null)
-<del>{{ $product->discount }} {{ __('site.EGP') }}</del>
-@endif
-@endif
+                                    <a href="#">
+                                        <h3 class="showcase-title">
+                                            {{ $product->size()->first()->standardSize->name }}</h3>
+                                    </a>
+                                @endif
+
+
+
+                                <div class="price-box">
+                                    @if (COUNT($product->size) > 0)
+                                        <p class="price">{{ $product->size()->first()->price }}
+                                            {{ __('site.EGP') }}</p>
+                                        @if ($product->size()->first()->discount != null)
+                                            <del>{{ $product->size()->first()->discount }}
+                                                {{ __('site.EGP') }}</del>
+                                        @endif
+                                    @else
+                                        <p class="price">{{ $product->price }} {{ __('site.EGP') }}</p>
+                                        @if ($product->discount != null)
+                                            <del>{{ $product->discount }} {{ __('site.EGP') }}</del>
+                                        @endif
+                                    @endif
+                                </div>
+
                             </div>
 
                         </div>
-
-                    </div>
-@endforeach
+                    @endforeach
 
 
 
@@ -422,67 +437,67 @@
 @push('js')
     <script src="https://releases.jquery.com/git/jquery-git.js"></script>
 
-        <script src="{{ asset('site') }}/assets/fontawesome-free-6.4.2-web/js/all.min.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="{{ asset('site') }}/assets/fontawesome-free-6.4.2-web/js/all.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                // Bind click event to size options
-                $('.size').click(function() {
-                    // Get selected size and price
-                    var size = $(this).data('size');
-                    var price = $(this).data('price');
-                    var available = $(this).data('available');
-                    console.log(available);
+    <script>
+        $(document).ready(function() {
+            // Bind click event to size options
+            $('.size').click(function() {
+                // Get selected size and price
+                var size = $(this).data('size');
+                var price = $(this).data('price');
+                var available = $(this).data('available');
+                console.log(available);
 
-                    // Update price display
-                    $('#price').text(' ' + price.toFixed(2));
-                    if (available == 'SOLD OUT') {
-                        available = 'SOLD OUT';
-                        $('#SOLDOUT').removeClass('text-success');
-                        $('#SOLDOUT').css('color', 'red');
+                // Update price display
+                $('#price').text(' ' + price.toFixed(2));
+                if (available == 'SOLD OUT') {
+                    available = 'SOLD OUT';
+                    $('#SOLDOUT').removeClass('text-success');
+                    $('#SOLDOUT').css('color', 'red');
 
-                        $('#SOLDOUT').text(' ' + available);
-                    }
+                    $('#SOLDOUT').text(' ' + available);
+                }
 
-                });
             });
-        </script>
-        <script src="{{ asset('site') }}/assets/js/magiczoomplus.js"></script>
+        });
+    </script>
+    <script src="{{ asset('site') }}/assets/js/magiczoomplus.js"></script>
 
-        <script>
-            const plus = document.querySelector(".plus"),
-                minus = document.querySelector(".minus"),
-                num = document.querySelector(".num");
-            let a = 1;
-            plus.addEventListener("click", () => {
-                a++;
+    <script>
+        const plus = document.querySelector(".plus"),
+            minus = document.querySelector(".minus"),
+            num = document.querySelector(".num");
+        let a = 1;
+        plus.addEventListener("click", () => {
+            a++;
+            a = (a < 5) ? "0" + a : a;
+            num.value = a;
+        });
+        minus.addEventListener("click", () => {
+            if (a > 1) {
+                a--;
                 a = (a < 5) ? "0" + a : a;
                 num.value = a;
-            });
-            minus.addEventListener("click", () => {
-                if (a > 1) {
-                    a--;
-                    a = (a < 5) ? "0" + a : a;
-                    num.value = a;
-                }
-            });
-        </script>
+            }
+        });
+    </script>
 
 
-        <script>
-            document.querySelector("form").addEventListener("submit", function(event) {
-                if (document.getElementById("color").value === "") {
-                    event.preventDefault();
-                    swal({
-                        position: 'center',
-                        icon: 'error',
-                        title: "{{ __('site.errorSelectColor') }}",
-                        showConfirmButton: false,
-                        timer: 2000
-                    });
-                }
-            });
-        </script>
-@endpush)
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            if (document.getElementById("color").value === "") {
+                event.preventDefault();
+                swal({
+                    position: 'center',
+                    icon: 'error',
+                    title: "{{ __('site.errorSelectColor') }}",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        });
+    </script>
+@endpush

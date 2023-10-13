@@ -16,6 +16,7 @@ class ProductCartController extends Controller
 {
     public function addToCart(AddToCartRequest $request, $slug)
     {
+        // return $request->all();
         $product = Product::where('slug', $slug)->first();
         $customerId = Cookie::get('customerId');
         $size = Size::where('id', $request->size)->first();
@@ -39,6 +40,10 @@ class ProductCartController extends Controller
             'size' => $sizeProduct,
             'totalPrice' => $price * $request->quantity,
         ]);
+
+        if ($request->buyNow) {
+            return redirect()->route('customers.payment.show');
+        }
 
         return redirect()->back()
             ->with('success', __('site.messages_addToCart'));

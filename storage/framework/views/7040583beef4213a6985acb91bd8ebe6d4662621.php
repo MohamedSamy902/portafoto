@@ -332,13 +332,24 @@
                                                     
                                                     <input type="submit" class="btn btn-dark"
                                                         value="<?php echo e(__('site.addToCart')); ?>">
+                                                    <input name="buyNow" type="submit" class="btn btn-info pt-2 mt-2"
+                                                        value="<?php echo e(__('site.Buy Now')); ?>">
                                                     <a class="checkoutt text-decoration-none"
-                                                        href="<?php echo e($setting->messenger); ?>"><button type="button"
-                                                            class="btn btn-primary">Custom Size <i
-                                                                class="fa-brands fa-facebook"></i></button></a>
+                                                        href="<?php echo e($setting->messenger); ?>">
+                                                        <button type="button" class="btn btn-primary">Custom Size
+                                                            <i class="fa-brands fa-facebook"></i>
+                                                        </button>
+                                                    </a>
+
+
                                                 </div>
                                             </div>
                                         </form>
+                                        <div class="col-12" style="padding: 0;">
+                                            
+                                            
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -355,58 +366,62 @@
                 <!-- <h2 class="title">New Products</h2> -->
 
                 <div class="product-grid product-grid-product prod">
-                    <?php $__currentLoopData = $product->category->product()->where('id', '!=', $product->id)->limit(3)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-<div class="showcase product-item">
-                        <div class="showcase-banner">
-                            <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>" alt="Mens Winter Leathers Jackets" width="300"
-                                class="product-img default">
-                            <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>" alt="Mens Winter Leathers Jackets" width="300"
-                                class="product-img hover">
+                    
+                    <?php $__currentLoopData = $productsLike; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="showcase product-item">
+                            <a href="<?php echo e(route('showProduct', $product->slug)); ?>">
+                                <div class="showcase-banner">
+                                    <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>"
+                                        alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
+                                    <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>"
+                                        alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
 
-                            <div class="showcase-actions">
+                                    <div class="showcase-actions">
 
-                                <button class="btn-action favorite-button" data-product-id="<?php echo e($product->id); ?>">
-                                    <ion-icon name="heart-outline"></ion-icon>
-                                </button>
+                                        <button class="btn-action favorite-button" data-product-id="<?php echo e($product->id); ?>">
+                                            <ion-icon name="heart-outline"></ion-icon>
+                                        </button>
 
-                            </div>
+                                    </div>
 
-                        </div>
+                                </div>
+                            </a>
 
-                        <div class="showcase-content">
+                            <div class="showcase-content">
 
-                            <a href="<?php echo e(route('showProduct', $product->slug)); ?>" class="showcase-category"><?php echo e($product->name); ?></a>
-                            <?php if(COUNT($product->size) > 0): ?>
-<a href="#">
-                                    <h3 class="showcase-title">
-                                        <?php echo e($product->size()->first()->standardSize->name); ?></h3>
-                                </a>
-<?php endif; ?>
-
-
-
-                            <div class="price-box">
+                                <a href="<?php echo e(route('showProduct', $product->slug)); ?>"
+                                    class="showcase-category"><?php echo e($product->name); ?></a>
                                 <?php if(COUNT($product->size) > 0): ?>
-<p class="price"><?php echo e($product->size()->first()->price); ?>
+                                    <a href="#">
+                                        <h3 class="showcase-title">
+                                            <?php echo e($product->size()->first()->standardSize->name); ?></h3>
+                                    </a>
+                                <?php endif; ?>
 
-                                        <?php echo e(__('site.EGP')); ?></p>
-                                    <?php if($product->size()->first()->discount != null): ?>
-<del><?php echo e($product->size()->first()->discount); ?>
 
-                                            <?php echo e(__('site.EGP')); ?></del>
-<?php endif; ?>
-<?php else: ?>
-<p class="price"><?php echo e($product->price); ?> <?php echo e(__('site.EGP')); ?></p>
-                                    <?php if($product->discount != null): ?>
-<del><?php echo e($product->discount); ?> <?php echo e(__('site.EGP')); ?></del>
-<?php endif; ?>
-<?php endif; ?>
+
+                                <div class="price-box">
+                                    <?php if(COUNT($product->size) > 0): ?>
+                                        <p class="price"><?php echo e($product->size()->first()->price); ?>
+
+                                            <?php echo e(__('site.EGP')); ?></p>
+                                        <?php if($product->size()->first()->discount != null): ?>
+                                            <del><?php echo e($product->size()->first()->discount); ?>
+
+                                                <?php echo e(__('site.EGP')); ?></del>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <p class="price"><?php echo e($product->price); ?> <?php echo e(__('site.EGP')); ?></p>
+                                        <?php if($product->discount != null): ?>
+                                            <del><?php echo e($product->discount); ?> <?php echo e(__('site.EGP')); ?></del>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+
                             </div>
 
                         </div>
-
-                    </div>
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 
@@ -424,69 +439,69 @@
 <?php $__env->startPush('js'); ?>
     <script src="https://releases.jquery.com/git/jquery-git.js"></script>
 
-        <script src="<?php echo e(asset('site')); ?>/assets/fontawesome-free-6.4.2-web/js/all.min.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="<?php echo e(asset('site')); ?>/assets/fontawesome-free-6.4.2-web/js/all.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                // Bind click event to size options
-                $('.size').click(function() {
-                    // Get selected size and price
-                    var size = $(this).data('size');
-                    var price = $(this).data('price');
-                    var available = $(this).data('available');
-                    console.log(available);
+    <script>
+        $(document).ready(function() {
+            // Bind click event to size options
+            $('.size').click(function() {
+                // Get selected size and price
+                var size = $(this).data('size');
+                var price = $(this).data('price');
+                var available = $(this).data('available');
+                console.log(available);
 
-                    // Update price display
-                    $('#price').text(' ' + price.toFixed(2));
-                    if (available == 'SOLD OUT') {
-                        available = 'SOLD OUT';
-                        $('#SOLDOUT').removeClass('text-success');
-                        $('#SOLDOUT').css('color', 'red');
+                // Update price display
+                $('#price').text(' ' + price.toFixed(2));
+                if (available == 'SOLD OUT') {
+                    available = 'SOLD OUT';
+                    $('#SOLDOUT').removeClass('text-success');
+                    $('#SOLDOUT').css('color', 'red');
 
-                        $('#SOLDOUT').text(' ' + available);
-                    }
+                    $('#SOLDOUT').text(' ' + available);
+                }
 
-                });
             });
-        </script>
-        <script src="<?php echo e(asset('site')); ?>/assets/js/magiczoomplus.js"></script>
+        });
+    </script>
+    <script src="<?php echo e(asset('site')); ?>/assets/js/magiczoomplus.js"></script>
 
-        <script>
-            const plus = document.querySelector(".plus"),
-                minus = document.querySelector(".minus"),
-                num = document.querySelector(".num");
-            let a = 1;
-            plus.addEventListener("click", () => {
-                a++;
+    <script>
+        const plus = document.querySelector(".plus"),
+            minus = document.querySelector(".minus"),
+            num = document.querySelector(".num");
+        let a = 1;
+        plus.addEventListener("click", () => {
+            a++;
+            a = (a < 5) ? "0" + a : a;
+            num.value = a;
+        });
+        minus.addEventListener("click", () => {
+            if (a > 1) {
+                a--;
                 a = (a < 5) ? "0" + a : a;
                 num.value = a;
-            });
-            minus.addEventListener("click", () => {
-                if (a > 1) {
-                    a--;
-                    a = (a < 5) ? "0" + a : a;
-                    num.value = a;
-                }
-            });
-        </script>
+            }
+        });
+    </script>
 
 
-        <script>
-            document.querySelector("form").addEventListener("submit", function(event) {
-                if (document.getElementById("color").value === "") {
-                    event.preventDefault();
-                    swal({
-                        position: 'center',
-                        icon: 'error',
-                        title: "<?php echo e(__('site.errorSelectColor')); ?>",
-                        showConfirmButton: false,
-                        timer: 2000
-                    });
-                }
-            });
-        </script>
-<?php $__env->stopPush(); ?>)
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            if (document.getElementById("color").value === "") {
+                event.preventDefault();
+                swal({
+                    position: 'center',
+                    icon: 'error',
+                    title: "<?php echo e(__('site.errorSelectColor')); ?>",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        });
+    </script>
+<?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('site.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/mohamed/Desktop/art/laravel/resources/views/site/product.blade.php ENDPATH**/ ?>

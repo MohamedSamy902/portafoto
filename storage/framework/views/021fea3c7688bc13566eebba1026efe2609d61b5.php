@@ -1,18 +1,20 @@
 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="showcase product-item">
         <div class="showcase-banner">
-            <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>" alt="Mens Winter Leathers Jackets" width="300"
-                class="product-img default">
-            <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>" alt="Mens Winter Leathers Jackets" width="300"
-                class="product-img hover">
+            <a href="<?php echo e(route('showProduct', $product->slug)); ?>">
+                <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>" alt="Mens Winter Leathers Jackets" width="300"
+                    class="product-img default">
+                <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>" alt="Mens Winter Leathers Jackets" width="300"
+                    class="product-img hover">
 
-            <div class="showcase-actions">
+                <div class="showcase-actions">
 
-                <button class="btn-action favorite-button" data-product-id="<?php echo e($product->id); ?>">
-                    <ion-icon name="heart-outline"></ion-icon>
-                </button>
+                    <button class="btn-action favorite-button" data-product-id="<?php echo e($product->id); ?>">
+                        <ion-icon name="heart-outline"></ion-icon>
+                    </button>
 
-            </div>
+                </div>
+            </a>
 
         </div>
 

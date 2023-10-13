@@ -111,8 +111,8 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return redirect()->back()
-                ->with('success', __('master.messages_save'));
+            // return redirect()->back()
+            //     ->with('success', __('master.messages_save'));
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
@@ -131,11 +131,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $colors = StandardColor::get();
+        // $colors = StandardColor::get();
         $sizes  = StandardSize::get();
         $categories = Category::get();
 
-        return view('dashbord.products.edit', compact('product', 'colors', 'sizes', 'categories'));
+        return view('dashbord.products.edit', compact('product', 'sizes', 'categories'));
     }
 
     /**
@@ -164,6 +164,9 @@ class ProductController extends Controller
                 'discount' => $request->discount,
                 'status'  => $request->status,
                 'best' => $request->best,
+                'slider' => $request->slider,
+                'category_id' => $request->category_id,
+
             ]);
 
             if ($request->standard_size_id) {
