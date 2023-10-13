@@ -17,7 +17,7 @@
                                 <h2 class="accordion-header" style="background-color: #e7f1ff;
                                 box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);">
                                     <button class="accordion-button trace" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 75%;
+                                        data-bs-target="#collapseOne{{ $order->id }}" aria-expanded="true" aria-controls="collapseOne{{ $order->id }}" style="width: 75%;
                                         display: -webkit-inline-box;">
                                         <div class="trr">
                                             <h4>#{{ $order->id }}</h4>
@@ -32,7 +32,7 @@
                                     <a href="{{ route('cancelOrder', $order->id) }}" class="btn btn-danger cancel">Cancel</a>
                                     @endif
                                 </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                <div id="collapseOne{{ $order->id }}" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <table>
