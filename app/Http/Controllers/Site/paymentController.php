@@ -86,19 +86,19 @@ class paymentController extends Controller
             ]);
         }
 
-        return redirect()->back()
-            ->with('success', __('master.save'));
+        // return redirect()->back()
+        //     ->with('success', __('master.save'));
 
-        if ($request->paymet == 'vodafon') {
-        }
+        // if ($request->paymet == 'vodafon') {
+        // }
 
-        if ($request->paymet == 'instaPay') {
-        }
+        // if ($request->paymet == 'instaPay') {
+        // }
 
-        if ($request->paymet == 'cash') {
-        }
+        // if ($request->paymet == 'cash') {
+        // }
 
-        return redirect()->back()
+        return redirect()->route('trackOrder')
             ->with('success', __('site.messages_soreOrder'));
     }
 }
