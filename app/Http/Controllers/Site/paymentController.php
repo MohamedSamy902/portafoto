@@ -26,7 +26,7 @@ class paymentController extends Controller
 
     public function buyNow($id)
     {
-        
+
         // $customerId = Cookie::get('customerId');
         // $carts = Cart::where('customerId', $customerId)->where('status', 'outInvoice')->get();
         // return $carts;
@@ -97,5 +97,8 @@ class paymentController extends Controller
 
         if ($request->paymet == 'cash') {
         }
+
+        return redirect()->back()
+            ->with('success', __('site.messages_soreOrder'));
     }
 }
