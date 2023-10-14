@@ -35,6 +35,8 @@ class SiteController extends Controller
         SEOTools::opengraph()->addProperty('type', 'ecommerce');
         SEOTools::twitter()->setSite('@LuizVinicius73');
         SEOTools::jsonLd()->addImage("https://portafoto.net/site/assets/images/logo/logo.jpg");
+        OpenGraph::addImage("https://portafoto.net/site/assets/images/logo/logo.jpg");
+
         // End Seo
 
         // return $customerId;
@@ -69,10 +71,11 @@ class SiteController extends Controller
 
         OpenGraph::setDescription($product->description);
         OpenGraph::setTitle($product->name);
-        OpenGraph::setUrl('http://current.url.com');
+        OpenGraph::setUrl(route('showProduct', $product->slug));
         OpenGraph::addProperty('type', 'ecommerce');
         OpenGraph::addProperty('locale', 'en');
         OpenGraph::addProperty('locale:alternate', ['ar', 'en']);
+
 
         OpenGraph::addImage($product->getFirstMediaUrl('products'));
         foreach ($product->getMedia('products') as $productImage) {
