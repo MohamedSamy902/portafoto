@@ -9,6 +9,12 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Models\StandardColor;
 use Illuminate\Support\Facades\Cookie;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\TwitterCard;
+use Artesaos\SEOTools\Facades\JsonLd;
+
 
 class SiteController extends Controller
 {
@@ -21,6 +27,16 @@ class SiteController extends Controller
     public function index()
     {
         $setting = Setting::first();
+        // Seo
+        SEOTools::setTitle('Home');
+        SEOTools::setDescription($setting->description);
+        SEOTools::opengraph()->setUrl('httpd://portafoto.net/en');
+        SEOTools::setCanonical('https://portafoto.net/en');
+        SEOTools::opengraph()->addProperty('type', 'ecommerce');
+        SEOTools::twitter()->setSite('@LuizVinicius73');
+        SEOTools::jsonLd()->addImage("https://portafoto.net/site/assets/images/logo/logo.jpg");
+        // End Seo
+
         // return $customerId;
         $products = Product::where('status', '!=', 'inactive')->with(['media', 'size'])->paginate(10);
 
@@ -42,13 +58,38 @@ class SiteController extends Controller
 
     public function showProduct($slug)
     {
-        // $product->category->product()->where('id', '!=', $product->id)->limit(3)->get()
         $product = Product::where('slug', $slug)->first();
+        $setting = Setting::first();
+
+        SEOMeta::setTitle($product->name);
+        SEOMeta::setDescription($product->description);
+        SEOMeta::addMeta('product:published_time', $product->created_at->toW3CString(), 'property');
+        SEOMeta::addMeta('product:section', $product->category, 'property');
+        SEOMeta::addKeyword([$setting->keywords]);
+
+        OpenGraph::setDescription($product->description);
+        OpenGraph::setTitle($product->name);
+        OpenGraph::setUrl('http://current.url.com');
+        OpenGraph::addProperty('type', 'ecommerce');
+        OpenGraph::addProperty('locale', 'en');
+        OpenGraph::addProperty('locale:alternate', ['ar', 'en']);
+
+        OpenGraph::addImage($product->getFirstMediaUrl('products'));
+        foreach ($product->getMedia('products') as $productImage) {
+            OpenGraph::addImage($product->getFirstMediaUrl('products'));
+        }
+        OpenGraph::addImage(['url' => $product->getFirstMediaUrl('products'), 'size' => 300]);
+        OpenGraph::addImage($product->getFirstMediaUrl('products'), ['height' => 300, 'width' => 300]);
+
+        JsonLd::setTitle($product->name);
+        JsonLd::setDescription($product->description);
+        JsonLd::setType('Product');
+
         $productsLike = $product->category->product()->where('id', '!=', $product->id)->limit(3)->get();
         $colors = StandardColor::get();
 
         $carts = $this->getCart();
-        $setting = Setting::first();
+
         return view('site.product', compact('product', 'colors', 'carts', 'setting', 'productsLike'));
     }
 

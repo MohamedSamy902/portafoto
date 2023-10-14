@@ -72,8 +72,14 @@
                                                     <h6 class="p-2 mb-0">{{ __('master.name') }}</h6>
                                                 </td>
                                                 <td class="Hours">
+                                                    <h6 class="p-2 mb-0">{{ __('site.image') }}</h6>
+                                                </td>
+                                                <td class="Hours">
                                                     <h6 class="p-2 mb-0">{{ __('site.color') }}</h6>
                                                 </td>
+
+
+
                                                 <td class="Rate">
                                                     <h6 class="p-2 mb-0">{{ __('site.quantity') }}</h6>
                                                 </td>
@@ -91,6 +97,10 @@
                                                         {{-- <p class="m-0">Lorem Ipsum is simply dummy text of the printing and
                                                         typesetting industry.</p> --}}
                                                     </td>
+                                                    <td><img style="max-width: 100px;max-height: 100px;"
+                                                            src="{{ $cart->product->getFirstMediaUrl('products') != null ? $cart->product->getFirstMediaUrl('products') : asset('assets/images/dashboard/1.png') }}">
+                                                    </td>
+
                                                     <td>
                                                         <p class="itemtext digits">{{ $cart->standardColor->name }}</p>
                                                     </td>

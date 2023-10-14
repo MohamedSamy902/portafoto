@@ -30,7 +30,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/sweetalert2.css') }}">
 {{-- <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-1ItPrW0cdtzxx8rVg3CTvhR/qIIuOMSD52l+ATF8jxjRXmDVtX7yBtlTnkJn5nVb" crossorigin="anonymous"></script> --}}
 <!-- OR -->
-{!! SEO::generate() !!}
+{{-- {!! SEO::generate() !!} --}}
 
 <!-- MINIFIED -->
 {{-- {!! SEO::generate(true) !!} --}}

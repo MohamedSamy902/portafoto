@@ -1,5 +1,5 @@
 <?php $__env->startSection('title'); ?>
-    <?php echo e(__('city.city')); ?>
+    <?php echo e(__('product.product')); ?>
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('css'); ?>
@@ -11,9 +11,9 @@
 <?php $__env->startSection('content'); ?>
     <?php $__env->startComponent('components.breadcrumb'); ?>
         <?php $__env->slot('breadcrumb_title'); ?>
-            <h3><?php echo e(__('city.city')); ?></h3>
+            <h3><?php echo e(__('product.product')); ?></h3>
         <?php $__env->endSlot(); ?>
-        <li class="breadcrumb-item active"><?php echo e(__('city.city')); ?></li>
+        <li class="breadcrumb-item active"><?php echo e(__('product.product')); ?></li>
     <?php echo $__env->renderComponent(); ?>
 
 
@@ -26,31 +26,19 @@
                             <table class="display" id="responsive">
                                 <thead>
                                     <tr>
-                                        <th><?php echo e(__('city.city')); ?></th>
-                                        <th><?php echo e(__('city.governorate')); ?></th>
+                                        <th><?php echo e(__('master.name')); ?></th>
+                                        <th><?php echo e(__('master.countProductInvoice')); ?></th>
+                                        <th><?php echo e(__('site.payment')); ?></th>
                                         <th><?php echo e(__('master.status')); ?></th>
-
-                                        <th><?php echo e(__('master.processes')); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $invoises; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $invoise): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <td><?php echo e($city->name); ?></td>
-
-                                            <td><?php echo e($city->governorate->name); ?></td>
-                                            <td style="<?php echo e($city->status == 'inactive' ? 'background-color: #e17575;' : ''); ?>><?php echo e($city->status); ?></td>
-
-                                            <td>
-                                                <div style="display: flex;">
-                                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('city-chengStatus')): ?>
-                                                        <a class="btn btn-outline-primary-2x" style="margin:0 20px;"
-                                                            href="<?php echo e(route('city.chengStatus', $city->slug)); ?>"><?php echo e(__('master.chengStatus')); ?></a>
-                                                    <?php endif; ?>
-
-                                                    
-                                                </div>
-                                            </td>
+                                            <td><a href="<?php echo e(route('invoices.show', $invoise->id)); ?>"><?php echo e($invoise->name); ?></a> </td>
+                                            <td><?php echo e(count($invoise->cart)); ?></td>
+                                            <td><?php echo e($invoise->payment); ?></td>
+                                            <td><?php echo e($invoise->status); ?></td>
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
@@ -90,4 +78,4 @@
     <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/mohamed/Desktop/art/laravel/resources/views/dashbord/cities/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/mohamed/Desktop/art/laravel/resources/views/dashbord/invoices/index.blade.php ENDPATH**/ ?>

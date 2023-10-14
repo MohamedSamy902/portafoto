@@ -30,7 +30,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/sweetalert2.css')); ?>">
 
 <!-- OR -->
-<?php echo SEO::generate(); ?>
 
 
 <!-- MINIFIED -->

@@ -39,7 +39,7 @@ class paymentController extends Controller
         $setting = Setting::first();
         $carts = $this->getCart();
         $customerId = Cookie::get('customerId');
-        $totalPrice =  Cart::where('customerId', $customerId)->sum('totalPrice');
+        $totalPrice =  Cart::where('customerId', $customerId)->where('status', 'outInvoice')->sum('totalPrice');
 
         $governorates = Governorate::where('status', 'active')->get();
         if (COUNT($carts) == 0) {
@@ -60,10 +60,10 @@ class paymentController extends Controller
     public function storePayment(StorePaymentRquest $request)
     {
         $customerId = Cookie::get('customerId');
-        $totalPrice = $totalPrice =  Cart::where('customerId', $customerId)->sum('totalPrice');
+        $totalPrice = $totalPrice =  Cart::where('customerId', $customerId)->where('status', 'outInvoice')->sum('totalPrice');
 
         $totalPrice += Governorate::where('id', $request->governorate_id)->first()->price;
-        $carts =  Cart::where('customerId', $customerId)->get();
+        $carts =  Cart::where('customerId', $customerId)->where('status', 'outInvoice')->get();
 
         $invoice = Invoice::create([
             'name' => $request->name,

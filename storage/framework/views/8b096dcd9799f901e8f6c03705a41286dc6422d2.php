@@ -46,15 +46,15 @@
                                             <tbody>
                                                 <?php $__currentLoopData = $order->cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <tr>
-                                                        <td data-label=""><img class="t-img" width="200"
+                                                        <td data-label="<?php echo e(__('master.image')); ?>"><img class="t-img" width="200"
                                                                 src="<?php echo e($cart->product->getFirstMediaUrl('products')); ?>"
                                                                 alt="">
                                                         </td>
-                                                        <td data-label="Due Date"><?php echo e($cart->product->name); ?></td>
-                                                        <td data-label="Amount"><?php echo e($cart->standardColor->name); ?></td>
-                                                        <td data-label="Period"><?php echo e($cart->quantity); ?></td>
-                                                        <td data-label="Period"><?php echo $cart->size == null ? $cart->product->description :  $cart->size; ?></td>
-                                                        <td data-label="Period"><?php echo e($cart->totalPrice); ?></td>
+                                                        <td data-label="<?php echo e(__('product.product')); ?>"><?php echo e($cart->product->name); ?></td>
+                                                        <td data-label="<?php echo e(__('site.color')); ?>"><?php echo e($cart->standardColor->name); ?></td>
+                                                        <td data-label="<?php echo e(__('site.quantity')); ?>"><?php echo e($cart->quantity); ?></td>
+                                                        <td data-label="<?php echo e(__('master.size')); ?>"><?php echo $cart->size == null ? $cart->product->description :  $cart->size; ?></td>
+                                                        <td data-label="<?php echo e(__('site.Total Price')); ?>"><?php echo e($cart->totalPrice); ?></td>
                                                     </tr>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 

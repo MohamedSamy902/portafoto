@@ -50,15 +50,15 @@
                                             <tbody>
                                                 @foreach ($order->cart as $cart)
                                                     <tr>
-                                                        <td data-label=""><img class="t-img" width="200"
+                                                        <td data-label="{{ __('master.image') }}"><img class="t-img" width="200"
                                                                 src="{{ $cart->product->getFirstMediaUrl('products') }}"
                                                                 alt="">
                                                         </td>
-                                                        <td data-label="Due Date">{{ $cart->product->name }}</td>
-                                                        <td data-label="Amount">{{ $cart->standardColor->name }}</td>
-                                                        <td data-label="Period">{{ $cart->quantity }}</td>
-                                                        <td data-label="Period">{!! $cart->size == null ? $cart->product->description :  $cart->size !!}</td>
-                                                        <td data-label="Period">{{ $cart->totalPrice }}</td>
+                                                        <td data-label="{{ __('product.product') }}">{{ $cart->product->name }}</td>
+                                                        <td data-label="{{ __('site.color') }}">{{ $cart->standardColor->name }}</td>
+                                                        <td data-label="{{ __('site.quantity') }}">{{ $cart->quantity }}</td>
+                                                        <td data-label="{{ __('master.size') }}">{!! $cart->size == null ? $cart->product->description :  $cart->size !!}</td>
+                                                        <td data-label="{{ __('site.Total Price') }}">{{ $cart->totalPrice }}</td>
                                                     </tr>
                                                 @endforeach
 
