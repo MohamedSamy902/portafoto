@@ -1,7 +1,7 @@
-@extends('site.layouts.master')
 
-@push('css')
-    <link rel="stylesheet" href="{{ asset('site') }}/assets/css/magiczoomplus.css">
+
+<?php $__env->startPush('css'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('site')); ?>/assets/css/magiczoomplus.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <style>
         .title {
@@ -218,8 +218,8 @@
             text-align: center;
         }
     </style>
-@endpush
-@section('content')
+<?php $__env->stopPush(); ?>
+<?php $__env->startSection('content'); ?>
 
     <main>
         <div class="product-container">
@@ -231,77 +231,79 @@
                                 <div class="showcase align-items-start">
                                     <div class="showcase-banner">
 
-                                        <a href="{{ $product->getFirstMediaUrl('products') }}" class="MagicZoom"
+                                        <a href="<?php echo e($product->getFirstMediaUrl('products')); ?>" class="MagicZoom"
                                             id="jeans" data-options="cssClass: mz-show-arrows;"><img
-                                                src="{{ $product->getFirstMediaUrl('products') }}"></a>
-                                        @foreach ($product->getMedia('products') as $productImage)
-                                            @if ($productImage->getFullUrl() != $product->getFirstMediaUrl('products'))
-                                                <a data-zoom-id="jeans" href="{{ $productImage->getFullUrl() }}"
+                                                src="<?php echo e($product->getFirstMediaUrl('products')); ?>"></a>
+                                        <?php $__currentLoopData = $product->getMedia('products'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productImage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($productImage->getFullUrl() != $product->getFirstMediaUrl('products')): ?>
+                                                <a data-zoom-id="jeans" href="<?php echo e($productImage->getFullUrl()); ?>"
                                                     data-image="jeans1-small.jpg" class="gallery"><img
-                                                        src="{{ $productImage->getFullUrl() }}"></a>
-                                            @endif
-                                        @endforeach
+                                                        src="<?php echo e($productImage->getFullUrl()); ?>"></a>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                     </div>
 
                                     <div class="showcase-content">
                                         <h4><span
-                                                id="price">{{ $product->price != null? $product->price: $product->size()->latest()->first()->price }}</span>
-                                            {{ __('site.EGP') }}</h4>
+                                                id="price"><?php echo e($product->price != null? $product->price: $product->size()->latest()->first()->price); ?></span>
+                                            <?php echo e(__('site.EGP')); ?></h4>
                                         <span class="text-success font-weight-bold pb-2" id="SOLDOUT"
-                                            @if ($product->status == 'SOLD OUT') style="color: red !important" @endif>{{ $product->status != 'SOLD OUT' ? 'In Stock' : 'SOLD OUT' }}</span>
+                                            <?php if($product->status == 'SOLD OUT'): ?> style="color: red !important" <?php endif; ?>><?php echo e($product->status != 'SOLD OUT' ? 'In Stock' : 'SOLD OUT'); ?></span>
 
 
                                         <p class="pt-3">
 
 
-                                            {!! $product->description !!}
+                                            <?php echo $product->description; ?>
+
                                         </p>
-                                        <p>{!! __('site.decProduct') !!}</p>
+                                        <p><?php echo __('site.decProduct'); ?></p>
                                         <form class="row g-3 needs-validation" novalidate method="post"
-                                            action="{{ route('product.add.cart', $product->slug) }}">
-                                            @csrf
-                                            @if (COUNT($product->size) > 0)
+                                            action="<?php echo e(route('product.add.cart', $product->slug)); ?>">
+                                            <?php echo csrf_field(); ?>
+                                            <?php if(COUNT($product->size) > 0): ?>
                                                 <div class="col-md-12 selectt gap-0">
                                                     <div class="talla">
                                                         <h2 class="title">Sizes</h2>
                                                         <div class="labels-radio-rect talla-instance ">
-                                                            @foreach ($product->size as $size)
+                                                            <?php $__currentLoopData = $product->size; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <label class="label ">
                                                                     <input class="input size"
-                                                                        data-price="{{ $size->price }}"
-                                                                        data-available="{{ $product->status }}"
+                                                                        data-price="<?php echo e($size->price); ?>"
+                                                                        data-available="<?php echo e($product->status); ?>"
                                                                         type="radio" name="size" checked
-                                                                        value="{{ $size->id }}">
+                                                                        value="<?php echo e($size->id); ?>">
                                                                     <span class="label__checkmark">
                                                                         <svg class="shape"
                                                                             xmlns="http://www.w3.org/2000/svg">
                                                                             <rect class="shape-rect" />
                                                                         </svg>
                                                                         <span
-                                                                            class="outline">{{ $size->standardSize->name }}</span>
+                                                                            class="outline"><?php echo e($size->standardSize->name); ?></span>
                                                                     </span>
                                                                 </label>
-                                                            @endforeach
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endif
+                                            <?php endif; ?>
 
 
                                             <div class="col-md-12 gap-0">
 
                                                 <div>
-                                                    <label for="color" class="form-label">{{ __('site.color') }}</label>
+                                                    <label for="color" class="form-label"><?php echo e(__('site.color')); ?></label>
                                                     <select required class="form-select" id="color"
                                                         name="standard_color_id">
-                                                        <option selected disabled value="">{{ __('site.choose') }}
+                                                        <option selected disabled value=""><?php echo e(__('site.choose')); ?>
+
                                                         </option>
-                                                        @foreach ($colors as $color)
-                                                            <option value="{{ $color->id }}">
-                                                                {{ $color->name }}</option>
-                                                        @endforeach
+                                                        <?php $__currentLoopData = $colors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $color): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($color->id); ?>">
+                                                                <?php echo e($color->name); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
                                                     </select>
@@ -316,7 +318,7 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <label for="validationCustom05"
-                                                    class="form-label">{{ __('site.quantity') }}</label>
+                                                    class="form-label"><?php echo e(__('site.quantity')); ?></label>
 
                                                 <div class="wrapper">
                                                     <span class="minus">-</span>
@@ -329,13 +331,13 @@
 
                                             <div class="col-12">
                                                 <div class="input-icons">
-                                                    {{-- <i style="position: absolute;color:#FFF" class="fa-solid fa-cart-shopping"></i> --}}
+                                                    
                                                     <input type="submit" class="btn btn-dark"
-                                                        value="{{ __('site.addToCart') }}">
+                                                        value="<?php echo e(__('site.addToCart')); ?>">
                                                     <input name="buyNow" type="submit" class="btn btn-success pt-2 mt-2"
-                                                        value="{{ __('site.Buy Now') }}">
+                                                        value="<?php echo e(__('site.Buy Now')); ?>">
                                                     <a class="checkoutt text-decoration-none"
-                                                        href="{{ $setting->messenger }}">
+                                                        href="<?php echo e($setting->messenger); ?>">
                                                         <button type="button" class="btn btn-primary">Custom Size
                                                             <i class="fa-brands fa-facebook"></i>
                                                         </button>
@@ -346,9 +348,9 @@
                                             </div>
                                         </form>
                                         <div class="col-12" style="padding: 0;">
-                                            {{-- <div class="input-icons"> --}}
-                                            {{-- <a class="btn btn-primary" style="min-width: 100%" href="{{ route('buynow', $product->slug) }}">Buy Now</a> --}}
-                                            {{-- </div> --}}
+                                            
+                                            
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -366,19 +368,19 @@
                 <!-- <h2 class="title">New Products</h2> -->
 
                 <div class="product-grid product-grid-product prod">
-                    {{-- @foreach ($product->category->product()->where('id', '!=', $product->id)->limit(3)->get() as $product) --}}
-                    @foreach ($productsLike as $product)
+                    
+                    <?php $__currentLoopData = $productsLike; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="showcase product-item">
-                            <a href="{{ route('showProduct', $product->slug) }}">
+                            <a href="<?php echo e(route('showProduct', $product->slug)); ?>">
                                 <div class="showcase-banner">
-                                    <img src="{{ $product->getFirstMediaUrl('products') }}"
+                                    <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>"
                                         alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
-                                    <img src="{{ $product->getFirstMediaUrl('products') }}"
+                                    <img src="<?php echo e($product->getFirstMediaUrl('products')); ?>"
                                         alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
 
                                     <div class="showcase-actions">
 
-                                        <button class="btn-action favorite-button" data-product-id="{{ $product->id }}">
+                                        <button class="btn-action favorite-button" data-product-id="<?php echo e($product->id); ?>">
                                             <ion-icon name="heart-outline"></ion-icon>
                                         </button>
 
@@ -389,37 +391,39 @@
 
                             <div class="showcase-content">
 
-                                <a href="{{ route('showProduct', $product->slug) }}"
-                                    class="showcase-category">{{ $product->name }}</a>
-                                @if (COUNT($product->size) > 0)
+                                <a href="<?php echo e(route('showProduct', $product->slug)); ?>"
+                                    class="showcase-category"><?php echo e($product->name); ?></a>
+                                <?php if(COUNT($product->size) > 0): ?>
                                     <a href="#">
                                         <h3 class="showcase-title">
-                                            {{ $product->size()->first()->standardSize->name }}</h3>
+                                            <?php echo e($product->size()->first()->standardSize->name); ?></h3>
                                     </a>
-                                @endif
+                                <?php endif; ?>
 
 
 
                                 <div class="price-box">
-                                    @if (COUNT($product->size) > 0)
-                                        <p class="price">{{ $product->size()->first()->price }}
-                                            {{ __('site.EGP') }}</p>
-                                        @if ($product->size()->first()->discount != null)
-                                            <del>{{ $product->size()->first()->discount }}
-                                                {{ __('site.EGP') }}</del>
-                                        @endif
-                                    @else
-                                        <p class="price">{{ $product->price }} {{ __('site.EGP') }}</p>
-                                        @if ($product->discount != null)
-                                            <del>{{ $product->discount }} {{ __('site.EGP') }}</del>
-                                        @endif
-                                    @endif
+                                    <?php if(COUNT($product->size) > 0): ?>
+                                        <p class="price"><?php echo e($product->size()->first()->price); ?>
+
+                                            <?php echo e(__('site.EGP')); ?></p>
+                                        <?php if($product->size()->first()->discount != null): ?>
+                                            <del><?php echo e($product->size()->first()->discount); ?>
+
+                                                <?php echo e(__('site.EGP')); ?></del>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <p class="price"><?php echo e($product->price); ?> <?php echo e(__('site.EGP')); ?></p>
+                                        <?php if($product->discount != null): ?>
+                                            <del><?php echo e($product->discount); ?> <?php echo e(__('site.EGP')); ?></del>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                                 </div>
 
                             </div>
 
                         </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 
@@ -432,12 +436,12 @@
     </main>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('js')
+<?php $__env->startPush('js'); ?>
     <script src="https://releases.jquery.com/git/jquery-git.js"></script>
 
-    <script src="{{ asset('site') }}/assets/fontawesome-free-6.4.2-web/js/all.min.js"></script>
+    <script src="<?php echo e(asset('site')); ?>/assets/fontawesome-free-6.4.2-web/js/all.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
@@ -464,7 +468,7 @@
             });
         });
     </script>
-    <script src="{{ asset('site') }}/assets/js/magiczoomplus.js"></script>
+    <script src="<?php echo e(asset('site')); ?>/assets/js/magiczoomplus.js"></script>
 
     <script>
         const plus = document.querySelector(".plus"),
@@ -493,11 +497,13 @@
                 swal({
                     position: 'center',
                     icon: 'error',
-                    title: "{{ __('site.errorSelectColor') }}",
+                    title: "<?php echo e(__('site.errorSelectColor')); ?>",
                     showConfirmButton: false,
                     timer: 2000
                 });
             }
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('site.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\Programming\new\portafoto\resources\views/site/product.blade.php ENDPATH**/ ?>

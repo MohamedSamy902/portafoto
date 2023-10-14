@@ -1,8 +1,8 @@
-@extends('site.layouts.master')
-@push('css')
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/sweetalert2.css') }}"> --}}
-@endpush
-@section('content')
+
+<?php $__env->startPush('css'); ?>
+    
+<?php $__env->stopPush(); ?>
+<?php $__env->startSection('content'); ?>
     <main>
         <!--  - BANNER  -->
         <div class="banner">
@@ -13,29 +13,27 @@
                 </div>
 
                 <div class="slider-container has-scrollbar">
-                    @foreach ($productsSlider as $slider)
+                    <?php $__currentLoopData = $productsSlider; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slider): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="slider-item">
 
-                            <img src="{{ $slider->getFirstMediaUrl('products') }}" alt="{{ $slider->name }}"
+                            <img src="<?php echo e($slider->getFirstMediaUrl('products')); ?>" alt="<?php echo e($slider->name); ?>"
                                 class="banner-img">
 
                             <div class="banner-content">
 
-                                <p class="banner-subtitle">{{ $slider->name }}</p>
+                                <p class="banner-subtitle"><?php echo e($slider->name); ?></p>
 
-                                <h2 class="banner-title">{{ $slider->name }}</h2>
+                                <h2 class="banner-title"><?php echo e($slider->name); ?></h2>
 
-                                {{-- <p class="banner-text">
-                                    starting at &dollar; <b>20</b>.00
-                                </p> --}}
+                                
 
-                                <a href="{{ route('showProduct', $slider->slug) }}"
-                                    class="banner-btn">{{ __('site.shopNow') }}</a>
+                                <a href="<?php echo e(route('showProduct', $slider->slug)); ?>"
+                                    class="banner-btn"><?php echo e(__('site.shopNow')); ?></a>
 
                             </div>
 
                         </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </div>
 
@@ -57,52 +55,54 @@
 
                     <div class="product-showcase">
 
-                        <h3 class="showcase-heading">{{ __('site.bestSellers') }}</h3>
+                        <h3 class="showcase-heading"><?php echo e(__('site.bestSellers')); ?></h3>
 
                         <div class="showcase-wrapper">
 
                             <div class="showcase-container">
 
-                                @foreach ($productsBest as $best)
+                                <?php $__currentLoopData = $productsBest; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $best): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="showcase">
 
-                                        <a href="{{ route('showProduct', $best->slug) }}" class="showcase-img-box">
-                                            <img src="{{ $best->getFirstMediaUrl('products') }}" alt="Wall Frame"
+                                        <a href="<?php echo e(route('showProduct', $best->slug)); ?>" class="showcase-img-box">
+                                            <img src="<?php echo e($best->getFirstMediaUrl('products')); ?>" alt="Wall Frame"
                                                 width="75" height="75" class="showcase-img">
                                         </a>
 
                                         <div class="showcase-content">
 
-                                            <a href="{{ route('showProduct', $best->slug) }}"
-                                                class="showcase-category">{{ $best->name }}</a>
-                                            @if (COUNT($best->size) > 0)
+                                            <a href="<?php echo e(route('showProduct', $best->slug)); ?>"
+                                                class="showcase-category"><?php echo e($best->name); ?></a>
+                                            <?php if(COUNT($best->size) > 0): ?>
                                                 <a href="#">
                                                     <h3 class="showcase-title">
-                                                        {{ $best->size()->first()->standardSize->name }}</h3>
+                                                        <?php echo e($best->size()->first()->standardSize->name); ?></h3>
                                                 </a>
-                                            @endif
+                                            <?php endif; ?>
 
 
                                             <div class="price-box">
-                                                @if (COUNT($best->size) > 0)
-                                                    <p class="price">{{ $best->size()->first()->price }}
-                                                        {{ __('site.EGP') }}</p>
-                                                    @if ($best->size()->first()->discount != null)
-                                                        <del>{{ $best->size()->first()->discount }}
-                                                            {{ __('site.EGP') }}</del>
-                                                    @endif
-                                                @else
-                                                    <p class="price">{{ $best->price }} {{ __('site.EGP') }}</p>
-                                                    @if ($best->discount != null)
-                                                        <del>{{ $best->discount }} {{ __('site.EGP') }}</del>
-                                                    @endif
-                                                @endif
+                                                <?php if(COUNT($best->size) > 0): ?>
+                                                    <p class="price"><?php echo e($best->size()->first()->price); ?>
+
+                                                        <?php echo e(__('site.EGP')); ?></p>
+                                                    <?php if($best->size()->first()->discount != null): ?>
+                                                        <del><?php echo e($best->size()->first()->discount); ?>
+
+                                                            <?php echo e(__('site.EGP')); ?></del>
+                                                    <?php endif; ?>
+                                                <?php else: ?>
+                                                    <p class="price"><?php echo e($best->price); ?> <?php echo e(__('site.EGP')); ?></p>
+                                                    <?php if($best->discount != null): ?>
+                                                        <del><?php echo e($best->discount); ?> <?php echo e(__('site.EGP')); ?></del>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
                                             </div>
 
                                         </div>
 
                                     </div>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                             </div>
 
@@ -119,10 +119,10 @@
                     <div class="product-main">
 
                         <div class="product-grid" id="products-container">
-                            @include('site.partialsProduct')
+                            <?php echo $__env->make('site.partialsProduct', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                             <div class="ajax-loading" style="display:none">
                                 test
-                                {{-- <img src="{{ asset('images/loading.gif') }}" /> --}}
+                                
                             </div>
                         </div>
 
@@ -136,7 +136,7 @@
 
     </main>
 
-    @push('js')
+    <?php $__env->startPush('js'); ?>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script src="https://releases.jquery.com/git/jquery-git.js"></script>
@@ -181,21 +181,21 @@
                 $(document).on('click', '.favorite-button', function(event) {
                     event.preventDefault();
                     var productId = $(this).data('product-id');
-                    var url = "{{ route('favorites.add', ':productId') }}";
+                    var url = "<?php echo e(route('favorites.add', ':productId')); ?>";
                     url = url.replace(':productId', productId);
                     $.ajax({
                         url: url,
                         type: 'POST',
                         data: {
                             id: productId,
-                            _token: '{{ csrf_token() }}'
+                            _token: '<?php echo e(csrf_token()); ?>'
                         },
                         success: function(response) {
 
                             swal({
                                 position: 'center',
                                 icon: 'success',
-                                title: "{{ __('site.favoritesAdd') }}",
+                                title: "<?php echo e(__('site.favoritesAdd')); ?>",
                                 showConfirmButton: false,
                                 timer: 2000
                             });
@@ -206,5 +206,7 @@
 
             });
         </script>
-    @endpush
-@endsection
+    <?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('site.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\Programming\new\portafoto\resources\views/site/index.blade.php ENDPATH**/ ?>

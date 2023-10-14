@@ -10,6 +10,9 @@
     <div class="order">
         <div class="container">
             <div class="row">
+                <div class="nothing text-center font-weight-bold pt-3">
+                    There Is No Content To Show
+                </div>
                 <div class="col-sm-12">
                     <div class="accordion pt-5 pb-5" id="accordionExample">
                         @foreach ($orders as $order)

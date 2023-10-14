@@ -330,6 +330,7 @@ input::placeholder {
 
 body {
     background: var(--white);
+    position: relative;
 }
 
 /**
@@ -1926,6 +1927,9 @@ body::-webkit-scrollbar-thumb:hover {
     -o-transition: var(--transition-timing);
     transition: var(--transition-timing);
 }
+.product-grid .showcase img {
+    height: 275px !important;
+}
 
 .product-grid .showcase:hover {
     -webkit-box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.1);
@@ -2405,6 +2409,9 @@ svg-inline--fa {
 
 .rounded-social-buttons {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .rounded-social-buttons .social-button {
@@ -2453,48 +2460,18 @@ svg-inline--fa {
     border-color: #3b5998;
 }
 
-.rounded-social-buttons .social-button.twitter {
-    background: #55acee;
-}
-
-.rounded-social-buttons .social-button.twitter:hover,
-.rounded-social-buttons .social-button.twitter:focus {
-    color: #55acee;
-    background: #fefefe;
-    border-color: #55acee;
-}
-
-.rounded-social-buttons .social-button.linkedin {
-    background: #007bb5;
-}
-
-.rounded-social-buttons .social-button.linkedin:hover,
-.rounded-social-buttons .social-button.linkedin:focus {
-    color: #007bb5;
-    background: #fefefe;
-    border-color: #007bb5;
-}
-
-.rounded-social-buttons .social-button.youtube {
-    background: #bb0000;
-}
-
-.rounded-social-buttons .social-button.youtube:hover,
-.rounded-social-buttons .social-button.youtube:focus {
-    color: #bb0000;
-    background: #fefefe;
-    border-color: #bb0000;
-}
-
 .rounded-social-buttons .social-button.instagram {
-    background: #F56040;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .rounded-social-buttons .social-button.instagram:hover,
 .rounded-social-buttons .social-button.instagram:focus {
     color: #125688;
     background: #fefefe;
-    border-color: #125688;
+    border-color: red;
 }
 
 footer {
@@ -2524,6 +2501,17 @@ footer .author a {
     color: #dc3545;
     font-weight: 550;
     font-size: 20px;
+}
+
+@media (max-width: 578px) {
+    footer .row {
+        text-align: center !important;
+    }
+    footer .author {
+        padding-top: 5px !important;
+        justify-content: center;
+        width: 100%;
+    }
 }
 
 .copyright {
@@ -4220,13 +4208,14 @@ table th {
     font-size: 18px;
     padding: 5px 0px;
     border-top: 1px solid #BDBDBD;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .checkout-details .checkout-details-inner .checkout-shipping p,
 .checkout-details .checkout-details-inner .checkout-total p {
     font-size: 16px;
     font-weight: 500;
+    margin-left: 10px;
 }
 
 
@@ -4292,4 +4281,12 @@ table th {
     height: 100%;
     border-radius: 0;
     border: 1px solid red;
+}
+
+
+.nothing {
+    font-size: 25px;
+}
+main {
+    min-height: 600px;
 }

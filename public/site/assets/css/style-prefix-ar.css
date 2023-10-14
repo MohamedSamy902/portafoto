@@ -1753,6 +1753,8 @@ body::-webkit-scrollbar-thumb:hover {
 
 .product-featured .showcase-content {
     margin-top: 30px;
+    direction: rtl;
+    text-align: right;
 }
 
 .product-featured .showcase-rating {
@@ -1948,6 +1950,10 @@ body::-webkit-scrollbar-thumb:hover {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
     gap: 25px;
+}
+
+.product-grid .showcase img {
+    height: 275px !important;
 }
 
 .product-grid .showcase {
@@ -2433,6 +2439,9 @@ body::-webkit-scrollbar-thumb:hover {
 
 .rounded-social-buttons {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .rounded-social-buttons .social-button {
@@ -2481,48 +2490,18 @@ body::-webkit-scrollbar-thumb:hover {
     border-color: #3b5998;
 }
 
-.rounded-social-buttons .social-button.twitter {
-    background: #55acee;
-}
-
-.rounded-social-buttons .social-button.twitter:hover,
-.rounded-social-buttons .social-button.twitter:focus {
-    color: #55acee;
-    background: #fefefe;
-    border-color: #55acee;
-}
-
-.rounded-social-buttons .social-button.linkedin {
-    background: #007bb5;
-}
-
-.rounded-social-buttons .social-button.linkedin:hover,
-.rounded-social-buttons .social-button.linkedin:focus {
-    color: #007bb5;
-    background: #fefefe;
-    border-color: #007bb5;
-}
-
-.rounded-social-buttons .social-button.youtube {
-    background: #bb0000;
-}
-
-.rounded-social-buttons .social-button.youtube:hover,
-.rounded-social-buttons .social-button.youtube:focus {
-    color: #bb0000;
-    background: #fefefe;
-    border-color: #bb0000;
-}
-
 .rounded-social-buttons .social-button.instagram {
-    background: #125688;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .rounded-social-buttons .social-button.instagram:hover,
 .rounded-social-buttons .social-button.instagram:focus {
     color: #125688;
     background: #fefefe;
-    border-color: #125688;
+    border-color: red;
 }
 
 footer {
@@ -2556,6 +2535,17 @@ footer .author {
     align-items: center;
     font-size: 18px;
     gap: 5px;
+}
+
+@media (max-width: 578px) {
+    footer .row {
+        text-align: center !important;
+    }
+    footer .author {
+        padding-top: 5px !important;
+        justify-content: center;
+        width: 100%;
+    }
 }
 
 footer .author a {
@@ -4431,13 +4421,14 @@ table th {
     font-size: 18px;
     padding: 5px 0px;
     border-top: 1px solid #BDBDBD;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .checkout-details .checkout-details-inner .checkout-shipping p,
 .checkout-details .checkout-details-inner .checkout-total p {
     font-size: 16px;
     font-weight: 500;
+    margin-right: 10px;
 }
 
 
@@ -4506,4 +4497,16 @@ table th {
     border-radius: 0;
     border: 1px solid red;
     color: white;
+}
+
+.nothing {
+    font-size: 25px;
+}
+
+table caption {
+    text-align: right;
+}
+
+main {
+    min-height: 600px;
 }
