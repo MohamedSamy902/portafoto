@@ -64,11 +64,13 @@ class SiteController extends Controller
         $product = Product::where('slug', $slug)->first();
         $setting = Setting::first();
         $descriptionSeo = '';
-        if ($product->description == null) {
-            $descriptionSeo .=  __("site.decProduct");
-        } else {
+        if ($product->description != null) {
             $descriptionSeo .=  __("site.decProduct") . $product->description;
+        } else {
+            $descriptionSeo .=  __("site.decProduct");
         }
+
+        return $descriptionSeo;
 
 
         SEOMeta::setTitle($product->name);
