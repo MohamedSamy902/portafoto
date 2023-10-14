@@ -70,8 +70,7 @@ class SiteController extends Controller
             $descriptionSeo .=  __("site.decProduct");
         }
 
-        // return $descriptionSeo;
-
+        $descriptionSeo = strip_tags($descriptionSeo);
 
         SEOMeta::setTitle($product->name);
         SEOMeta::setDescription($descriptionSeo);
