@@ -19,7 +19,8 @@ use Artesaos\SEOTools\Facades\JsonLd;
 class SiteController extends Controller
 {
 
-    public function getCart(){
+    public function getCart()
+    {
         $customerId = Cookie::get('customerId');
         $carts = Cart::where('customerId', $customerId)->where('status', 'outInvoice')->get();
         return $carts;
@@ -62,14 +63,21 @@ class SiteController extends Controller
     {
         $product = Product::where('slug', $slug)->first();
         $setting = Setting::first();
+        $descriptionSeo = '';
+        if ($product->description == null) {
+            $descriptionSeo .=  __("site.decProduct");
+        } else {
+            $descriptionSeo .=  __("site.decProduct") . $product->description;
+        }
+
 
         SEOMeta::setTitle($product->name);
-        SEOMeta::setDescription($product->description);
+        SEOMeta::setDescription($descriptionSeo);
         SEOMeta::addMeta('product:published_time', $product->created_at->toW3CString(), 'property');
         SEOMeta::addMeta('product:section', $product->category, 'property');
         SEOMeta::addKeyword([$setting->keywords]);
 
-        OpenGraph::setDescription($product->description);
+        OpenGraph::setDescription($descriptionSeo);
         OpenGraph::setTitle($product->name);
         OpenGraph::setUrl(route('showProduct', $product->slug));
         OpenGraph::addProperty('type', 'ecommerce');
@@ -85,7 +93,7 @@ class SiteController extends Controller
         OpenGraph::addImage($product->getFirstMediaUrl('products'), ['height' => 300, 'width' => 300]);
 
         JsonLd::setTitle($product->name);
-        JsonLd::setDescription($product->description);
+        JsonLd::setDescription($descriptionSeo);
         JsonLd::setType('Product');
 
         $productsLike = $product->category->product()->where('id', '!=', $product->id)->limit(3)->get();
@@ -95,8 +103,4 @@ class SiteController extends Controller
 
         return view('site.product', compact('product', 'colors', 'carts', 'setting', 'productsLike'));
     }
-
-
-
-
 }
