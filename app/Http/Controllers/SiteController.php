@@ -115,7 +115,30 @@ class SiteController extends Controller
         $customerId = Cookie::get('customerId');
         $carts = Cart::where('customerId', $customerId)->where('status', 'outInvoice')->get();
 
-        return view('site.mobile-fav', compact('setting', 'carts'));
+        $favorites = Cookie::get('favorites');
+
+        $favorites = json_decode($favorites, true);
+
+        $products = Product::whereIn('id', $favorites)->with('media')->get();
+
+        // return response()->json(['message' => 'Product added to favorites', 'favorites' => $favorites]);
+
+
+
+        return view('site.mobile-fav', compact('setting', 'carts', 'products'));
+    }
+
+    public function removeFromCookiesMobile(Request $request, $id)
+    {
+        $existingFavorites = json_decode($request->cookie('favorites'), true);
+
+        // Remove the product ID from the favorites array
+        $updatedFavorites = array_diff($existingFavorites, [$id]);
+
+        // Update the favorites cookie with the new array of IDs
+        $cookie = cookie('favorites', json_encode($updatedFavorites), 60);
+
+        return redirect()->back() ->with('success', __('site.messages_addToCart'))->cookie($cookie);
     }
 
 

@@ -8,9 +8,9 @@
         <div class="banner">
 
             <div class="container">
-                <div class="nothing text-center font-weight-bold">
+                {{-- <div class="nothing text-center font-weight-bold">
                     There Is No Content To Show
-                </div>
+                </div> --}}
 
                 <div class="slider-container has-scrollbar">
                     @foreach ($productsSlider as $slider)

@@ -9,9 +9,12 @@ return
         'cart'  => 'Cart',
         'search' => 'search',
         'favoritesAdd' => 'Add Favorite Sucsses',
+        'favorite' => 'Favorite',
         'errorSelectColor' => 'Error Please Select Color',
         'messages_addToCart' => 'Add To Cart Success',
         'messages_removeToCart' => 'Remove To Cart Success',
+        'messages_success' => 'Success',
+        'messages_soreOrder' => 'The order was requested successfully',
 
         // Slider
         'shopNow' => 'Shop Now',

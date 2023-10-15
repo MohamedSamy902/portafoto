@@ -1,6 +1,6 @@
 @extends('site.layouts.master')
 @section('content')
-    <h1>Favorite Products</h1>
+    <h1>{{ __('site.favorite') }}</h1>
 
     @foreach ($products as $product)
         <div>

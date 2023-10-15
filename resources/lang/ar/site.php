@@ -8,10 +8,13 @@ return
     // Header
     'cart'  => 'السله',
     'search' => 'بحث',
+    'favorite' => 'المفضله',
     'favoritesAdd' => 'تم الاضافه في المفظله بنجاح',
     'errorSelectColor' => 'يجب اختيار اللون',
     'messages_addToCart' => 'تم الاضافه الي السله بنجاح',
     'messages_removeToCart' => 'تم الحذف من السله بنجاح',
+    'messages_success' => 'تم بنجاح',
+    'messages_soreOrder' => 'تم طلب الاوردر بنجاح',
 
     // Slider
     'shopNow' => 'شراء الان',

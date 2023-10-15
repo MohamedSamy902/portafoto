@@ -125,6 +125,7 @@ Route::group(
                 Route::get('/favorite/product', 'favoriteProductMobile')->name('favoriteProduct');
                 Route::get('/cart/product', 'cartMobile')->name('cartMobile');
                 Route::get('/search', 'search')->name('product.search');
+                Route::get('/remove/product/favorite{id}', 'removeFromCookiesMobile')->name('remove.product.mobile');
 
 
 
