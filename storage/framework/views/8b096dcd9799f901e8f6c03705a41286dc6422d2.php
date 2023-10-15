@@ -8,6 +8,9 @@
     <div class="order">
         <div class="container">
             <div class="row">
+                <div class="nothing text-center font-weight-bold pt-3">
+                    There Is No Content To Show
+                </div>
                 <div class="col-sm-12">
                     <div class="accordion pt-5 pb-5" id="accordionExample">
                         <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

@@ -6,17 +6,23 @@
                 Portafoto
             </a>
             <div class="header-search-container">
-                <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
-                <button class="search-btn">
-                    <ion-icon name="search-outline"></ion-icon>
-                </button>
+                <form action="{{ route('product.search') }}" method="GET">
+                    {{-- <input type="text" name="query"> --}}
+                    <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
+                    <button class="search-btn">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
+                    {{-- <button type="submit">Search</button> --}}
+                </form>
+
             </div>
             <div class="header-user-actions">
                 <a href="{{ route('trackOrder') }}"><button class="action-btn truck" type="button">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACRklEQVR4nO2YO0sdQRiGH1GPQtQjksJYhXTpE4hVwE6IaKws/APxQpr0sdNTJ4VC2hTBSv9CiDfMpfGSIkUSNShoYRQlKCcMfAuDObM7M3thA/PCNLPffM++55vbHggKCgoKCgoKCgqyUAcwDxwD9QLaCbAA3CJjLRRk4GZ7nbWRY0n8gGL0SHhHWSeuSytSuTDrwYi/QkXKOrV+Wexuh8A74L5t0iLls12fAUM2SYtUxBy3iL0HLEn8BdCflLRIuTKbgTcy5jvQk0XSLGRiVoAacJAwzZaBJtukecrErDmsmRe2SfOUibkv/U9ixg4C18Cfm+ulTEbqlu8yK3E/gNuug8tkpAV4L7GLroPLZETpLnAp8Y//ZyNoW/Lbshn5Kf1jlnkGJP5bXNI8ZWLOeF5frspmpEXMRJVxaaUy4qNgJAuFiqSdWu3Ac2ADOJe2DkwDbWngCZwzYBWYkptxKiN9wJeY3eIzcCcDI0mcTxLjZaRNS74FDAOd0kaAHQ1SSWHElvOxAcfKyLQ82waqDZ5XNchECiMunElTroOY7+cVeaZ+IZOeSswHSxMPNfiQB2dV6xuXvn3brzJVYpO6PK8VvpzTBuNmo/lZ077OXAFVx5dVf5q/Al4Cex6cUy1evfOczfqMSq4WnEmjjlMrLWfFBzAlg3cMi7Ab+Coxz3wAHpwJH0BFzgmVYFcWXJe0US15o20xD84m0OoL6dMgpoOqN4UJW86mx8H7j9SGoMq/JteG6Oqg9vQ0lUji/Ja1p6ZTbCX+Anf7zx/UhtX/AAAAAElFTkSuQmCC">
+                        <img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACRklEQVR4nO2YO0sdQRiGH1GPQtQjksJYhXTpE4hVwE6IaKws/APxQpr0sdNTJ4VC2hTBSv9CiDfMpfGSIkUSNShoYRQlKCcMfAuDObM7M3thA/PCNLPffM++55vbHggKCgoKCgoKCgqyUAcwDxwD9QLaCbAA3CJjLRRk4GZ7nbWRY0n8gGL0SHhHWSeuSytSuTDrwYi/QkXKOrV+Wexuh8A74L5t0iLls12fAUM2SYtUxBy3iL0HLEn8BdCflLRIuTKbgTcy5jvQk0XSLGRiVoAacJAwzZaBJtukecrErDmsmRe2SfOUibkv/U9ixg4C18Cfm+ulTEbqlu8yK3E/gNuug8tkpAV4L7GLroPLZETpLnAp8Y//ZyNoW/Lbshn5Kf1jlnkGJP5bXNI8ZWLOeF5frspmpEXMRJVxaaUy4qNgJAuFiqSdWu3Ac2ADOJe2DkwDbWngCZwzYBWYkptxKiN9wJeY3eIzcCcDI0mcTxLjZaRNS74FDAOd0kaAHQ1SSWHElvOxAcfKyLQ82waqDZ5XNchECiMunElTroOY7+cVeaZ+IZOeSswHSxMPNfiQB2dV6xuXvn3brzJVYpO6PK8VvpzTBuNmo/lZ077OXAFVx5dVf5q/Al4Cex6cUy1evfOczfqMSq4WnEmjjlMrLWfFBzAlg3cMi7Ab+Coxz3wAHpwJH0BFzgmVYFcWXJe0US15o20xD84m0OoL6dMgpoOqN4UJW86mx8H7j9SGoMq/JteG6Oqg9vQ0lUji/Ja1p6ZTbCX+Anf7zx/UhtX/AAAAAElFTkSuQmCC">
 
 
-                </button></a>
+                    </button></a>
 
                 <div class="dropdown fav" id="favorite">
                     <button class="action-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -94,20 +100,21 @@
         {{-- <button class="action-btn" data-mobile-menu-open-btn>
             <ion-icon name="menu-outline"></ion-icon>
         </button> --}}
-        <button class="action-btn">
+        <a style="color: var(--eerie-black);" href="{{ route('favoriteProduct') }}" class="action-btn">
             <ion-icon name="bag-handle-outline"></ion-icon>
             {{-- <span class="count">0</span> --}}
-        </button>
-        <a class="action-btn" href="{{ route('site') }}">
+        </a>
+        <a style="color: var(--eerie-black);" class="action-btn" href="{{ route('site') }}">
             <ion-icon name="home-outline"></ion-icon>
         </a>
-        <a class="action-btn">
+        <a style="color: var(--eerie-black);" class="action-btn" href="{{ route('cartMobile') }}">
             <ion-icon name="heart-outline"></ion-icon>
             {{-- <span class="count">0</span> --}}
         </a>
-        {{-- <button class="action-btn" data-mobile-menu-open-btn>
+        <a style="color: var(--eerie-black);" href="{{ route('trackOrder') }}" class="action-btn"
+            data-mobile-menu-open-btn>
             <ion-icon name="grid-outline"></ion-icon>
-        </button> --}}
+        </a>
     </div>
 
 </header>

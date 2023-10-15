@@ -8,12 +8,15 @@ use App\Models\Product;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Models\StandardColor;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Lang;
+use Artesaos\SEOTools\Facades\JsonLd;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Support\Facades\Cookie;
 use Artesaos\SEOTools\Facades\SEOTools;
-use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\TwitterCard;
-use Artesaos\SEOTools\Facades\JsonLd;
 
 
 class SiteController extends Controller
@@ -103,5 +106,44 @@ class SiteController extends Controller
         $carts = $this->getCart();
 
         return view('site.product', compact('product', 'colors', 'carts', 'setting', 'productsLike'));
+    }
+
+
+    public function favoriteProductMobile()
+    {
+        $setting = Setting::first();
+        $customerId = Cookie::get('customerId');
+        $carts = Cart::where('customerId', $customerId)->where('status', 'outInvoice')->get();
+
+        return view('site.mobile-fav', compact('setting', 'carts'));
+    }
+
+
+    public function cartMobile()
+    {
+        $setting = Setting::first();
+        $customerId = Cookie::get('customerId');
+        $carts = Cart::where('customerId', $customerId)->where('status', 'outInvoice')->get();
+
+        return view('site.mobile-fav', compact('setting', 'carts'));
+    }
+
+    public function search(Request $request)
+    {
+        $setting = Setting::first();
+        $customerId = Cookie::get('customerId');
+        $carts = Cart::where('customerId', $customerId)->where('status', 'outInvoice')->get();
+        $query = $request->input('search');
+
+        $products = Product::where(function ($q) use ($query) {
+            $q->where('name->en', 'like', '%' . $query . '%')
+                ->orWhere('name->ar', 'like', '%' . $query . '%');
+        })->get();
+
+        return view('site.search_results', [
+            'products' => $products,
+            'carts' => $carts,
+            'setting' => $setting,
+        ]);
     }
 }

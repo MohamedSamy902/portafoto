@@ -122,6 +122,10 @@ Route::group(
                 Route::get('/', 'index')->name('site');
                 Route::get('/get-products-ajax', 'getProductsAjax');
                 Route::get('/product/{slug}', 'showProduct')->name('showProduct');
+                Route::get('/favorite/product', 'favoriteProductMobile')->name('favoriteProduct');
+                Route::get('/cart/product', 'cartMobile')->name('cartMobile');
+                Route::get('/search', 'search')->name('product.search');
+
 
 
             });

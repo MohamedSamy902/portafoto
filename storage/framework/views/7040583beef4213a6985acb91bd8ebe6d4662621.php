@@ -226,7 +226,7 @@
                     <div class="product-featured">
                         <div class="showcase-wrapper has-scrollbar">
                             <div class="" style="padding: 10px">
-                                <div class="showcase">
+                                <div class="showcase align-items-start">
                                     <div class="showcase-banner">
 
                                         <a href="<?php echo e($product->getFirstMediaUrl('products')); ?>" class="MagicZoom"
@@ -332,7 +332,7 @@
                                                     
                                                     <input type="submit" class="btn btn-dark"
                                                         value="<?php echo e(__('site.addToCart')); ?>">
-                                                    <input name="buyNow" type="submit" class="btn btn-info pt-2 mt-2"
+                                                    <input name="buyNow" type="submit" class="btn btn-success pt-2 mt-2"
                                                         value="<?php echo e(__('site.Buy Now')); ?>">
                                                     <a class="checkoutt text-decoration-none"
                                                         href="<?php echo e($setting->messenger); ?>">
