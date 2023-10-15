@@ -2461,7 +2461,7 @@ svg-inline--fa {
 }
 
 .rounded-social-buttons .social-button.instagram {
-    background-color: #fff;
+    background-color: #dc3545;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3467,7 +3467,7 @@ footer .telephone span:hover {
     }
 
     .sidebar-close-btn {
-        display: none;
+        display: block;
     }
 
     .product-box {
