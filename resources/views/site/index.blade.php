@@ -178,7 +178,7 @@
 
         <script>
             var visible = 10; // Number of visible products at load
-            var skip = 0; // Number of products already loaded
+            var skip = 10; // Number of products already loaded
 
             $(window).scroll(function() {
                 if ($(window).scrollTop() + $(window).height() == $(document).height()) {
@@ -192,7 +192,7 @@
                             limit: visible,
                             skip: skip
                         }, // Send limit and skip parameters to Laravel route
-                        
+
                         success: function(data) {
                             $('#products-container').append(data);
                             // Append new products to the existing list

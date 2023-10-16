@@ -65,7 +65,7 @@ class SiteController extends Controller
                     ->skip($skip)
                     ->take($limit)
                     ->get();
-
+        return $products;
         // return response()->json($products);
         return view('site.partialsProduct', ['products' => $products]);
     }
