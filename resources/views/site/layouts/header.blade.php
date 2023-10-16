@@ -32,7 +32,7 @@
                     </button>
 
                     <ul class="dropdown-menu wide" id="favorites-list" aria-labelledby="dropdownMenuButton1">
-                        <p class="text-center">Empty Cart</p>
+                        <p class="text-center">{{ __('site.messages_fav_empty') }}</p>
                     </ul>
                 </div>
                 <div class="dropdown shop">
@@ -67,7 +67,7 @@
                                 </a>
                             </li>
                         @else
-                            <p class="text-center">Empty Cart</p>
+                            <p class="text-center">{{ __('site.messages_cart_empty') }}</p>
                         @endif
 
 

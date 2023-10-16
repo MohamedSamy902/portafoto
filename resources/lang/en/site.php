@@ -15,6 +15,8 @@ return
         'messages_removeToCart' => 'Remove To Cart Success',
         'messages_success' => 'Success',
         'messages_soreOrder' => 'The order was requested successfully',
+        'messages_cart_empty' => 'Empty Cart',
+        'messages_fav_empty' => 'Empty Favourite',
 
         // Slider
         'shopNow' => 'Shop Now',

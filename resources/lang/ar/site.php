@@ -15,6 +15,9 @@ return
     'messages_removeToCart' => 'تم الحذف من السله بنجاح',
     'messages_success' => 'تم بنجاح',
     'messages_soreOrder' => 'تم طلب الاوردر بنجاح',
+    'messages_cart_empty' => 'السله فارغه',
+    'messages_fav_empty' => 'المفضله فارغه',
+
 
     // Slider
     'shopNow' => 'شراء الان',

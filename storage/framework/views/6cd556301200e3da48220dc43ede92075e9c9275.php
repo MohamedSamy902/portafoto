@@ -7,9 +7,7 @@
         <div class="banner">
 
             <div class="container">
-                <div class="nothing text-center font-weight-bold">
-                    There Is No Content To Show
-                </div>
+                
 
                 <div class="slider-container has-scrollbar">
                     <?php $__currentLoopData = $productsSlider; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slider): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

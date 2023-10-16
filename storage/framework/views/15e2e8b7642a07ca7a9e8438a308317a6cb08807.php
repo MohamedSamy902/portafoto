@@ -32,7 +32,7 @@
                     </button>
 
                     <ul class="dropdown-menu wide" id="favorites-list" aria-labelledby="dropdownMenuButton1">
-                        <p class="text-center">Empty Cart</p>
+                        <p class="text-center"><?php echo e(__('site.messages_fav_empty')); ?></p>
                     </ul>
                 </div>
                 <div class="dropdown shop">
@@ -68,7 +68,7 @@
                                 </a>
                             </li>
                         <?php else: ?>
-                            <p class="text-center">Empty Cart</p>
+                            <p class="text-center"><?php echo e(__('site.messages_cart_empty')); ?></p>
                         <?php endif; ?>
 
 
