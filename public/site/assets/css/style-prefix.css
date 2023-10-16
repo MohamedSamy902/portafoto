@@ -1314,7 +1314,7 @@ body::-webkit-scrollbar-thumb:hover {
     bottom: 0;
     width: 100%;
     max-width: 320px;
-    padding: 30px;
+    padding-bottom: 30px;
     overflow-y: scroll;
     -ms-scroll-chaining: none;
     overscroll-behavior: contain;

@@ -1328,7 +1328,7 @@ body::-webkit-scrollbar-thumb:hover {
     bottom: 0;
     width: 100%;
     max-width: 320px;
-    padding: 30px;
+    padding-bottom: 30px;
     overflow-y: scroll;
     -ms-scroll-chaining: none;
     overscroll-behavior: contain;
@@ -1337,7 +1337,6 @@ body::-webkit-scrollbar-thumb:hover {
     -o-transition: 0.5s ease;
     transition: 0.5s ease;
     z-index: 20;
-    direction: rtl;
 }
 
 .sidebar.active {
@@ -1556,7 +1555,9 @@ body::-webkit-scrollbar-thumb:hover {
     -ms-flex-align: center;
     align-items: center;
     gap: 15px;
-    flex-direction: row-reverse;
+    flex-direction: row;
+    direction: rtl;
+    text-align: right;
 }
 
 .sidebar .price-box p {
