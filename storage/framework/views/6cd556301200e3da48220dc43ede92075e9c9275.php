@@ -138,40 +138,44 @@
 
         <script src="https://releases.jquery.com/git/jquery-git.js"></script>
 
+        
+
         <script>
-            $(document).ready(function() {
-                var page = 1; // initialize page to 2
-                var loading = false; // set loading to false
-                var product_container_offset = $('#products-container').offset().top;
-                var window_height = $(window).height();
+            var visible = 10; // Number of visible products at load
+            var skip = 0; // Number of products already loaded
 
-                $(window).scroll(function() {
-                    var scroll_height = $(document).height() - $(window).height();
-                    var scroll_position = $(window).scrollTop();
-                    console.log(scroll_position);
-                    console.log(scroll_height);
-                    if (((scroll_position == scroll_height) || ((scroll_position + 5) >= scroll_height)) && !loading) {
+            $(window).scroll(function() {
+                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                    // Increment the skip count
+                    skip += visible;
 
-                        loading = true;
-                        $('.ajax-loading').show();
-                        $.ajax({
-                            url: "/get-products-ajax?skip=" + page,
-                            type: "get",
-                            success: function(data) {
-                                $('#products-container').append(data);
-                                loading = false;
-                                page++;
-                                console.log(page);
-                            },
-                            complete: function() {
-                                $('.ajax-loading').hide();
-                            }
-                        });
-                    }
-                });
+                    $.ajax({
+                        url: "/get-products-ajax",
+                        method: 'get',
+                        data: {
+                            limit: visible,
+                            skip: skip
+                        }, // Send limit and skip parameters to Laravel route
+                        
+                        success: function(data) {
+                            $('#products-container').append(data);
+                            // Append new products to the existing list
+                            // $.each(response, function(index, product) {
+                            //     // Your code to create HTML markup for each product
+                            //     // Append the markup to the #product-list element
+                            // });
+                        }
+                    });
+                }
             });
-
         </script>
+
+
+
+
+
+
+
 
         <script>
             $(document).ready(function() {

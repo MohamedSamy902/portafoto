@@ -57,7 +57,16 @@ class SiteController extends Controller
     public function getProductsAjax(Request $request)
     {
 
-        $products = Product::paginate(10)->get();
+        // $products = Product::paginate(10)->get();
+        $limit = $request->input('limit', 10); // Set default limit to 10
+        $skip = $request->input('skip', 0);
+
+        $products = Product::orderBy('created_at', 'desc')
+                    ->skip($skip)
+                    ->take($limit)
+                    ->get();
+
+        // return response()->json($products);
         return view('site.partialsProduct', ['products' => $products]);
     }
 

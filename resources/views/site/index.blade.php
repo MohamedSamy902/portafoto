@@ -141,7 +141,7 @@
 
         <script src="https://releases.jquery.com/git/jquery-git.js"></script>
 
-        <script>
+        {{-- <script>
             $(document).ready(function() {
                 var page = 1; // initialize page to 2
                 var loading = false; // set loading to false
@@ -174,7 +174,44 @@
                 });
             });
 
+        </script> --}}
+
+        <script>
+            var visible = 10; // Number of visible products at load
+            var skip = 0; // Number of products already loaded
+
+            $(window).scroll(function() {
+                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                    // Increment the skip count
+                    skip += visible;
+
+                    $.ajax({
+                        url: "/get-products-ajax",
+                        method: 'get',
+                        data: {
+                            limit: visible,
+                            skip: skip
+                        }, // Send limit and skip parameters to Laravel route
+                        
+                        success: function(data) {
+                            $('#products-container').append(data);
+                            // Append new products to the existing list
+                            // $.each(response, function(index, product) {
+                            //     // Your code to create HTML markup for each product
+                            //     // Append the markup to the #product-list element
+                            // });
+                        }
+                    });
+                }
+            });
         </script>
+
+
+
+
+
+
+
 
         <script>
             $(document).ready(function() {
