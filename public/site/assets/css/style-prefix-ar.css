@@ -1322,7 +1322,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .sidebar {
     background: var(--white);
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     right: -100%;
     bottom: 0;
@@ -1332,11 +1332,12 @@ body::-webkit-scrollbar-thumb:hover {
     overflow-y: scroll;
     -ms-scroll-chaining: none;
     overscroll-behavior: contain;
-    visibility: hidden;
+    /* visibility: hidden; */
     -webkit-transition: 0.5s ease;
     -o-transition: 0.5s ease;
     transition: 0.5s ease;
     z-index: 20;
+    direction: rtl;
 }
 
 .sidebar.active {
