@@ -26,7 +26,7 @@ class OrderController extends Controller
         $setting = Setting::first();
         $carts = $this->getCart();
         $customerId = Cookie::get('customerId');
-        $orders = Invoice::where('customerId', $customerId)->get();
+        $orders = Invoice::where('customerId', $customerId)->where('status', '!=', 'Cancel OrderBy Customer')->get();
         SEOTools::setTitle('Order Track');
         SEOTools::setDescription($setting->description);
         SEOTools::opengraph()->setUrl('httpd://portafoto.net/en');

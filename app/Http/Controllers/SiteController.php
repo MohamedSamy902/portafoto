@@ -45,7 +45,7 @@ class SiteController extends Controller
 
         // return $customerId;
         $products = Product::where('status', '!=', 'inactive')->with(['media', 'size'])->paginate(10);
-
+        // return $products;
         $productsBest =  Product::where('status', '!=', 'inactive')->where('best', 'yes')->limit(4)->with(['media', 'size'])->get();
 
         $productsSlider =  Product::where('status', '!=', 'inactive')->where('slider', 'yes')->limit(4)->with(['media', 'size'])->get();

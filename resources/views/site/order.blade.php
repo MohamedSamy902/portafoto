@@ -16,6 +16,7 @@
                 <div class="col-sm-12">
                     <div class="accordion pt-5 pb-5" id="accordionExample">
                         @foreach ($orders as $order)
+                            
                             <div class="accordion-item">
                                 <h2 class="accordion-header" style="background-color: #e7f1ff;
                                 box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);">
@@ -71,51 +72,6 @@
                                 </div>
                             </div>
                         @endforeach
-
-                        {{-- <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <div class="trr">
-                                        <h4>#15</h4>
-                                        <p>Available</p>
-                                        <a href="" class="btn btn-danger cancel">Cancel</a>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <strong>This is the second item's accordion body.</strong> It is hidden by default,
-                                    until the collapse plugin adds the appropriate classes that we use to style each
-                                    element. These classes control the overall appearance, as well as the showing and hiding
-                                    via CSS transitions. You can modify any of this with custom CSS or overriding our
-                                    default variables. It's also worth noting that just about any HTML can go within the
-                                    <code>.accordion-body</code>, though the transition does limit overflow.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <div class="trr">
-                                        <h4>#15</h4>
-                                        <p>Available</p>
-                                        <a href="" class="btn btn-danger cancel">Cancel</a>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until
-                                    the collapse plugin adds the appropriate classes that we use to style each element.
-                                    These classes control the overall appearance, as well as the showing and hiding via CSS
-                                    transitions. You can modify any of this with custom CSS or overriding our default
-                                    variables. It's also worth noting that just about any HTML can go within the
-                                    <code>.accordion-body</code>, though the transition does limit overflow.
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>

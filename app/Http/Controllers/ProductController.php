@@ -111,8 +111,8 @@ class ProductController extends Controller
 
             DB::commit();
 
-            // return redirect()->back()
-            //     ->with('success', __('master.messages_save'));
+            return redirect()->back()
+                ->with('success', __('master.messages_save'));
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
