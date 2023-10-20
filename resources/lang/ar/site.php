@@ -17,6 +17,7 @@ return
     'messages_soreOrder' => 'تم طلب الاوردر بنجاح',
     'messages_cart_empty' => 'السله فارغه',
     'messages_fav_empty' => 'المفضله فارغه',
+    'messages_cancel_success' => 'تم الغاء الطلب بنجاح', 
 
 
     // Slider

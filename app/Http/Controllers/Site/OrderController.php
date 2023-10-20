@@ -44,6 +44,6 @@ class OrderController extends Controller
     {
         $invoises = Invoice::findOrFail($id)->update(['status' => 'Cancel OrderBy Customer']);
         return redirect()->back()
-            ->with('success', __('master.messages_success'));
+            ->with('success', __('site.messages_cancel_success'));
     }
 }

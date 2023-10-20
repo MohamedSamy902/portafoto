@@ -17,6 +17,7 @@ return
         'messages_soreOrder' => 'The order was requested successfully',
         'messages_cart_empty' => 'Empty Cart',
         'messages_fav_empty' => 'Empty Favourite',
+        'messages_cancel_success' => 'Success Cancelled Order',
 
         // Slider
         'shopNow' => 'Shop Now',

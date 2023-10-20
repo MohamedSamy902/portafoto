@@ -16,7 +16,7 @@
                 <div class="col-sm-12">
                     <div class="accordion pt-5 pb-5" id="accordionExample">
                         @foreach ($orders as $order)
-                            
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header" style="background-color: #e7f1ff;
                                 box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);">
@@ -27,9 +27,7 @@
                                             <h4>#{{ $order->id }}</h4>
                                             <p>{{ $order->status }}</p>
                                             <p>{{ $order->created_at }}</p>
-                                            {{-- @if ($order->status == 'pending')
-                                                <a href="{{ route('cancelOrder', $order->id) }}" class="btn btn-danger cancel">Cancel</a>
-                                            @endif --}}
+                                       
                                         </div>
                                     </button>
                                     @if ($order->status == 'pending')
