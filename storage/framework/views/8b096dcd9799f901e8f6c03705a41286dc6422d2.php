@@ -12,6 +12,7 @@
                 <div class="col-sm-12">
                     <div class="accordion pt-5 pb-5" id="accordionExample">
                         <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            
                             <div class="accordion-item">
                                 <h2 class="accordion-header" style="background-color: #e7f1ff;
                                 box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);">
@@ -65,8 +66,6 @@
                                 </div>
                             </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                        
                     </div>
                 </div>
             </div>

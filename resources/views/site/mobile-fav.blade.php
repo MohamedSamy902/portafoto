@@ -9,32 +9,18 @@
                 <div class="col-sm-12">
                     <h4 class="text-center pb-3">{{ __('site.favorite') }}</h4>
                     @foreach ($products as $product)
-                        <div class="mobfav">
+                        <div class="mobfav" id="mobfav{{ $product->id }}">
                             <img src="{{ $product->getFirstMediaUrl('products') }}" alt="">
                             <div class="details">
                                 <h6>{{ $product->name }}</h6>
-                                <p>{{ $product->price != null? $product->price: $product->size()->latest()->first()->price }} {{ __('site.EGP') }}</p>
+                                <p>{{ $product->price != null? $product->price: $product->size()->latest()->first()->price }}
+                                    {{ __('site.EGP') }}</p>
                             </div>
-                            <a href="{{ route('remove.product.mobile', $product->id) }}" class="remove btn btn-danger"><i class="fas fa-times"></i></a>
+                            <button id="removeFavorite" data-product-id-remove="{{ $product->id }}"
+                                class="remove btn btn-danger"><i class="fas fa-times"></i></button>
                         </div>
                     @endforeach
 
-                    {{-- <div class="mobfav">
-                        <img src="https://rvs-checkout-page.onrender.com/photo1.png" alt="">
-                        <div class="details">
-                            <h6>Wall Frame</h6>
-                            <p>30 x 60</p>
-                        </div>
-                        <a href="" class="remove btn btn-danger"><i class="fas fa-times"></i></a>
-                    </div>
-                    <div class="mobfav">
-                        <img src="https://rvs-checkout-page.onrender.com/photo1.png" alt="">
-                        <div class="details">
-                            <h6>Wall Frame</h6>
-                            <p>30 x 60</p>
-                        </div>
-                        <a href="" class="remove btn btn-danger"><i class="fas fa-times"></i></a>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -42,5 +28,28 @@
 
     @push('js')
         <script src="https://releases.jquery.com/git/jquery-git.js"></script>
+        <script>
+            $('.remove').on('click', function(event) {
+                var productId = $(this).data('product-id-remove');
+                var url = "{{ route('remove.product', ':productId') }}";
+                url = url.replace(':productId', productId);
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        id: productId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        
+                        $('#mobfav'+productId).remove()
+                        // console.log(response);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr);
+                    }
+                });
+            });
+        </script>
     @endpush
 @endsection

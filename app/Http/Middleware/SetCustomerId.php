@@ -19,6 +19,7 @@ class SetCustomerId
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
+
     public function handle(Request $request, Closure $next)
     {
 
@@ -32,16 +33,5 @@ class SetCustomerId
         } else {
             return $next($request);
         }
-
-
-        // $response->cookie('name', 'value', $minutes);
-        //        return $response;
-
-        // $minutes = 1;
-        // $response = new Response('Hello World');
-        // $response->withCookie(cookie('name', 'virat', $minutes));
-        // // cookie('name', 'MOhamed Samy', 60);
-        // // $request->withCookie(cookie('name', '55', 60));
-        // return $next($request);
     }
 }

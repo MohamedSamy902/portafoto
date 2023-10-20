@@ -66,7 +66,6 @@ class SiteController extends Controller
                     ->take($limit)
                     ->get();
         return $products;
-        // return response()->json($products);
         return view('site.partialsProduct', ['products' => $products]);
     }
 
@@ -128,11 +127,11 @@ class SiteController extends Controller
 
         $favorites = json_decode($favorites, true);
 
-        $products = Product::whereIn('id', $favorites)->with('media')->get();
-
-        // return response()->json(['message' => 'Product added to favorites', 'favorites' => $favorites]);
-
-
+        if ($favorites == null) {
+            $products = [];
+        }else {
+            $products = Product::whereIn('id', $favorites)->with('media')->get();
+        }
 
         return view('site.mobile-fav', compact('setting', 'carts', 'products'));
     }
@@ -157,7 +156,7 @@ class SiteController extends Controller
         $customerId = Cookie::get('customerId');
         $carts = Cart::where('customerId', $customerId)->where('status', 'outInvoice')->get();
 
-        return view('site.mobile-fav', compact('setting', 'carts'));
+        return view('site.mobile-cart', compact('setting', 'carts'));
     }
 
     public function search(Request $request)

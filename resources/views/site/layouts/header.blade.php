@@ -100,14 +100,14 @@
         {{-- <button class="action-btn" data-mobile-menu-open-btn>
             <ion-icon name="menu-outline"></ion-icon>
         </button> --}}
-        <a style="color: var(--eerie-black);" href="{{ route('favoriteProduct') }}" class="action-btn">
+        <a style="color: var(--eerie-black);" href="{{ route('cartMobile') }}" class="action-btn">
             <ion-icon name="bag-handle-outline"></ion-icon>
             {{-- <span class="count">0</span> --}}
         </a>
         <a style="color: var(--eerie-black);" class="action-btn" href="{{ route('site') }}">
             <ion-icon name="home-outline"></ion-icon>
         </a>
-        <a style="color: var(--eerie-black);" class="action-btn" href="{{ route('cartMobile') }}">
+        <a style="color: var(--eerie-black);" class="action-btn" href="{{ route('favoriteProduct') }}">
             <ion-icon name="heart-outline"></ion-icon>
             {{-- <span class="count">0</span> --}}
         </a>
@@ -138,6 +138,7 @@
 
                             </div>`);
                     });
+                    
                     $('.remove').on('click', function(event) {
                         var productId = $(this).data('product-id-remove');
                         var url = "{{ route('remove.product', ':productId') }}";

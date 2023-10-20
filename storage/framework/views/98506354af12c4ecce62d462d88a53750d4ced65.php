@@ -1,6 +1,5 @@
 <?php $__env->startSection('title'); ?>
-    <?php echo e(__('product.product')); ?>
-
+Category
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('css'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/datatables.css')); ?>">
@@ -11,9 +10,9 @@
 <?php $__env->startSection('content'); ?>
     <?php $__env->startComponent('components.breadcrumb'); ?>
         <?php $__env->slot('breadcrumb_title'); ?>
-            <h3><?php echo e(__('product.product')); ?></h3>
+            <h3>Category</h3>
         <?php $__env->endSlot(); ?>
-        <li class="breadcrumb-item active"><?php echo e(__('product.product')); ?></li>
+        <li class="breadcrumb-item active">Category</li>
     <?php echo $__env->renderComponent(); ?>
 
 
@@ -27,18 +26,29 @@
                                 <thead>
                                     <tr>
                                         <th><?php echo e(__('master.name')); ?></th>
-                                        <th><?php echo e(__('master.countProductInvoice')); ?></th>
-                                        <th><?php echo e(__('site.payment')); ?></th>
-                                        <th><?php echo e(__('master.status')); ?></th>
+                                        <th><?php echo e(__('master.processes')); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $__currentLoopData = $invoises; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $invoise): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <td><a href="<?php echo e(route('invoices.show', $invoise->id)); ?>"><?php echo e($invoise->name); ?></a> </td>
-                                            <td><?php echo e(count($invoise->cart)); ?></td>
-                                            <td><?php echo e($invoise->payment); ?></td>
-                                            <td><?php echo e($invoise->status); ?></td>
+                                            <td><?php echo e($category->name); ?></td>
+                                            <td>
+                                                <div style="display: flex;">
+                                                    <a class="btn btn-outline-primary-2x" style="margin:0 20px;"
+                                                        href="<?php echo e(route('category.edit', $category->id)); ?>"><?php echo e(__('master.edit')); ?></a>
+
+                                                    <form action="<?php echo e(route('category.destroy', $category->id)); ?>"
+                                                        method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('delete'); ?>
+                                                        <input style="border-color: #d22d3d;"
+                                                            class="btn btn-outline-danger-2x"
+                                                            value="<?php echo e(__('master.delete')); ?>" type="submit">
+
+                                                    </form>
+                                                </div>
+                                            </td>
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
@@ -78,4 +88,4 @@
     <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/mohamed/Desktop/art/laravel/resources/views/dashbord/invoices/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/mohamed/Desktop/art/laravel/resources/views/dashbord/categories/index.blade.php ENDPATH**/ ?>

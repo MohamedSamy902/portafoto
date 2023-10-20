@@ -101,14 +101,14 @@
 
     <div class="mobile-bottom-navigation">
         
-        <a style="color: var(--eerie-black);" href="<?php echo e(route('favoriteProduct')); ?>" class="action-btn">
+        <a style="color: var(--eerie-black);" href="<?php echo e(route('cartMobile')); ?>" class="action-btn">
             <ion-icon name="bag-handle-outline"></ion-icon>
             
         </a>
         <a style="color: var(--eerie-black);" class="action-btn" href="<?php echo e(route('site')); ?>">
             <ion-icon name="home-outline"></ion-icon>
         </a>
-        <a style="color: var(--eerie-black);" class="action-btn" href="<?php echo e(route('cartMobile')); ?>">
+        <a style="color: var(--eerie-black);" class="action-btn" href="<?php echo e(route('favoriteProduct')); ?>">
             <ion-icon name="heart-outline"></ion-icon>
             
         </a>
@@ -139,6 +139,7 @@
 
                             </div>`);
                     });
+                    
                     $('.remove').on('click', function(event) {
                         var productId = $(this).data('product-id-remove');
                         var url = "<?php echo e(route('remove.product', ':productId')); ?>";
