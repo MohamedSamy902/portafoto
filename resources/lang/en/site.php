@@ -18,6 +18,7 @@ return
         'messages_cart_empty' => 'Empty Cart',
         'messages_fav_empty' => 'Empty Favourite',
         'messages_cancel_success' => 'Success Cancelled Order',
+        'Created By' => 'Created By',
 
         // Slider
         'shopNow' => 'Shop Now',

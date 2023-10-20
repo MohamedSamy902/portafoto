@@ -64,8 +64,8 @@
                         {{-- <img src="{{ asset('site/assets/images/logo/logo-removebg-previe.png') }}" alt="Anon's logo" width="120" height="36"> --}}
                         Portafoto
                     </a>
-                    <p class="text-white-50 author justify-content-sm-center justify-content-lg-start pt-3">Created By
-                        <a href="https://karimosama99.github.io/GoldenCode/" target="_blank"><span>CyBoRg</span></a>
+                    <p class="text-white-50 author justify-content-sm-center justify-content-lg-start pt-3">{{ __('site.Created By') }}
+                        <a href="https://wa.me/+201065160109" target="_blank"><span>Golden Code</span></a>
                     </p>
                 </div>
                 <div class="col-sm-12 col-lg-4">
